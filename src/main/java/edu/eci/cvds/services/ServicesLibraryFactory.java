@@ -1,12 +1,13 @@
 package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
-import edu.eci.cvds.persistence.DaoMultimedia;
-import edu.eci.cvds.persistence.DaoStudyRoom;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoComputer;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoMultimedia;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisStudyRoom;
-import edu.eci.cvds.persistence.mybatisimpl.mappers.DaoComputer;
+import edu.eci.cvds.persistence.DaoRecurso;
+import edu.eci.cvds.persistence.DaoRecursoRentado;
+import edu.eci.cvds.persistence.DaoTipoRecurso;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoRecurso;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoRecursoRentado;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisTipoRecurso;
+import edu.eci.cvds.services.impl.AdministratorServicesLibraryImpl;
 import edu.eci.cvds.services.impl.ServicesLibraryImpl;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
@@ -25,9 +26,10 @@ public class ServicesLibraryFactory {
                 install(JdbcHelper.MySQL); //Revisar si es en postSQl
                 setClassPathResource("mybatis-config.xml");
                 bind(ServicesLibrary.class).to(ServicesLibraryImpl.class);
-                bind(DaoComputer.class).to(MyBatisDaoComputer.class);
-                bind(DaoMultimedia.class).to(MyBatisDaoMultimedia.class);
-                bind(DaoStudyRoom.class).to(MyBatisStudyRoom.class);
+                bind(AdministratorServicesLibrary.class).to(AdministratorServicesLibraryImpl.class);
+                bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
+                bind(DaoRecursoRentado.class).to(MyBatisDaoRecursoRentado.class);
+                bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
             }
         });
     }

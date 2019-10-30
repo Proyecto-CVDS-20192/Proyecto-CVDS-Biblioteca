@@ -1,4 +1,4 @@
 package edu.eci.cvds.persistence;
 
-public interface DaoMultimedia {
+public interface DaoRecursoRentado {
 }
