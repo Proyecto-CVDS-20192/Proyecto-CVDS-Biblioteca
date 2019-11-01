@@ -19,11 +19,12 @@ public class ServicesLibraryFactory {
     private static ServicesLibraryFactory instance=new ServicesLibraryFactory();
 
     private static Injector injector;
+
     private ServicesLibraryFactory(){
         injector=createInjector(new XMLMyBatisModule(){
             @Override
             protected void initialize(){
-                install(JdbcHelper.MySQL); //Revisar si es en postSQl
+                install(JdbcHelper.MySQL);
                 setClassPathResource("mybatis-config.xml");
                 bind(ServicesLibrary.class).to(ServicesLibraryImpl.class);
                 bind(AdministratorServicesLibrary.class).to(AdministratorServicesLibraryImpl.class);
@@ -32,6 +33,14 @@ public class ServicesLibraryFactory {
                 bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
             }
         });
+    }
+
+    public AdministratorServicesLibrary getAdministratorServices(){
+        return injector.getInstance(AdministratorServicesLibrary.class);
+    }
+
+    public ServicesLibrary getServicesLibrary(){
+        return injector.getInstance(ServicesLibrary.class);
     }
 
     public static ServicesLibraryFactory getInstance(){

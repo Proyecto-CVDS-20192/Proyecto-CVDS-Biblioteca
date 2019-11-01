@@ -1,5 +1,10 @@
 package edu.eci.cvds.services;
 
-public interface ServicesLibrary {
+import edu.eci.cvds.entities.Recurso;
 
+import java.util.List;
+
+
+public interface ServicesLibrary {
+    public List<Recurso> consultarRecursos();
 }
