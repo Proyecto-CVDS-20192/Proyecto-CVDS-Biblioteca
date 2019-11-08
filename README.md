@@ -1,20 +1,40 @@
-# Proyecto CVDS 2019-II - Biblioteca
+﻿# Proyecto CVDS 2019-II - Biblioteca
 
-### Integrantes:
-* Juan Sebastián Gómez
-* Sebastián Herrera
-* Eduardo Ocampo
-* Juan David Navarro
+## Profesores 
+	- Julian Velasco (Product Owner)
+	- Santiago Alzate (Product Owner)
+	
+## Integrantes:
+	- Juan Sebastián Gómez 
+	- Sebastián Herrera
+	- Eduardo Ocampo 
+	- Juan David Navarro
 
 
-### Base de datos
+## Descripción del producto:
+
+### Descripción general:
+	
+El objetivo del sistema es permitir que los estudiantes, puedan reservar las salas de estudio, equipos de cómputo, tablero inteligente y demás recursos de la biblioteca. Deberían autenticarse con su correo institucional y hacer la reserva del recurso en el horario de su preferencia. Debe existir también una forma de gestionar aquellos recursos en caso que se deseen agregar o modificar los mismos, así como asignar horarios de disponibilidad específicos. La plataforma de gestión de recursos debe contar con una interfaz de usuario amigable con los usuarios.
+		
+	
+## Arquitectura y Diseño detallado:
+### Modelo E-R.
 ![Base de datos](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Base%20de%20datos.png)
-
 ### Diagrama de clases
-![Diagrama de clases](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Diagrama%20de%20clases.png)
+![Diagrama de clases](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Diagrama%20de%20clases.png)	
+
+### Enlace a la aplicación en Heroku:
+Heroku APP : [https://cvds-proyecto-biblioteca.herokuapp.com/](https://cvds-proyecto-biblioteca.herokuapp.com/)
 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/936c2a405ca14b45a130fc6a40aaf9b9)](https://www.codacy.com/manual/JuanCe28/Proyecto-CVDS-Biblioteca?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca&amp;utm_campaign=Badge_Grade)
+
+[![CircleCI](https://circleci.com/gh/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca.svg?style=svg)](https://circleci.com/gh/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca)
+
+
+-----------------------------------------------------------------------------------
+
 
 ### Informacion Base de Datos
  - Host: ec2-54-163-230-199.compute-1.amazonaws.com

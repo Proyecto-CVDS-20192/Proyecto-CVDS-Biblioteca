@@ -5,21 +5,21 @@
       xmlns:r="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Consultar Recurso</title>
+        <title>Cambiar de estado un recurso</title>
         <link rel="icon" type="image/png" href="/resources/img/libro.png" />
         <link href="resources/css/login.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css"
-		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
+              href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
 
-	<script type="text/javascript" charset="utf8"
-		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
     </h:head>
     <h:body style="margin:0px; padding:0px;">
         <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
         <br></br>
         <div id="divbarraid" class="divbarra">
-            <center>Consultar Recursos Biblioteca ECI</center>
+            <center>Cambiar de estado recursos de la Biblioteca ECI</center>
         </div>
         <br></br>
 
@@ -33,6 +33,7 @@
                             <th>Ubicacion</th>
                             <th>Capacidad</th>
                             <th>Estado</th>
+                            <th>Reserva</th>
 
                         </tr>
                     </thead>
@@ -43,6 +44,12 @@
                                 <td class="columregistro">#{recursoBean.ubicacion}</td>
                                 <td class="columregistro">#{recursoBean.capacidad}</td>
                                 <td class="columregistro">#{recursoBean.estado}</td>
+                                <td>#{ideas.estado} <h:form>
+                                        <h:commandButton class="mybuttons"
+                                                         actionListener="#{recursoBean.reservarRecurso()}"
+                                                         update="Registro_table" value="Reservar" />									
+                                    </h:form>
+                                </td>
                             </tr>
                         </r:repeat>
                     </tbody>
