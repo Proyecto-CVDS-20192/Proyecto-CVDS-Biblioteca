@@ -19,13 +19,13 @@ import javax.faces.bean.ManagedBean;
 @Named
 @Stateless
 @SessionScoped
-@ManagedBean(name="userBean",eager =true)
+@ManagedBean(name = "userBean", eager = true)
 public class UserBean implements Serializable {
     private static final transient Logger log = LoggerFactory.getLogger(UserBean.class);
 
     private String username;
     private String password;
-	private String principalUrl = "/faces/index.xhtml";
+    private String principalUrl = "/faces/index.xhtml";
     Subject subject;
 
     public UserBean() {
@@ -35,7 +35,7 @@ public class UserBean implements Serializable {
      * Try and authenticate the user
      */
     public void doLogin() {
-		subject = SecurityUtils.getSubject();
+        subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword());
         try {
             subject.login(token);
@@ -51,18 +51,18 @@ public class UserBean implements Serializable {
         } catch (LockedAccountException ex) {
             facesMessage("The account for username " + token.getPrincipal() + " is locked. Please contact your administrator to unlock it.");
         } catch (Exception ex) {
-            log.info("Ops something happened."+ ex.getMessage());
-            facesMessage("Ops something happened."+ ex.getMessage());
+            log.info("Ops something happened." + ex.getMessage());
+            facesMessage("Ops something happened." + ex.getMessage());
         } finally {
             token.clear();
         }
     }
 
     private void facesMessage(String message) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
     }
 
-	public void doLogOut() {
+    public void doLogOut() {
 
         SecurityUtils.getSubject().logout();
         try {

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:r="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Consultar Recurso</title>
+        <link href="resources/css/login.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
+
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    </h:head>
+    <h:body style="margin:0px; padding:0px;">
+        <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+        <br></br>
+        <div id="divbarraid" class="divbarra">
+            <center>Consultar Recursos Biblioteca ECI</center>
+        </div>
+        <br></br>
+
+
+        <p:panel class="paneregistro">
+            <h:panelGroup class="paneregistro" id="paneregistroid">
+                <table class="panelRegistroF" id="Registro_table">
+                    <thead class="panelregistroH">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Ubicacion</th>
+                            <th>Capacidad</th>
+                            <th>Estado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <r:repeat var="registros" value="#{recursoBean.ideasGeneral}">
+                            <tr>
+                                <td class="columregistro">#{recursoBean.nombre}</td>
+                                <td class="columregistro">#{recursoBean.ubicacion}</td>
+                                <td class="columregistro">#{recursoBean.capacidad}</td>
+                                <td class="columregistro">#{recursoBean.estado}</td>
+                            </tr>
+                        </r:repeat>
+                    </tbody>
+                </table>
+            </h:panelGroup>
+        </p:panel>
+
+        <script>
+            $(document).ready(function () {
+                $('#Registro_table').DataTable();
+            });
+        </script>
+
+
+        <!-- Site footer -->
+
+        <!-- Footer -->
+        <div class="footerlogin" id="footerloginid"></div>
+        <!-- Footer -->
+
+    </h:body>
+</html>
