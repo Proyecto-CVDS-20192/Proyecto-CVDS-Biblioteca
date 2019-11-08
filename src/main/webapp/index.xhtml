@@ -4,7 +4,8 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:p="http://primefaces.org/ui">
 <h:head>
   <meta charset="utf-8"/>
-  <title>Login</title>
+  <title>Biblioteca | Login</title>
+  <link rel="icon" type="image/png" href="/resources/img/libro.png" />
   <link rel="stylesheet" type="text/css" href="/resources/css/style.css" media="screen" />
 </h:head>
 <body nload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
@@ -31,10 +32,10 @@
 
                 <label for="email">Password</label>
                 <p:password id="password" required="true" value="#{userBean.password}"/>
-
-                <h:outputText/>
                 <p:commandButton id="ingresar" value="Login" action="#{userBean.doLogin()}" />
-                <p:messages id="messages" autoUpdate="true" closable="true" />
+				<p:messages id="messages" showDetail="true" closable="true">
+				<p:autoUpdate />
+				</p:messages> 
             </h:form>
         </div>
       </div>
