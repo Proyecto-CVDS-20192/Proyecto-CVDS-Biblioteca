@@ -1,0 +1,2 @@
+alter table RECURSO add constraint FK_RECURSO_TIPORECURSO foreign key(id_tipo) references TIPO_RECURSO(id);
+alter table RECURSO_RENTADO add constraint FK_RECRUSORENTADO_RECRUSO foreign key(id_recurso) references RECURSO(id_interno);
