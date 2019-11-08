@@ -32,12 +32,4 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     public void volverAAdmitirElRecurso(Recurso recurso) {
         recursoDao.volverAAdmitirRecurso(recurso);
     }
-
-    public static void main(String[] args){
-
-        ServicesLibraryFactory a=ServicesLibraryFactory.getInstance();
-        System.out.println("Hasta aca todo bien");
-        //a.getAdministratorServices().registrarRecurso(new Recurso("ElDamian","Biblioteca",new TipoRecurso(1,"Computador"),"5020",0));
-        System.out.println("Hasta aca acabo");
-    }
 }

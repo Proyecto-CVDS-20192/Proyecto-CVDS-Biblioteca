@@ -4,13 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper">
-    <resultMap id="RecursoResult" type="Recurso">
+    <resultMap id="RecursoResult" type="edu.eci.cvds.entities.Recurso">
         <id property="identificadorInterno" column="id_interno"/>
         <result property="nombre" column="nombre"/>
         <result property="ubicacion" column="ubicacion"/>
         <result property="capacidad" column="capacidad"/>
         <result property="estado" column="estado"/>
-        <association property="tipoRecurso" javaType="TipoRecurso" resultMap="TipoRecursoResult" columnPrefix="tr_"></association>
+        <association property="tipoRecurso" javaType="edu.eci.cvds.entities.TipoRecurso" resultMap="TipoRecursoResult"
+                     columnPrefix="tr_"/>
     </resultMap>
 
     <insert id="agregarNuevoRecurso" parameterType="map">
@@ -26,7 +27,7 @@
         update RECURSOS SET estado=false WHERE id_interno=#{recurso.identificadorInterno};
     </update>
 
-    <update id="volverAAdmitirRecurso" parameterMap="map">
+    <update id="volverAAdmitirRecurso" parameterType="map">
         update RECURSOS SET estado=true WHERE id_interno=#{recurso.identificadorInterno};
     </update>
 

@@ -17,7 +17,7 @@ public class MyBatisDaoRecurso implements DaoRecurso {
         try{
             recursoMapper.registraNuevoRecurso(recurso);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -26,7 +26,7 @@ public class MyBatisDaoRecurso implements DaoRecurso {
         try{
             recursoMapper.eliminarRecursoPermanente(recurso);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -35,7 +35,7 @@ public class MyBatisDaoRecurso implements DaoRecurso {
         try{
             recursoMapper.eliminarRecursoTemporal(recurso);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -44,7 +44,7 @@ public class MyBatisDaoRecurso implements DaoRecurso {
         try{
             recursoMapper.volverAAdmitirRecurso(recurso);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-
+            e.printStackTrace();
         }
     }
 
@@ -53,7 +53,7 @@ public class MyBatisDaoRecurso implements DaoRecurso {
         try{
             return recursoMapper.consultarRecursos();
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-
+            e.printStackTrace();
         }
         return null;
     }
