@@ -8,10 +8,10 @@
 
 
 ### Base de datos
-![Base de datos](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Base_de_datos.png)
+![Base de datos](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Base%20de%20datos.png)
 
 ### Diagrama de clases
-![Diagrama de clases](https://github.comProyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Diagrama_de_clases.png)
+![Diagrama de clases](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Diagrama%20de%20clases.png)
 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/936c2a405ca14b45a130fc6a40aaf9b9)](https://www.codacy.com/manual/JuanCe28/Proyecto-CVDS-Biblioteca?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca&amp;utm_campaign=Badge_Grade)
