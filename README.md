@@ -24,7 +24,7 @@ El objetivo del sistema es permitir que los estudiantes, puedan reservar las sal
 ### Diagrama de clases
 ![Diagrama de clases](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Diagrama%20de%20clases.png)	
 
-###Tecnologías
+### Tecnologías
 
  - Se ultiliza Guice para hacer la injeccion de los diferentes servicios de la biblioteca 
  junto con los elementos necesarios para usar MyBatis
