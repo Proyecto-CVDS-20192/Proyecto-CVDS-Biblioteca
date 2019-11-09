@@ -31,12 +31,12 @@ public class LibraryServicesTest{
         boolean ans=true;
     }
 
-    /*@Test
+    @Test
     public void deberiaConsultarLosClientes(){
         servicesLibrary.consultarRecursos();
     }
 
-    @Test
+    /*@Test
     public void deberiaIngresarRecurso(){
         Recurso recurso=new Recurso("p","library",new TipoRecurso(1,"Computador"),true,"abcd",0);
         administratorServices.registrarRecurso(recurso);
