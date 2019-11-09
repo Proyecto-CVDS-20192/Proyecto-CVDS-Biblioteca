@@ -57,4 +57,14 @@ public class MyBatisDaoRecurso implements DaoRecurso {
         }
         return null;
     }
+
+    @Override
+    public Recurso consultarRecurso(int id){
+        try {
+            return recursoMapper.consultarRecurso(id);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

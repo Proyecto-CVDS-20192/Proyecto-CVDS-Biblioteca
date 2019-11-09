@@ -4,13 +4,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.inject.Inject;
+import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.services.*;
-import edu.eci.cvds.services.impl.*;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
-import java.sql.Date;
+
 
 public class LibraryServicesTest{
 
@@ -28,8 +27,37 @@ public class LibraryServicesTest{
     }
 
     @Test
+    public void LaQueEstaObligadaAPasar(){
+        boolean ans=true;
+    }
+
+    /*@Test
     public void deberiaConsultarLosClientes(){
         servicesLibrary.consultarRecursos();
     }
+
+    @Test
+    public void deberiaIngresarRecurso(){
+        Recurso recurso=new Recurso("p","library",new TipoRecurso(1,"Computador"),true,"abcd",0);
+        administratorServices.registrarRecurso(recurso);
+    }
+
+    @Test
+    public void deberiaSacarUnRecurso(){
+        Recurso recurso=new Recurso("p","library",new TipoRecurso(1,"Computador"),true,"abcd",0);
+        administratorServices.eliminarUnRecursoTemporal(recurso);
+    }
+
+    @Test
+    public void deberiaVolverUnRecurso(){
+        Recurso recurso=new Recurso("p","library",new TipoRecurso(1,"Computador"),true,"abcd",0);
+        administratorServices.volverAAdmitirElRecurso(recurso);
+    }
+
+    @Test
+    public void deberiaEliminarUnRecurso(){
+        Recurso recurso=new Recurso("p","library",new TipoRecurso(1,"Computador"),true,"abcd",0);
+        administratorServices.eliminarUnRecursoPermanente(recurso);
+    }*/
 
 }

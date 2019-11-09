@@ -14,4 +14,9 @@ public class ServicesLibraryImpl implements ServicesLibrary {
     public List<Recurso> consultarRecursos(){
         return recursoDao.consultarRecursos();
     }
+
+    @Override
+    public Recurso consultarRecurso(int id) {
+        return recursoDao.consultarRecurso(id);
+    }
 }

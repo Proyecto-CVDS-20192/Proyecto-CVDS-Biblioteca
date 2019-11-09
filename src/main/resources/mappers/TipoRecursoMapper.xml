@@ -8,4 +8,8 @@
         <id property="id" column="id"/>
         <result property="tipo" column="tipo"/>
     </resultMap>
+
+    <insert id="registrarTipoRecurso" parameterType="map">
+        insert into tipo_recurso(id,nombre) values(#{tipoRecurso.id},#{tipoRecurso.nombre});
+    </insert>
 </mapper>

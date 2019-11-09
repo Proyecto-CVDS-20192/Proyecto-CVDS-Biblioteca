@@ -20,6 +20,9 @@ public class ServicesLibraryFactory {
 
     private static Injector injector;
 
+    /**
+     * Fabrica de los servicios
+     */
     private ServicesLibraryFactory(){
         injector=createInjector(new XMLMyBatisModule(){
             @Override
@@ -35,14 +38,26 @@ public class ServicesLibraryFactory {
         });
     }
 
+    /**
+     * Get de los servicios de administrador
+     * @return AdministratorServices
+     */
     public AdministratorServicesLibrary getAdministratorServices(){
         return injector.getInstance(AdministratorServicesLibrary.class);
     }
 
+    /**
+     * Get de los serivicios de usuario
+     * @return ServicesLibrary
+     */
     public ServicesLibrary getServicesLibrary(){
         return injector.getInstance(ServicesLibrary.class);
     }
 
+    /**
+     * Get de la instancia de la fabrica
+     * @return la fabrica
+     */
     public static ServicesLibraryFactory getInstance(){
         return instance;
     }

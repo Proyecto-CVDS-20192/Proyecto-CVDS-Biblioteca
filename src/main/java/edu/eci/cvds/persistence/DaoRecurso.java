@@ -10,4 +10,5 @@ public interface DaoRecurso {
     public void eliminarTemporal(Recurso recurso);
     public void volverAAdmitirRecurso(Recurso recurso);
     public List<Recurso> consultarRecursos();
+    Recurso consultarRecurso(int id);
 }

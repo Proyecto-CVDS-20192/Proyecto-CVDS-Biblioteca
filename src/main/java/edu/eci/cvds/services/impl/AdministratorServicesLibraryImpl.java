@@ -3,6 +3,7 @@ package edu.eci.cvds.services.impl;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.persistence.DaoRecurso;
+import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.ServicesLibraryFactory;
 
@@ -12,6 +13,13 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
 
     @Inject
     private DaoRecurso recursoDao;
+    @Inject
+    private DaoTipoRecurso tipoRecursoDao;
+
+    @Override
+    public void registrarTipoRecurso(TipoRecurso tipoRecurso) {
+        tipoRecursoDao.registrarTipoRecurso(tipoRecurso);
+    }
 
     @Override
     public void registrarRecurso(Recurso recurso) {
@@ -32,4 +40,5 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     public void volverAAdmitirElRecurso(Recurso recurso) {
         recursoDao.volverAAdmitirRecurso(recurso);
     }
+
 }
