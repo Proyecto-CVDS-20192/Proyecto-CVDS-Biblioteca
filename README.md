@@ -24,6 +24,13 @@ El objetivo del sistema es permitir que los estudiantes, puedan reservar las sal
 ### Diagrama de clases
 ![Diagrama de clases](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Diagrama%20de%20clases.png)	
 
+###Tecnologías
+
+ - Se ultiliza Guice para hacer la injeccion de los diferentes servicios de la biblioteca 
+ junto con los elementos necesarios para usar MyBatis
+ - MyBatis con el fin de hacer mas eficiente las consultas y acciones sobre la base de datos
+ - PostgreeSQL, se relizo una base de datos en Heroku de PostgreeSQL para la capa de persistencia
+
 ### Enlace a la aplicación en Heroku:
 Heroku APP : [https://cvds-proyecto-biblioteca.herokuapp.com/](https://cvds-proyecto-biblioteca.herokuapp.com/)
 
