@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:r="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Cambiar de estado un recurso</title>
+        <meta charset="utf-8"/>
+        <link rel="icon" type="image/png" href="/resources/img/libro.png" />
+        <link href="resources/css/login.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
+
+        <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    </h:head>
+    <h:body style="margin:0px; padding:0px;">
+        <div class="image">
+            <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+        </div>
+        <div class="logout">
+            <h:form id="frmm">
+                <p:commandButton value="Cerrar sesión" class="dropdown-item"
+                                 action="#{userBean.doLogOut()}" />
+            </h:form>
+        </div>
+        <div class="clearfix"></div>
+        <br></br>
+        <div id="divbarraid" class="divbarra">
+            <center>Cambiar de estado recursos de la Biblioteca ECI</center>
+        </div>
+
+        <div class="registrar">
+            <h:form id="frmm2">
+                <p:commandButton value="Agregar Recurso" onclick="PF('dlg').show();" type="button" icon="pi pi-home" />
+
+                <p:dialog header="Agregar Recurso" widgetVar="dlg" focus="tipo">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="tipo" value="Tipo:" />
+                        <p:inputText id="tipo" label="tipo" 
+                                     binding="#{tipo}"/>
+
+                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <p:inputText id="nombre" label="nombre"
+                                     binding="#{nombre}"/>
+
+                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
+                        <p:inputText id="ubicacion" label="ubicacion" 
+                                     binding="#{ubicacion}"/>
+
+                        <h:outputLabel for="capacidad" value="Capacidad:" />
+                        <p:inputText id="capacidad" label="capacidad" 
+                                     binding="#{capacidad}"/>
+
+                        <p:commandButton class="buttonR" value="Registrar">
+                            <f:actionListener binding="#{recursoBean.registrarRecurso(nombre.value, capacidad.value)}" update="frmm2"/>
+                        </p:commandButton>
+
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+        </div>
+
+        <br></br>
+
+        <p:panel class="panelregistro">
+            <h:panelGroup class="panelregistro" id="paneregistroid">
+                <table class="panelRegistroF" id="Registro_table">
+                    <thead class="panelregistroH">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Ubicacion</th>
+                            <th>Capacidad</th>
+                            <th>Estado</th>
+                            <th>Editar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <r:repeat var="recursos" value="#{recursoBean.recursos}">
+                            <tr>
+                                <td align="center" class="columregistro">#{recursos.nombre}</td>
+                                <td align="center" class="columregistro">#{recursos.ubicacion}</td>
+                                <td align="center" class="columregistro">#{recursos.capacidad}</td>
+                                <td align="center">
+                                    <h:selectOneMenu value="#{recursos.estado}" style="width:100%">
+                                        <f:selectItems value="#{recursos.estados}"/>
+                                    </h:selectOneMenu>
+                                </td>
+                                <td align="center"> <h:form>
+                                        <h:commandButton class="mybuttons"
+                                                         actionListener="#{recursoBean.editarEstadoRecurso()}"
+                                                         update="Registro_table" value="Editar" />									
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </r:repeat>
+                    </tbody>
+                </table>
+            </h:panelGroup>
+        </p:panel>
+
+        <script>
+            $(document).ready(function () {
+                $('#Registro_table').DataTable();
+            });
+        </script>
+
+
+        <!-- Site footer -->
+
+        <!-- Footer -->
+        <div class="footerlogin" id="footerloginid"></div>
+        <!-- Footer -->
+
+    </h:body>
+</html>

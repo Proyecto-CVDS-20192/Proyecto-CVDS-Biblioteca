@@ -4,37 +4,21 @@ import java.io.Serializable;
 public class Usuario implements Serializable{
 
     private String nombre;
-    private String passw;
+    private String apellido;
+    private String clave;
     private String tipo;
-    private String id;
-    private Integer carnet;
+    private String correo;
 
 
     public Usuario() {
     }
 
-    public Usuario(String nombre,String passw,String tipo,String id,Integer carnet) {
+    public Usuario(String nombre, String apellido, String clave, String tipo, String correo) {
         this.nombre = nombre;
-        this.passw=passw;
+        this.apellido = apellido;
+        this.clave = clave;
         this.tipo = tipo;
-        this.id=id;
-        this.carnet=carnet;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public Integer getCarnet() {
-        return carnet;
-    }
-
-    public void setCarnet(Integer carnet) {
-        this.carnet = carnet;
+        this.correo = correo;
     }
 
     public String getNombre() {
@@ -45,12 +29,20 @@ public class Usuario implements Serializable{
         this.nombre = nombre;
     }
 
-    public String getPassw() {
-        return passw;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setPassw(String passw) {
-        this.passw = passw;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     public String getTipo() {
@@ -61,8 +53,16 @@ public class Usuario implements Serializable{
         this.tipo = tipo;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     @Override
     public String toString() {
-        return id+" "+nombre+" "+tipo;
+        return "Estudiante{nombre=" + nombre + " " + apellido + ", tipo=\n\t" + tipo + '}';
     }
 }

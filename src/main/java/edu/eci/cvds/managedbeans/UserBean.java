@@ -40,9 +40,9 @@ public class UserBean implements Serializable {
         try {
             subject.login(token);
             if (subject.hasRole("administrador")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin/pages/administrador.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin/pages/cambiarEstadoRecurso.xhtml");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/regular.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/consultarRecursos.xhtml");
             }
         } catch (UnknownAccountException ex) {
             facesMessage("There is no user with username of " + token.getPrincipal());

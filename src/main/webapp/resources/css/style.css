@@ -61,13 +61,13 @@ body {
 .login {
   font-size: 50px;
   font-weight: 900;
-  margin: 50px 40px 40px;
+  margin: 50px 80px 40px;
 }
 .eula {
   color: #999;
   font-size: 14px;
   line-height: 1.5;
-  margin: 40px;
+  margin-left: 10px;
 }
 .right {
   background: #474A59;
@@ -132,5 +132,5 @@ input::-moz-focus-inner {
 	background: transparent;
 	-moz-border-radius:20px ;
 	-webkit-border-radius:20px ;
-	border:2px solid #ff00c9 ;
+	border:2px solid #9F0D0D ;
 }

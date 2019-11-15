@@ -1,28 +1,46 @@
 package edu.eci.cvds.entities;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class RecursoRentado implements Serializable {
     private int id;
-    private Timestamp fechaInicio;
-    private Timestamp fechaFin;
+    private Date fechaInicioRenta;
+    private Date fechaFinRenta;
     private Recurso recurso;
-    private Usuario usuario;
+
+    /**
+     * Constructor de la clase RecursoREntado
+     * @param id id de la reserva
+     * @param fechaInicioRenta fecha inicio
+     * @param fechaFinRenta fecha final
+     * @param identificadorInterno id interno del recurso
+     * @param nombre nombre del recurso
+     * @param ubicacion ubicacion del recurso
+     * @param capacidad capacidad del recurso
+     * @param estado estado del recurso
+     * @param idT id del tipo de recuros
+     * @param tipo tipo de TipoRecurso
+     */
+    public RecursoRentado(int id,Date fechaInicioRenta,Date fechaFinRenta,int identificadorInterno,String nombre,String ubicacion,Integer capacidad,String estado,int idT,String tipo){
+        this.id=id;
+        this.fechaFinRenta=fechaFinRenta;
+        this.fechaInicioRenta=fechaInicioRenta;
+        this.recurso=new Recurso(identificadorInterno,nombre,ubicacion,capacidad,estado,idT,tipo);
+    }
 
     /**
      * Constructor de la clase RecursoRentado
      * @param id el id del recurso rentado
-     * @param fechaInicio fecha de inicio de la renta
-     * @param fechaFin fecha de fin de la renta
+     * @param fechaInicioRenta fecha de inicio de la renta
+     * @param fechaFinRenta fecha de fin de la renta
      * @param recurso el recurso rentado
      */
-    public RecursoRentado(int id,Timestamp fechaInicio,Timestamp fechaFin,Recurso recurso,Usuario usuario){
+    public RecursoRentado(int id,Date fechaInicioRenta,Date fechaFinRenta,Recurso recurso){
         this.id=id;
-        this.fechaInicio=fechaInicio;
-        this.fechaFin=fechaFin;
+        this.fechaInicioRenta=fechaInicioRenta;
+        this.fechaFinRenta=fechaFinRenta;
         this.recurso=recurso;
-        this.usuario=usuario;
     }
 
     /**
@@ -45,16 +63,16 @@ public class RecursoRentado implements Serializable {
      * Getter de la fecha para finalizar la renta
      * @return la fecha en la que finaliza la renta
      */
-    public Timestamp getFechaFin() {
-        return fechaFin;
+    public Date getFechaFinRenta() {
+        return fechaFinRenta;
     }
 
     /**
      * Getter de la fehca de inicio de la renta
      * @return fecha de inico de la renta
      */
-    public Timestamp getFechaInicio() {
-        return fechaInicio;
+    public Date getFechaInicioRenta() {
+        return fechaInicioRenta;
     }
 
     /**
@@ -67,18 +85,18 @@ public class RecursoRentado implements Serializable {
 
     /**
      * Setter de la fecha final de renta
-     * @param fechaFin La nueva fecha final de renta
+     * @param fechaFinRenta La nueva fecha final de renta
      */
-    public void setFechaFin(Timestamp fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setFechaFinRenta(Date fechaFinRenta) {
+        this.fechaFinRenta = fechaFinRenta;
     }
 
     /**
      * Setter de la fecha inicial de renta
-     * @param fechaInicio Nueva fecha inicial de renta
+     * @param fechaInicioRenta Nueva fecha inicial de renta
      */
-    public void setFechaInicio(Timestamp fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFechaInicioRenta(Date fechaInicioRenta) {
+        this.fechaInicioRenta = fechaInicioRenta;
     }
 
     /**
@@ -89,16 +107,8 @@ public class RecursoRentado implements Serializable {
         this.recurso = recurso;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     @Override
     public String toString() {
-        return Integer.toString(this.id)+" "+this.recurso.toString()+" "+this.fechaInicio.toString()+" "+this.fechaFin.toString();
+        return Integer.toString(this.id)+" "+this.recurso.toString()+" "+this.fechaInicioRenta.toString()+" "+this.fechaFinRenta.toString();
     }
 }

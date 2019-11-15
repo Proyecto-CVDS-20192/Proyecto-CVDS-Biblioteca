@@ -9,7 +9,10 @@ import org.mybatis.guice.datasource.helper.JdbcHelper;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
+import edu.eci.cvds.persistence.DaoRecurso;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoRecurso;
+import edu.eci.cvds.services.ServicesLibrary;
+import edu.eci.cvds.services.impl.ServicesLibraryImpl;
 
 public class GuiceContextListener implements ServletContextListener {
 
@@ -23,20 +26,18 @@ public class GuiceContextListener implements ServletContextListener {
             @Override
             protected void initialize() {
 
-                install(JdbcHelper.MySQL);
+                install(JdbcHelper.PostgreSQL);
                 setEnvironmentId("development");
                 setClassPathResource("mybatis-config.xml");
 
                 // Laboratories
-                //bind(BibliotecaServices.class).to(BibliotecaServicesImpl.class);
-               // bind(UsuarioDAO.class).to(MyBatisUsuarioDAO.class);
-                //bind(RecursoDAO.class).to(MyBatisRecursoDAO.class);
+                bind(ServicesLibrary.class).to(ServicesLibraryImpl.class);
+                bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
             }
         }
         );
 
-        ServletContext servletContext = servletContextEvent.getServletContext();
-        servletContext.setAttribute(Injector.class.getName(), injector);
+        servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);
     }
 
 }

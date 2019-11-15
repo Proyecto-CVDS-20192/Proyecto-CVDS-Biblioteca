@@ -1,31 +1,65 @@
 package edu.eci.cvds.entities;
 
+import com.google.inject.internal.cglib.proxy.$InvocationHandler;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Recurso implements Serializable {
     private String nombre;
     private String ubicacion;
     private TipoRecurso tipoRecurso;
-    private String identificadorInterno;
+    private int identificadorInterno;
     private Integer capacidad;
     private String estado;
+    private List<String> estados;
+
+    /**
+     * Constructor de la clase recurso
+     * @param identificadorInterno id interno
+     * @param nombre nombre
+     * @param ubicacion ubicacion
+     * @param capacidad capacidad
+     * @param estado estado
+     * @param idT id del tipoRecurso
+     * @param tipo tipo del tipoRecurso
+     */
+    public Recurso(int identificadorInterno,String nombre,String ubicacion,Integer capacidad,String estado,int idT,String tipo){
+        this.nombre=nombre;
+        this.identificadorInterno=identificadorInterno;
+        this.ubicacion=ubicacion;
+        this.capacidad=capacidad;
+        this.estado=estado;
+        this.tipoRecurso=new TipoRecurso(idT,tipo);
+        estados = new ArrayList<String>();
+        estados.add("Disponible");
+        estados.add("No Disponible");
+        estados.add("Mantenimiento");
+    }
 
     /**
      * Constructor de la clase Recurso
-     * @param nombre El nombre del recurso
-     * @param ubicacion La ubicacion del recurso
-     * @param tipoRecurso El tipo del recurso
-     * @param identificadorInterno El identificador interno
-     * @param capacidad La capacidad del recurso
+     * @param identificadorInterno id interno
+     * @param nombre nombre
+     * @param ubicacion ubicacion
+     * @param capacidad capacidad
+     * @param estado estado
+     * @param tipo tipo del recurso
      */
-    public Recurso(String nombre,String ubicacion,TipoRecurso tipoRecurso,String estado,String identificadorInterno,Integer capacidad){
+    public Recurso(int identificadorInterno,String nombre,String ubicacion,Integer capacidad,String estado,TipoRecurso tipo){
         this.nombre=nombre;
-        this.ubicacion=ubicacion;
-        this.tipoRecurso=tipoRecurso;
         this.identificadorInterno=identificadorInterno;
+        this.ubicacion=ubicacion;
         this.capacidad=capacidad;
         this.estado=estado;
+        this.tipoRecurso=tipo;
+        estados = new ArrayList<String>();
+        estados.add("Disponible");
+        estados.add("No Disponible");
+        estados.add("Mantenimiento");
     }
+
 
     /**
      * Getter de la capacidad
@@ -39,7 +73,7 @@ public class Recurso implements Serializable {
      * Getter del identificado interno
      * @return el identificador interno
      */
-    public String getIdentificadorInterno() {
+    public int getIdentificadorInterno() {
         return identificadorInterno;
     }
 
@@ -79,7 +113,7 @@ public class Recurso implements Serializable {
      * Setter del identificador interno
      * @param identificadorInterno el nuevo identificador interno
      */
-    public void setIdentificadorInterno(String identificadorInterno) {
+    public void setIdentificadorInterno(int identificadorInterno) {
         this.identificadorInterno = identificadorInterno;
     }
 
@@ -123,8 +157,18 @@ public class Recurso implements Serializable {
         return estado;
     }
 
+    public List<String> getEstados() {
+        return estados;
+    }
+    public void setEstados(List<String> estados){
+        this.estados = estados;
+    }
     @Override
     public String toString() {
-        return this.nombre+" "+this.ubicacion+" "+this.identificadorInterno+" "+this.tipoRecurso.toString()+" "+this.capacidad.toString();
+        try{
+            return this.nombre+" "+this.ubicacion+" "+this.identificadorInterno+" "+this.tipoRecurso.toString()+" "+this.capacidad.toString();
+        }catch (NullPointerException e) {
+            return this.nombre+" "+this.ubicacion+" "+this.identificadorInterno+" "+this.tipoRecurso.toString();
+        }
     }
 }

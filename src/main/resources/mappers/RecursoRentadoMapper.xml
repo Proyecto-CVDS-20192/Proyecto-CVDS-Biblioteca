@@ -6,9 +6,8 @@
 <mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoRentadoMapper">
     <resultMap id="RecursoRentadoMapper" type="edu.eci.cvds.entities.RecursoRentado">
         <id property="id" column="id"/>
-        <result property="fechaInicio" column="fecha_ini"/>
-        <result property="fechaFin" column="fecha_fin"/>
-        <association property="recurso" javaType="edu.eci.cvds.entities.Recurso" resultMap="RecursoResult" columnPrefix="re_"/>
-        <association property="usuario" javaType="edu.eci.cvds.entities.Usuario" resultMap="UsuarioResult" columnPrefix="u_"/>
+        <result property="fechaInicioRenta" column="fecha_ini"/>
+        <result property="fechaFinRenta" column="fecha_fin"/>
+        <association property="recurso" javaType="edu.eci.cvds.entities.Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult" columnPrefix="re_"/>
     </resultMap>
 </mapper>

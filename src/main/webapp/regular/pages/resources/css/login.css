@@ -4,12 +4,29 @@ html, body {
 }
 
 .footerlogin {
-    position: absolute;
+    display: block;
     width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+    margin-left: 0;
+    position: absolute;
     height: 5vh;
     background: #9F0D0D;
-    margin: 0 0 0 0;
-    top: 95vh;
+}
+
+.image{
+    width:55%;
+    margin-right:2%;
+    float: left;
+}
+
+.logout {
+    float: right;
+    margin-top: 3vh;
+    margin-right: 2vw;
+}
+.clearfix{
+    clear:both
 }
 
 .divbarra{
