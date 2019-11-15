@@ -3,7 +3,7 @@ package edu.eci.cvds.entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class RecursoRentado implements Serializable {
+public class Reserva implements Serializable {
     private int id;
     private Timestamp fechaInicio;
     private Timestamp fechaFin;
@@ -17,7 +17,7 @@ public class RecursoRentado implements Serializable {
      * @param fechaFin fecha de fin de la renta
      * @param recurso el recurso rentado
      */
-    public RecursoRentado(int id,Timestamp fechaInicio,Timestamp fechaFin,Recurso recurso,Usuario usuario){
+    public Reserva(int id,Timestamp fechaInicio,Timestamp fechaFin,Recurso recurso,Usuario usuario){
         this.id=id;
         this.fechaInicio=fechaInicio;
         this.fechaFin=fechaFin;

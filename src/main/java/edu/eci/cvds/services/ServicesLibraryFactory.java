@@ -2,10 +2,10 @@ package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
 import edu.eci.cvds.persistence.DaoRecurso;
-import edu.eci.cvds.persistence.DaoRecursoRentado;
+import edu.eci.cvds.persistence.DaoReserva;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoRecurso;
-import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoRecursoRentado;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoReserva;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisTipoRecurso;
 import edu.eci.cvds.services.impl.AdministratorServicesLibraryImpl;
 import edu.eci.cvds.services.impl.ServicesLibraryImpl;
@@ -32,7 +32,7 @@ public class ServicesLibraryFactory {
                 bind(ServicesLibrary.class).to(ServicesLibraryImpl.class);
                 bind(AdministratorServicesLibrary.class).to(AdministratorServicesLibraryImpl.class);
                 bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
-                bind(DaoRecursoRentado.class).to(MyBatisDaoRecursoRentado.class);
+                bind(DaoReserva.class).to(MyBatisDaoReserva.class);
                 bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
             }
         });

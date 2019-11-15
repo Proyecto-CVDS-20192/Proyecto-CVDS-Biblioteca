@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.sql.Timestamp;
 
-public interface RecursoRentadoMapper {
+public interface ReservaMapper {
     void reservarRecurso(@Param("recurso") Recurso recurso, @Param("usuario")Usuario usuario, @Param("fechaIni") Timestamp fechaIni,@Param("fechaFin") Timestamp fechaFin);
 }

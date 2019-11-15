@@ -15,8 +15,10 @@ public class MyBatisDaoRecurso implements DaoRecurso {
 
     @Override
     public void registraNuevoRecurso(Recurso recurso) throws LibraryServicesException{
-        if(recurso.getCapacidad().intValue()<0){
-            throw new LibraryServicesException(LibraryServicesException.CAPACIDAD_NEGATIVA);
+        if(recurso.getCapacidad()!=null) {
+            if (recurso.getCapacidad().intValue() < 0) {
+                throw new LibraryServicesException(LibraryServicesException.CAPACIDAD_NEGATIVA);
+            }
         }
         try{
             recursoMapper.registraNuevoRecurso(recurso);

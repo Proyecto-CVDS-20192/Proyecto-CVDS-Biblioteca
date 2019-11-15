@@ -18,6 +18,7 @@ public class LibraryServicesTest{
     AdministratorServicesLibrary administratorServices;
     @Inject
     ServicesLibrary servicesLibrary;
+    private Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
 
     @Before
     public void setUp(){}
@@ -41,7 +42,6 @@ public class LibraryServicesTest{
 
     @Test
     public void deberiaEliminareIngresarRecurso() throws LibraryServicesException {
-        Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
         administratorServices.eliminarUnRecursoPermanente(recurso);
         int length=servicesLibrary.consultarRecursos().size();
         administratorServices.registrarRecurso(recurso);
@@ -57,7 +57,6 @@ public class LibraryServicesTest{
 
     @Test
     public void deberiaSacarUnRecursoDeFormaTemporal() throws LibraryServicesException {
-        Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
         administratorServices.eliminarUnRecursoTemporal(recurso);
         assertFalse(servicesLibrary.consultarRecurso(500).getEstado().equals("Mantenimiento"));
     }
@@ -65,12 +64,11 @@ public class LibraryServicesTest{
 
     @Test
     public void deberiaVolverUnRecurso() throws LibraryServicesException{
-        Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
         administratorServices.volverAAdmitirElRecurso(recurso);
         assertTrue(servicesLibrary.consultarRecurso(500).getEstado().equals("Disponible"));
     }
 
-    /*
+
     @Test
     public void NoDebePermitirUnaCapacidadNegativa(){
         try {
@@ -90,6 +88,6 @@ public class LibraryServicesTest{
             assertTrue(false);
         }
     }
-    */
+
 
 }
