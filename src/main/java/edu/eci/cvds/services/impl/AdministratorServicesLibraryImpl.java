@@ -5,7 +5,6 @@ import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.persistence.DaoRecurso;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
-import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
@@ -23,27 +22,22 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     }
 
     @Override
-    public void registrarRecurso(Recurso recurso) throws LibraryServicesException{
-        if(recurso.getCapacidad()!=null){
-            if(recurso.getCapacidad().intValue()<0){
-                throw new LibraryServicesException(LibraryServicesException.CAPACIDAD_NEGATIVA);
-            }
-        }
+    public void registrarRecurso(Recurso recurso) {
         recursoDao.registraNuevoRecurso(recurso);
     }
 
     @Override
-    public void eliminarUnRecursoPermanente(Recurso recurso) throws LibraryServicesException{
+    public void eliminarUnRecursoPermanente(Recurso recurso) {
         recursoDao.eliminarPermanente(recurso);
     }
 
     @Override
-    public void eliminarUnRecursoTemporal(Recurso recurso) throws LibraryServicesException {
+    public void eliminarUnRecursoTemporal(Recurso recurso) {
         recursoDao.eliminarTemporal(recurso);
     }
 
     @Override
-    public void volverAAdmitirElRecurso(Recurso recurso)throws  LibraryServicesException {
+    public void volverAAdmitirElRecurso(Recurso recurso) {
         recursoDao.volverAAdmitirRecurso(recurso);
     }
 

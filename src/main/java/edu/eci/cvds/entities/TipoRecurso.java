@@ -49,6 +49,6 @@ public class TipoRecurso implements Serializable {
 
     @Override
     public String toString() {
-        return Integer.toString(id)+" "+tipo;
+        return Integer.toString(id);
     }
 }

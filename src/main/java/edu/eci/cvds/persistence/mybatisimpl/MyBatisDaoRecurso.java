@@ -3,7 +3,6 @@ package edu.eci.cvds.persistence.mybatisimpl;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.persistence.DaoRecurso;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
-import edu.eci.cvds.services.LibraryServicesException;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -14,56 +13,58 @@ public class MyBatisDaoRecurso implements DaoRecurso {
     private RecursoMapper recursoMapper;
 
     @Override
-    public void registraNuevoRecurso(Recurso recurso) throws LibraryServicesException{
+    public void registraNuevoRecurso(Recurso recurso) {
         try{
             recursoMapper.registraNuevoRecurso(recurso);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void eliminarPermanente(Recurso recurso) throws LibraryServicesException{
+    public void eliminarPermanente(Recurso recurso) {
         try{
             recursoMapper.eliminarRecursoPermanente(recurso);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void eliminarTemporal(Recurso recurso) throws LibraryServicesException{
+    public void eliminarTemporal(Recurso recurso) {
         try{
             recursoMapper.eliminarRecursoTemporal(recurso);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void volverAAdmitirRecurso(Recurso recurso) throws LibraryServicesException{
+    public void volverAAdmitirRecurso(Recurso recurso) {
         try{
             recursoMapper.volverAAdmitirRecurso(recurso);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
-    public List<Recurso> consultarRecursos() throws LibraryServicesException{
+    public List<Recurso> consultarRecursos() {
         try{
             return recursoMapper.consultarRecursos();
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            e.printStackTrace();
         }
+        return null;
     }
 
     @Override
-    public Recurso consultarRecurso(int id) throws LibraryServicesException{
+    public Recurso consultarRecurso(int id){
         try {
             return recursoMapper.consultarRecurso(id);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            e.printStackTrace();
         }
+        return null;
     }
 }
