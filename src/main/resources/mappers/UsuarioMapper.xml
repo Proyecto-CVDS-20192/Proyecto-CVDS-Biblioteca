@@ -5,7 +5,10 @@
 
 <mapper>
     <resultMap id="UsuarioResult" type="edu.eci.cvds.entities.Usuario">
-        <id property="" column=""/>
-
+        <id property="id" column="id"/>
+        <result property="passw" column="passw"/>
+        <result property="tipo" column="tipo"/>
+        <result property="carnet" column="carnet"/>
+        <result property="nombre" column="nombre"/>
     </resultMap>
 </mapper>
