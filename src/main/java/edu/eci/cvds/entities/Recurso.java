@@ -8,7 +8,7 @@ public class Recurso implements Serializable {
     private TipoRecurso tipoRecurso;
     private String identificadorInterno;
     private Integer capacidad;
-    private boolean estado;
+    private String estado;
 
     /**
      * Constructor de la clase Recurso
@@ -18,7 +18,7 @@ public class Recurso implements Serializable {
      * @param identificadorInterno El identificador interno
      * @param capacidad La capacidad del recurso
      */
-    public Recurso(String nombre,String ubicacion,TipoRecurso tipoRecurso,boolean estado,String identificadorInterno,Integer capacidad){
+    public Recurso(String nombre,String ubicacion,TipoRecurso tipoRecurso,String estado,String identificadorInterno,Integer capacidad){
         this.nombre=nombre;
         this.ubicacion=ubicacion;
         this.tipoRecurso=tipoRecurso;
@@ -111,7 +111,7 @@ public class Recurso implements Serializable {
      * Setter del estado
      * @param estado el nuevo estado
      */
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -119,7 +119,7 @@ public class Recurso implements Serializable {
      * Obtenedor del estado
      * @return el estado
      */
-    public boolean isEstado() {
+    public String getEstado() {
         return estado;
     }
 
