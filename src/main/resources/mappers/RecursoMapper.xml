@@ -10,34 +10,33 @@
         <result property="ubicacion" column="ubicacion"/>
         <result property="capacidad" column="capacidad"/>
         <result property="estado" column="estado"/>
-        <association property="tipoRecurso" javaType="edu.eci.cvds.entities.TipoRecurso" resultMap="TipoRecursoResult"
+        <association property="tipoRecurso" javaType="edu.eci.cvds.entities.TipoRecurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.TipoRecursoMapper.TipoRecursoResult"
                      columnPrefix="tr_"/>
     </resultMap>
 
     <insert id="registraNuevoRecurso" parameterType="map">
-        insert into RECURSOS(id_interno,nombre,ubicacion,capacidad,TIPORECURSO_id) values
-        (#{recurso.identificadorInterno},#{recurso.nombre},#{recurso.ubicacion},#{recurso.capacidad},#{recurso.tipoRecurso.id});
+        insert into RECURSO(id_interno,nombre,ubicacion,capacidad,id_tipo,estado) values
+        (#{recurso.identificadorInterno},#{recurso.nombre},#{recurso.ubicacion},#{recurso.capacidad},#{recurso.tipoRecurso.id},#{recurso.estado});
     </insert>
 
     <delete id="eliminarRecursoPermanente" parameterType="map">
-        delete from RECURSOS where id_interno=#{recurso.identificadorInterno};
+        delete from RECURSO where id_interno=#{recurso.identificadorInterno};
     </delete>
 
     <update id="eliminarRecursoTemporal" parameterType="map">
-        update RECURSOS SET estado=false WHERE id_interno=#{recurso.identificadorInterno};
+        update RECURSO SET estado='No Disponible' WHERE id_interno=#{recurso.identificadorInterno};
     </update>
 
     <update id="volverAAdmitirRecurso" parameterType="map">
-        update RECURSOS SET estado=true WHERE id_interno=#{recurso.identificadorInterno};
+        update RECURSO SET estado='Disponible' WHERE id_interno=#{recurso.identificadorInterno};
     </update>
 
     <select id="consultarRecursos" parameterType="map" resultMap="RecursoResult">
-        select * FROM
-        recurso left join tipo_recurso on id_tipo=id;
+        select * from recurso left join tipo_recurso on id_tipo=id where estado='Disponible';
     </select>
 
     <select id="consultarRecurso" parameterType="map" resultMap="RecursoResult">
-        select * FROM recurso left join tipo_recurso on id_tipo=id where recurso.id_interno=#{id}
+        select * from recurso left join tipo_recurso on id_tipo=id where recurso.id_interno=#{id}
     </select>
 
 </mapper>

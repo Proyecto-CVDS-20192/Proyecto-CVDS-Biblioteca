@@ -34,14 +34,14 @@ public class LibraryServicesTest{
 
 
     @Test
-    public void deberiaConsultarTodosLosRecursos() throws LibraryServicesException{
+    public void deberiaConsultarTodosLosRecursos() throws LibraryServicesException {
         assertTrue(servicesLibrary.consultarRecursos() instanceof List);
     }
 
 
     @Test
-    public void deberiaEliminareIngresarRecurso() throws LibraryServicesException{
-        Recurso recurso=new Recurso(500,"LaCosa","Central",null,"Disponible",new TipoRecurso(1,"Computador"));
+    public void deberiaEliminareIngresarRecurso() throws LibraryServicesException {
+        Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
         administratorServices.eliminarUnRecursoPermanente(recurso);
         int length=servicesLibrary.consultarRecursos().size();
         administratorServices.registrarRecurso(recurso);
@@ -50,30 +50,31 @@ public class LibraryServicesTest{
 
 
     @Test
-    public void deberiaConsultarUnRecurso() throws LibraryServicesException{
-        assertTrue(servicesLibrary.consultarRecurso(500).getNombre().equals("LaCosa"));
+    public void deberiaConsultarUnRecurso() throws LibraryServicesException {
+        assertTrue(servicesLibrary.consultarRecurso(500).getNombre().equals("El PC"));
     }
 
 
-    /*@Test
-    public void deberiaSacarUnRecursoDeFormaTemporal() throws LibraryServicesException{
-        Recurso recurso=new Recurso(500,"LaCosa","Central",null,"Disponible",new TipoRecurso(1,"Computador"));
+    @Test
+    public void deberiaSacarUnRecursoDeFormaTemporal() throws LibraryServicesException {
+        Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
         administratorServices.eliminarUnRecursoTemporal(recurso);
-        assertFalse(servicesLibrary.consultarRecurso(500).getEstado());
+        assertFalse(servicesLibrary.consultarRecurso(500).getEstado().equals("Mantenimiento"));
     }
 
 
     @Test
     public void deberiaVolverUnRecurso() throws LibraryServicesException{
-        Recurso recurso=new Recurso(500,"LaCosa","Central",null,"Disponible",new TipoRecurso(1,"Computador"));
+        Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
         administratorServices.volverAAdmitirElRecurso(recurso);
-        assertTrue(servicesLibrary.consultarRecurso(500).getEstado());
-    }*/
+        assertTrue(servicesLibrary.consultarRecurso(500).getEstado().equals("Disponible"));
+    }
 
+    /*
     @Test
     public void NoDebePermitirUnaCapacidadNegativa(){
         try {
-            Recurso recurso = new Recurso(500, "LaCosa", "Central", -50, "Disponible", new TipoRecurso(1, "Computador"));
+            Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,-50);
             administratorServices.registrarRecurso(recurso);
             assertTrue(false);
         }catch(LibraryServicesException e){ }
@@ -82,12 +83,13 @@ public class LibraryServicesTest{
     @Test
     public void debePermitirUnaCapacidadPositiva(){
         try{
-            Recurso recurso = new Recurso(600, "LaCosa", "Central", 50, "Disponible", new TipoRecurso(1, "Computador"));
+            Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,50);
             administratorServices.eliminarUnRecursoPermanente(recurso);
             administratorServices.registrarRecurso(recurso);
         }catch (LibraryServicesException e){
             assertTrue(false);
         }
     }
+    */
 
 }

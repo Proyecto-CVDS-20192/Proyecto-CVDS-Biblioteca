@@ -5,6 +5,7 @@ import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.TipoRecursoMapper;
+import edu.eci.cvds.services.LibraryServicesException;
 
 import javax.inject.Inject;
 
@@ -14,11 +15,11 @@ public class MyBatisTipoRecurso implements DaoTipoRecurso {
     TipoRecursoMapper tiporecursoMapper;
 
     @Override
-    public void registrarTipoRecurso(TipoRecurso tipoRecurso) {
+    public void registrarTipoRecurso(TipoRecurso tipoRecurso) throws LibraryServicesException{
         try {
             tiporecursoMapper.registrarTipoRecurso(tipoRecurso);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            e.printStackTrace();
+            throw new LibraryServicesException(e.getMessage());
         }
     }
 }

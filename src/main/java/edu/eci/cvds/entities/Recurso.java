@@ -6,10 +6,35 @@ public class Recurso implements Serializable {
     private String nombre;
     private String ubicacion;
     private TipoRecurso tipoRecurso;
-    private String identificadorInterno;
+    private int identificadorInterno;
     private Integer capacidad;
     private String estado;
 
+    /*
+    select
+        r.nombre as r_nombre,
+        r.ubicacion as r_ubicacion,
+        r.estado as r_estado,
+        r.id_interno as r_id_interno,
+        r.capacidad as r_capacidad,
+        tr.id as tr_id,
+        tr.tipo as tr_tipo
+        FROM
+        recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.estado='Disponible';
+     */
+
+
+    /*
+    select
+        r.nombre,
+        r.ubicacion,
+        r.estado,
+        r.id_interno,
+        r.capacidad,
+        tr.id as tr_id,
+        tr.tipo as tr_tipo
+        FROM recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.id_interno=#{id};
+     */
     /**
      * Constructor de la clase Recurso
      * @param nombre El nombre del recurso
@@ -18,7 +43,7 @@ public class Recurso implements Serializable {
      * @param identificadorInterno El identificador interno
      * @param capacidad La capacidad del recurso
      */
-    public Recurso(String nombre,String ubicacion,TipoRecurso tipoRecurso,String estado,String identificadorInterno,Integer capacidad){
+    public Recurso(String nombre,String ubicacion,TipoRecurso tipoRecurso,String estado,int identificadorInterno,Integer capacidad){
         this.nombre=nombre;
         this.ubicacion=ubicacion;
         this.tipoRecurso=tipoRecurso;
@@ -26,6 +51,17 @@ public class Recurso implements Serializable {
         this.capacidad=capacidad;
         this.estado=estado;
     }
+
+    public Recurso(int identificadorInterno,int idTipo,String nombre,String ubicacion,Integer capacidad,String estado,int idTipo2,String nombreTipo){
+        this.nombre=nombre;
+        this.ubicacion=ubicacion;
+        this.tipoRecurso=new TipoRecurso(idTipo,nombreTipo);
+        this.identificadorInterno=identificadorInterno;
+        this.capacidad=capacidad;
+        this.estado=estado;
+    }
+
+
 
     /**
      * Getter de la capacidad
@@ -39,7 +75,7 @@ public class Recurso implements Serializable {
      * Getter del identificado interno
      * @return el identificador interno
      */
-    public String getIdentificadorInterno() {
+    public int getIdentificadorInterno() {
         return identificadorInterno;
     }
 
@@ -79,7 +115,7 @@ public class Recurso implements Serializable {
      * Setter del identificador interno
      * @param identificadorInterno el nuevo identificador interno
      */
-    public void setIdentificadorInterno(String identificadorInterno) {
+    public void setIdentificadorInterno(int identificadorInterno) {
         this.identificadorInterno = identificadorInterno;
     }
 

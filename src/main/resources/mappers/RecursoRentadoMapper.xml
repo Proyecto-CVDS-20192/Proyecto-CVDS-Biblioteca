@@ -11,4 +11,8 @@
         <association property="recurso" javaType="edu.eci.cvds.entities.Recurso" resultMap="RecursoResult" columnPrefix="re_"/>
         <association property="usuario" javaType="edu.eci.cvds.entities.Usuario" resultMap="UsuarioResult" columnPrefix="u_"/>
     </resultMap>
+
+    <insert id="reservarRecurso" parameterType="map">
+        insert into()
+    </insert>
 </mapper>
