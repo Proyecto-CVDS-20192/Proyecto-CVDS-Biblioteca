@@ -27,8 +27,16 @@ public class RecursoBean extends BasePageBean {
 
     private Recurso recurso;
 
+    public List<Recurso> getRecursosAdmin() throws LibraryServicesException {
+        return servicesA.consultarRecursosAdmin();
+    }
+    
     public List<Recurso> getRecursos() throws LibraryServicesException {
         return servicesL.consultarRecursos();
+    }
+    
+    public void reservarRecurso(int id) {
+        
     }
 
     public List<String> getEstados() {
@@ -40,8 +48,7 @@ public class RecursoBean extends BasePageBean {
 
     public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {
         Recurso recurso;
-        int id = servicesL.consultarRecursos().size() + 2;
-        System.out.println(id);
+        int id = servicesA.consultarRecursosAdmin().size() + 1;
         try {
             recurso = new Recurso(id, 1, nombre, "Biblioteca", capacidad, "Disponible", 1, "PC");
             servicesA.registrarRecurso(recurso);

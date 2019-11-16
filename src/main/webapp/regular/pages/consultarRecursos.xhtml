@@ -6,11 +6,11 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <meta charset="utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<meta name="keywords" content="footer, address, phone, icons" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="keywords" content="footer, address, phone, icons" />
         <title>Consultar Recurso</title>
-        
+
         <link rel="icon" type="image/png" href="/resources/img/libro.png" />
         <link href="/resources/css/login.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
@@ -30,7 +30,7 @@
             </h:form>
         </div>
         <div class="clearfix"></div>
-        
+
         <br></br>
         <div id="divbarraid" class="divbarra">
             <center>Consultar Recursos Biblioteca ECI</center>
@@ -46,7 +46,9 @@
                             <th>Nombre</th>
                             <th>Ubicacion</th>
                             <th>Capacidad</th>
+                            <th>Tipo</th>
                             <th>Estado</th>
+                            <th>Reservar</th>
 
                         </tr>
                     </thead>
@@ -56,7 +58,24 @@
                                 <td align="center" class="columregistro">#{recursos.nombre}</td>
                                 <td align="center" class="columregistro">#{recursos.ubicacion}</td>
                                 <td align="center" class="columregistro">#{recursos.capacidad}</td>
+                                <td align="center" class="columregistro">#{recursos.tipoRecurso.tipo}</td>
                                 <td align="center" class="columregistro">#{recursos.estado}</td>
+                                <td align="center" class="columregistro">
+                                    <h:form id="frmm3">         
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton class="buttonR"  value="Reservar Recurso" update="message">
+                                            <p:confirm header="Confirmación" message="¿Desea reservar el recurso #{recursos.nombre}?" icon="pi pi-exclamation-triangle" />
+                                            <f:actionListener binding="#{recursoBean.reservarRecurso(recursos.identificadorInterno)}" update="frmm3"/>
+                                        </p:commandButton>
+
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <div align="center">
+                                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                            </div>
+                                        </p:confirmDialog>
+                                    </h:form>
+                                </td>
                             </tr>
                         </r:repeat>
                     </tbody>
