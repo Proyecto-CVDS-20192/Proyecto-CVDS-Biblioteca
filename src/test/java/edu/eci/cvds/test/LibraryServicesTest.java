@@ -61,13 +61,13 @@ public class LibraryServicesTest{
         assertFalse(servicesLibrary.consultarRecurso(500).getEstado().equals("Mantenimiento"));
     }
 
-
+/*
     @Test
     public void deberiaVolverUnRecurso() throws LibraryServicesException{
         administratorServices.volverAAdmitirElRecurso(recurso);
         assertTrue(servicesLibrary.consultarRecurso(500).getEstado().equals("Disponible"));
     }
-
+*/
 
     @Test
     public void NoDebePermitirUnaCapacidadNegativa(){

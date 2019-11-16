@@ -8,7 +8,8 @@ import org.apache.shiro.web.util.WebUtils;
 
 public class OnlyNotAutenticated extends AccessControlFilter {
 
-    String welcomeurl;
+    String welcomeurlAdmin = "/faces/admin/pages/cambiarEstadoRecurso.xhtml ";
+    String welcomeurlRegular = "/faces/regular/pages/consultarRecursos.xhtml ";
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
@@ -19,15 +20,12 @@ public class OnlyNotAutenticated extends AccessControlFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        WebUtils.issueRedirect(request, response, welcomeurl);
+        Subject subject = getSubject(request, response);
+        if (subject.hasRole("administrador")) {
+            WebUtils.issueRedirect(request, response, welcomeurlAdmin);
+        }else{
+            WebUtils.issueRedirect(request, response, welcomeurlRegular);
+        }
         return false;//What to do if try to go to login -> go welcome page of auth ursers
-    }
-
-    public String getWelcomeurl() {
-        return welcomeurl;
-    }
-
-    public void setWelcomeurl(String welcomeurl) {
-        this.welcomeurl = welcomeurl;
     }
 }

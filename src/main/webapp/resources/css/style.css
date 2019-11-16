@@ -47,7 +47,6 @@ body {
   background: white;
   height: calc(100% - 40px);
   top: 20px;
-  position: relative;
   width: 50%;
 }
 @media (max-width: 767px) {
@@ -67,8 +66,14 @@ body {
   color: #999;
   font-size: 14px;
   line-height: 1.5;
+  position: relative;
   margin-left: 10px;
 }
+
+.eula p{
+   font-weight:bold;
+}
+
 .right {
   background: #474A59;
   box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
