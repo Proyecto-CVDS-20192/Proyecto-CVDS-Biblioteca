@@ -80,17 +80,19 @@
                             <th>Nombre</th>
                             <th>Ubicacion</th>
                             <th>Capacidad</th>
+                            <th>Tipo</th>
                             <th>Estado</th>
                             <th>Editar</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <r:repeat var="recursos" value="#{recursoBean.recursos}">
+                        <r:repeat var="recursos" value="#{recursoBean.recursosAdmin}">
                             <tr>
                                 <td align="center" class="columregistro">#{recursos.nombre}</td>
                                 <td align="center" class="columregistro">#{recursos.ubicacion}</td>
                                 <td align="center" class="columregistro">#{recursos.capacidad}</td>
+                                <td align="center" class="columregistro">#{recursos.tipoRecurso.tipo}</td>
                                 <td align="center" class="columregistro">#{recursos.estado}</td>
                                 <td align="center" class="columregistro">
                                     <h:form id="frmm3">         
