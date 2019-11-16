@@ -12,4 +12,5 @@ public interface DaoRecurso {
     public void volverAAdmitirRecurso(Recurso recurso) throws LibraryServicesException;
     public List<Recurso> consultarRecursos() throws LibraryServicesException;
     Recurso consultarRecurso(int id) throws LibraryServicesException;
+    List<Recurso> consultarRecursosAdmin() throws LibraryServicesException;
 }

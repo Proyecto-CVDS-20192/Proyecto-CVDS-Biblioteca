@@ -71,4 +71,13 @@ public class MyBatisDaoRecurso implements DaoRecurso {
             throw new LibraryServicesException(e.getMessage());
         }
     }
+
+    @Override
+    public List<Recurso> consultarRecursosAdmin() throws LibraryServicesException {
+        try{
+            return recursoMapper.consultarRecursosAdmin();
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(e.getMessage());
+        }
+    }
 }

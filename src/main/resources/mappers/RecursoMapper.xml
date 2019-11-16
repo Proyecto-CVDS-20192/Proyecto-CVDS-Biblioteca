@@ -39,4 +39,8 @@
         select * from recurso left join tipo_recurso on id_tipo=id where recurso.id_interno=#{id}
     </select>
 
+    <select id="consultarRecursosAdmin" parameterType="map" resultMap="RecursoResult">
+        select * from recurso left join tipo_recurso on id_tipo=id;
+    </select>
+
 </mapper>

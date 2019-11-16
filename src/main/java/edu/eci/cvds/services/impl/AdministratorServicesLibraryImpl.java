@@ -9,6 +9,7 @@ import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class AdministratorServicesLibraryImpl implements AdministratorServicesLibrary {
 
@@ -40,6 +41,11 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     @Override
     public void volverAAdmitirElRecurso(Recurso recurso) throws LibraryServicesException {
         recursoDao.volverAAdmitirRecurso(recurso);
+    }
+
+    @Override
+    public List<Recurso> consultarRecursosAdmin() throws LibraryServicesException {
+        return recursoDao.consultarRecursosAdmin();
     }
 
 }

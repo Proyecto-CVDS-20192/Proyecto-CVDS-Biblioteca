@@ -43,4 +43,6 @@ public interface RecursoMapper {
      * @return el recurso a buscar
      */
     Recurso consultarRecurso(@Param("id") int id);
+
+    List<Recurso> consultarRecursosAdmin();
 }

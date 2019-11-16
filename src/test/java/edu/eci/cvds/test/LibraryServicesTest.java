@@ -39,6 +39,11 @@ public class LibraryServicesTest{
         assertTrue(servicesLibrary.consultarRecursos() instanceof List);
     }
 
+    @Test
+    public void deberiaConsultarTodosLosRecursosComoAdmin() throws LibraryServicesException{
+        assertTrue(administratorServices.consultarRecursosAdmin() instanceof List);
+    }
+
 
     @Test
     public void deberiaEliminareIngresarRecurso() throws LibraryServicesException {

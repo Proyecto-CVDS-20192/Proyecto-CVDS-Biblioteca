@@ -3,6 +3,8 @@ package edu.eci.cvds.services;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.TipoRecurso;
 
+import java.util.List;
+
 public interface AdministratorServicesLibrary {
     /**
      * Registra un nuevo tipo de recurso
@@ -33,4 +35,6 @@ public interface AdministratorServicesLibrary {
      * @param recurso el recurso
      */
     public void volverAAdmitirElRecurso(Recurso recurso) throws LibraryServicesException;
+
+    List<Recurso> consultarRecursosAdmin() throws LibraryServicesException;
 }
