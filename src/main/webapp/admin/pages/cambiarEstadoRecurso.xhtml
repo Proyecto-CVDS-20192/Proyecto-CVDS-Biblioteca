@@ -34,9 +34,9 @@
 
         <div class="registrar">
             <h:form id="frmm2">
-                <p:commandButton value="Agregar Recurso" onclick="PF('dlg').show();" type="button" icon="pi pi-home" />
+                <p:commandButton value="Agregar Recurso" onclick="PF('dlg1').show();"/>
 
-                <p:dialog header="Agregar Recurso" widgetVar="dlg" focus="tipo">
+                <p:dialog header="Agregar Recurso" widgetVar="dlg1" focus="tipo" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="tipo" value="Tipo:" />
                         <p:inputText id="tipo" label="tipo" 
@@ -54,9 +54,16 @@
                         <p:inputText id="capacidad" label="capacidad" 
                                      binding="#{capacidad}"/>
 
-                        <p:commandButton class="buttonR" value="Registrar">
+                        <p:growl id="message1" showDetail="true" />                                        
+                        <p:commandButton class="buttonR" value="Registrar" update="message1">
+                            <p:confirm header="Confirmación" message="¿Desea registrar este recurso?" icon="pi pi-exclamation-triangle" />
                             <f:actionListener binding="#{recursoBean.registrarRecurso(nombre.value, capacidad.value)}" update="frmm2"/>
                         </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <div align="center">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </div></p:confirmDialog> 
 
                     </h:panelGrid>
                 </p:dialog>
@@ -84,15 +91,21 @@
                                 <td align="center" class="columregistro">#{recursos.nombre}</td>
                                 <td align="center" class="columregistro">#{recursos.ubicacion}</td>
                                 <td align="center" class="columregistro">#{recursos.capacidad}</td>
-                                <td align="center">
-                                    <h:selectOneMenu value="#{recursos.estado}" style="width:100%">
-                                        <f:selectItems value="#{recursos.estados}"/>
-                                    </h:selectOneMenu>
-                                </td>
-                                <td align="center"> <h:form>
-                                        <h:commandButton class="mybuttons"
-                                                         actionListener="#{recursoBean.editarEstadoRecurso()}"
-                                                         update="Registro_table" value="Editar" />									
+                                <td align="center" class="columregistro">#{recursos.estado}</td>
+                                <td align="center" class="columregistro">
+                                    <h:form id="frmm3">         
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton class="buttonR"  value="Elimnar Recurso" update="message">
+                                            <p:confirm header="Confirmación" message="¿Desea eliminar el recurso?" icon="pi pi-exclamation-triangle" />
+                                            <f:actionListener binding="#{recursoBean.eliminarRecurso(recursos.identificadorInterno)}" update="frmm3"/>
+                                        </p:commandButton>
+
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <div align="center">
+                                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                            </div>
+                                        </p:confirmDialog> 
                                     </h:form>
                                 </td>
                             </tr>

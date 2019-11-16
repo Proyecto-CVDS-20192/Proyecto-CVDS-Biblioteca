@@ -1,79 +1,61 @@
 package edu.eci.cvds.managedbeans;
 
+import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.services.AdministratorServicesLibrary;
+import edu.eci.cvds.services.LibraryServicesException;
+import edu.eci.cvds.services.ServicesLibrary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ejb.Stateless;
-import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
-@Named
-@Stateless
-@ViewScoped
-@ManagedBean(name = "recursoBean", eager = true)
-public class RecursoBean implements Serializable {
+@SuppressWarnings("deprecation")
+@ManagedBean(name = "recursoBean")
+@SessionScoped
+public class RecursoBean extends BasePageBean {
 
     private static final transient Logger log = LoggerFactory.getLogger(UserBean.class);
 
-    private String nombre;
-    private int capacidad;
-    private String ubicacion;
-    private boolean estado;
-    private int id;
+    @Inject
+    private ServicesLibrary servicesL;
 
-    public RecursoBean() {
+    @Inject
+    private AdministratorServicesLibrary servicesA;
+
+    private Recurso recurso;
+
+    public List<Recurso> getRecursos() throws LibraryServicesException {
+        return servicesL.consultarRecursos();
     }
 
-    public List<Recurso> getRecursos() {
-        return null;
+    public List<String> getEstados() {
+        return recurso.getEstados();
     }
 
-    public void reservarRecurso() {
-
+    public void editarEstadoRecurso() {
     }
 
-    public String getNombre() {
-        return nombre;
+    public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {
+        Recurso recurso;
+        int id = servicesL.consultarRecursos().size() + 2;
+        System.out.println(id);
+        try {
+            recurso = new Recurso(id, 1, nombre, "Biblioteca", capacidad, "Disponible", 1, "PC");
+            servicesA.registrarRecurso(recurso);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void eliminarRecurso(int id) {
+        try {
+            servicesA.eliminarUnRecursoPermanente(servicesL.consultarRecurso(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

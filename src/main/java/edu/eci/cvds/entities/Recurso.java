@@ -1,6 +1,8 @@
 package edu.eci.cvds.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Recurso implements Serializable {
     private String nombre;
@@ -9,6 +11,7 @@ public class Recurso implements Serializable {
     private int identificadorInterno;
     private Integer capacidad;
     private String estado;
+    private List<String> estados;
 
     /*
     select
@@ -50,6 +53,10 @@ public class Recurso implements Serializable {
         this.identificadorInterno=identificadorInterno;
         this.capacidad=capacidad;
         this.estado=estado;
+        estados = new ArrayList<String>();
+        estados.add("Disponible");
+        estados.add("No Disponible");
+        estados.add("Mantenimiento");
     }
 
     public Recurso(int identificadorInterno,int idTipo,String nombre,String ubicacion,Integer capacidad,String estado,int idTipo2,String nombreTipo){
@@ -59,6 +66,10 @@ public class Recurso implements Serializable {
         this.identificadorInterno=identificadorInterno;
         this.capacidad=capacidad;
         this.estado=estado;
+        estados = new ArrayList<String>();
+        estados.add("Disponible");
+        estados.add("No Disponible");
+        estados.add("Mantenimiento");
     }
 
 
@@ -157,6 +168,13 @@ public class Recurso implements Serializable {
      */
     public String getEstado() {
         return estado;
+    }
+    
+    public List<String> getEstados() {
+        return estados;
+    }
+    public void setEstados(List<String> estados){
+        this.estados = estados;
     }
 
     @Override
