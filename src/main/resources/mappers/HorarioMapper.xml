@@ -9,6 +9,11 @@
         <result property="horaInicio" column="hora_inicio"/>
         <result property="horaFin" column="hora_fin"/>
         <association property="recurso" javaType="edu.eci.cvds.entities.Recurso" resultMap="RecursoResult"
-                     columnPrefix="h_"/>
+                     columnPrefix="r_"/>
     </resultMap>
+
+    <select id="horarios" parameterType="map" resultMap="HorarioResult">
+        select * from recurso left join horario on id_interno=id;
+    </select>
+
 </mapper>

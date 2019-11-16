@@ -2,7 +2,9 @@ package edu.eci.cvds.services.impl;
 
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.TipoRecurso;
+import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.DaoRecurso;
+import edu.eci.cvds.persistence.DaoReserva;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
@@ -17,6 +19,8 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     private DaoRecurso recursoDao;
     @Inject
     private DaoTipoRecurso tipoRecursoDao;
+    @Inject
+    private DaoReserva reservaDao;
 
     @Override
     public void registrarTipoRecurso(TipoRecurso tipoRecurso) throws LibraryServicesException {
@@ -46,6 +50,11 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     @Override
     public List<Recurso> consultarRecursosAdmin() throws LibraryServicesException {
         return recursoDao.consultarRecursosAdmin();
+    }
+
+    @Override
+    public void reservarRecurso(Recurso recurso, Usuario usuario) throws LibraryServicesException {
+        reservaDao.reservarRecurso(recurso,usuario);
     }
 
 }

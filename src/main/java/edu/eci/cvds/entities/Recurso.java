@@ -38,6 +38,11 @@ public class Recurso implements Serializable {
         tr.tipo as tr_tipo
         FROM recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.id_interno=#{id};
      */
+
+    public Recurso(){
+        super();
+    }
+
     /**
      * Constructor de la clase Recurso
      * @param nombre El nombre del recurso

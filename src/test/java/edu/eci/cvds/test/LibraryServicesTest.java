@@ -2,6 +2,10 @@ package edu.eci.cvds.test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.inject.Inject;
@@ -24,8 +28,8 @@ public class LibraryServicesTest{
     public void setUp(){}
 
     public LibraryServicesTest(){
-        administratorServices=ServicesLibraryFactory.getInstance().getAdministratorServices();
-        servicesLibrary=ServicesLibraryFactory.getInstance().getServicesLibrary();
+        administratorServices=ServicesLibraryFactory.getInstance().testAdminServicesLibrary();
+        servicesLibrary=ServicesLibraryFactory.getInstance().testServicesLibrary();
     }
 
     @Test
@@ -43,8 +47,8 @@ public class LibraryServicesTest{
     public void deberiaConsultarTodosLosRecursosComoAdmin() throws LibraryServicesException{
         assertTrue(administratorServices.consultarRecursosAdmin() instanceof List);
     }
-
-
+    /*
+    #
     @Test
     public void deberiaEliminareIngresarRecurso() throws LibraryServicesException {
         administratorServices.eliminarUnRecursoPermanente(recurso);
@@ -53,27 +57,27 @@ public class LibraryServicesTest{
         assertTrue(servicesLibrary.consultarRecursos().size()>length);
     }
 
-
+    #
     @Test
     public void deberiaConsultarUnRecurso() throws LibraryServicesException {
         assertTrue(servicesLibrary.consultarRecurso(500).getNombre().equals("El PC"));
     }
 
-
+    #
     @Test
     public void deberiaSacarUnRecursoDeFormaTemporal() throws LibraryServicesException {
         administratorServices.eliminarUnRecursoTemporal(recurso);
         assertFalse(servicesLibrary.consultarRecurso(500).getEstado().equals("Mantenimiento"));
     }
 
-/*
+    #
     @Test
     public void deberiaVolverUnRecurso() throws LibraryServicesException{
         administratorServices.volverAAdmitirElRecurso(recurso);
         assertTrue(servicesLibrary.consultarRecurso(500).getEstado().equals("Disponible"));
     }
-*/
 
+    #
     @Test
     public void NoDebePermitirUnaCapacidadNegativa(){
         try {
@@ -90,9 +94,10 @@ public class LibraryServicesTest{
             administratorServices.eliminarUnRecursoPermanente(recurso);
             administratorServices.registrarRecurso(recurso);
         }catch (LibraryServicesException e){
+            e.printStackTrace();
             assertTrue(false);
         }
     }
-
+    */
 
 }

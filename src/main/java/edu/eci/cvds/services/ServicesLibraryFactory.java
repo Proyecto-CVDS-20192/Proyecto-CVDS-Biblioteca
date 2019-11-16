@@ -1,9 +1,11 @@
 package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
+import edu.eci.cvds.persistence.DaoHorario;
 import edu.eci.cvds.persistence.DaoRecurso;
 import edu.eci.cvds.persistence.DaoReserva;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoHorario;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoRecurso;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisDaoReserva;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisTipoRecurso;
@@ -20,6 +22,8 @@ public class ServicesLibraryFactory {
 
     private static Injector injector;
 
+    private static Injector testInjector;
+
     /**
      * Fabrica de los servicios
      */
@@ -34,8 +38,32 @@ public class ServicesLibraryFactory {
                 bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
                 bind(DaoReserva.class).to(MyBatisDaoReserva.class);
                 bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
+                //bind(DaoHorario.class).to(MyBatisDaoHorario.class);
             }
         });
+
+        testInjector=createInjector(new XMLMyBatisModule(){
+            @Override
+            protected void initialize(){
+                install(JdbcHelper.MySQL);
+                setClassPathResource("mybatis-config-h2.xml");
+                bind(ServicesLibrary.class).to(ServicesLibraryImpl.class);
+                bind(AdministratorServicesLibrary.class).to(AdministratorServicesLibraryImpl.class);
+                bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
+                bind(DaoReserva.class).to(MyBatisDaoReserva.class);
+                bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
+                //bind(DaoHorario.class).to(MyBatisDaoHorario.class);
+            }
+        });
+    }
+
+
+    public ServicesLibrary testServicesLibrary(){
+        return testInjector.getInstance(ServicesLibrary.class);
+    }
+
+    public AdministratorServicesLibrary testAdminServicesLibrary(){
+        return testInjector.getInstance(AdministratorServicesLibrary.class);
     }
 
     /**
@@ -61,4 +89,5 @@ public class ServicesLibraryFactory {
     public static ServicesLibraryFactory getInstance(){
         return instance;
     }
+
 }

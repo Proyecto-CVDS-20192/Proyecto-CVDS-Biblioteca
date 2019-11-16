@@ -2,6 +2,7 @@ package edu.eci.cvds.services;
 
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.TipoRecurso;
+import edu.eci.cvds.entities.Usuario;
 
 import java.util.List;
 
@@ -37,4 +38,6 @@ public interface AdministratorServicesLibrary {
     public void volverAAdmitirElRecurso(Recurso recurso) throws LibraryServicesException;
 
     List<Recurso> consultarRecursosAdmin() throws LibraryServicesException;
+
+    void reservarRecurso(Recurso recurso, Usuario usuario) throws LibraryServicesException;
 }
