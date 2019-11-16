@@ -66,6 +66,7 @@
                                         <p:commandButton class="buttonR"  value="Reservar Recurso" update="message">
                                             <p:confirm header="Confirmación" message="¿Desea reservar el recurso #{recursos.nombre}?" icon="pi pi-exclamation-triangle" />
                                             <f:actionListener binding="#{recursoBean.reservarRecurso(recursos.identificadorInterno)}" update="frmm3"/>
+                                            <f:actionListener binding="#{recursoBean.reloadUser()}" update="frmm3"/>
                                         </p:commandButton>
 
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

@@ -58,6 +58,7 @@
                         <p:commandButton class="buttonR" value="Registrar" update="message1">
                             <p:confirm header="Confirmación" message="¿Desea registrar este recurso?" icon="pi pi-exclamation-triangle" />
                             <f:actionListener binding="#{recursoBean.registrarRecurso(nombre.value, capacidad.value)}" update="frmm2"/>
+                            <f:actionListener binding="#{recursoBean.reloadAdmin()}" update="frmm2"/>
                         </p:commandButton>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <div align="center">
@@ -97,9 +98,10 @@
                                 <td align="center" class="columregistro">
                                     <h:form id="frmm3">         
                                         <p:growl id="message" showDetail="true" />
-                                        <p:commandButton class="buttonR"  value="Elimnar Recurso" update="message">
+                                        <p:commandButton class="buttonR"  value="Eliminar Recurso" update="message">
                                             <p:confirm header="Confirmación" message="¿Desea eliminar el recurso?" icon="pi pi-exclamation-triangle" />
                                             <f:actionListener binding="#{recursoBean.eliminarRecurso(recursos.identificadorInterno)}" update="frmm3"/>
+                                            <f:actionListener binding="#{recursoBean.reloadAdmin()}" update="frmm3"/>
                                         </p:commandButton>
 
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

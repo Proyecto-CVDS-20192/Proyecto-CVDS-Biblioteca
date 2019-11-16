@@ -5,12 +5,14 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "recursoBean")
@@ -30,13 +32,13 @@ public class RecursoBean extends BasePageBean {
     public List<Recurso> getRecursosAdmin() throws LibraryServicesException {
         return servicesA.consultarRecursosAdmin();
     }
-    
+
     public List<Recurso> getRecursos() throws LibraryServicesException {
         return servicesL.consultarRecursos();
     }
-    
+
     public void reservarRecurso(int id) {
-        
+
     }
 
     public List<String> getEstados() {
@@ -63,6 +65,14 @@ public class RecursoBean extends BasePageBean {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void reloadAdmin() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin/pages/cambiarEstadoRecurso.xhtml");
+    }
+    
+    public void reloadUser() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/consultarRecursos.xhtml");
     }
 
 }
