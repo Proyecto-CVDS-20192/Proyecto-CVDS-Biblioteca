@@ -2,6 +2,7 @@ package edu.eci.cvds.managedbeans;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class UserBean implements Serializable {
      */
     public void doLogin() {
         subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), getPassword());
+        UsernamePasswordToken token = new UsernamePasswordToken(getUsername(), new Sha256Hash(getPassword()).toHex());
         try {
             subject.login(token);
             if (subject.hasRole("administrador")) {
