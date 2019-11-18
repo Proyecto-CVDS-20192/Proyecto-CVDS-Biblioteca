@@ -58,8 +58,13 @@ public class RecursoBean extends BasePageBean {
     public void editarEstadoRecurso() {
     }
 
-    public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {
+    public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {        
         int id = servicesA.consultarRecursosAdmin().size() + 1;
+        for (int i=0; i < servicesA.consultarRecursosAdmin().size();i++){
+            if (servicesA.consultarRecursosAdmin().get(i).getIdentificadorInterno() != i+1) {
+                id = i+1;
+            } 
+        }
         try {
             recurso = new Recurso(id, 1, nombre, "Biblioteca", capacidad, "Disponible", 1, "PC");
             servicesA.registrarRecurso(recurso);
