@@ -73,4 +73,11 @@ public interface ServicesLibrary {
      */
     Reserva consultarReservaRecurso(Recurso recurso) throws LibraryServicesException;
 
+    /**
+     * Elimina una reserva
+     * @param reserva La reserva a eliminar
+     * @throws LibraryServicesException
+     */
+    void eliminarReserva(Reserva reserva) throws LibraryServicesException;
+
 }

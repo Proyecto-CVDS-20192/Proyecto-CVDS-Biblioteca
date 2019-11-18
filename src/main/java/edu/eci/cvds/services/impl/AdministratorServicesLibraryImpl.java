@@ -8,14 +8,12 @@ import edu.eci.cvds.persistence.DaoReserva;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
-import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class AdministratorServicesLibraryImpl implements AdministratorServicesLibrary {
+public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implements AdministratorServicesLibrary {
 
     @Inject
     private DaoRecurso recursoDao;

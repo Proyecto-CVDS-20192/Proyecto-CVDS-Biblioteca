@@ -13,6 +13,9 @@ public class Recurso implements Serializable {
     private String estado;
     private List<String> estados;
 
+    /**
+     * Constructor vacio de la clase recurso
+     */
     public Recurso(){
         super();
         estados = new ArrayList<String>();
@@ -43,6 +46,17 @@ public class Recurso implements Serializable {
     }
 
 
+    /**
+     * Constructor de la clase recurso
+     * @param identificadorInterno el identificador interno
+     * @param idTipo El id del tipo
+     * @param nombre Nombre del recurso
+     * @param ubicacion Ubicacion del recuros
+     * @param capacidad Capacidad del recurso
+     * @param estado Estado del recurso
+     * @param idTipo2 El id del tipo
+     * @param nombreTipo Nombre del tipo de recurso
+     */
     public Recurso(int identificadorInterno,int idTipo,String nombre,String ubicacion,Integer capacidad,String estado,int idTipo2,String nombreTipo){
         this.nombre=nombre;
         this.ubicacion=ubicacion;
@@ -152,10 +166,19 @@ public class Recurso implements Serializable {
     public String getEstado() {
         return estado;
     }
-    
+
+    /**
+     * Getter de los estados posibles de un recurso
+     * @return Una lista con los estados posibles
+     */
     public List<String> getEstados() {
         return estados;
     }
+
+    /**
+     * Sette de los estados del recurso
+     * @param estados Los nuevos estados del recurso
+     */
     public void setEstados(List<String> estados){
         this.estados = estados;
     }

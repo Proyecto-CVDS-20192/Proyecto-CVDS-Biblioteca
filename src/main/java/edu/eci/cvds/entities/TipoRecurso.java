@@ -6,6 +6,9 @@ public class TipoRecurso implements Serializable {
     private int id;
     private String tipo;
 
+    /**
+     * Constructor vacio de la clase TipoRecurso
+     */
     public TipoRecurso(){super();}
 
     /**

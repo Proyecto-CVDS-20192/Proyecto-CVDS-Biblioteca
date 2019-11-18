@@ -60,4 +60,8 @@
         left join reserva as re on r.id_interno=re.id_recurso
         left join usuario as u on u.id=re.id_usuario where re.id=#{recurso.identificadorInterno};
     </select>
+    
+    <delete id="eliminarReserva" parameterType="map">
+
+    </delete>
 </mapper>

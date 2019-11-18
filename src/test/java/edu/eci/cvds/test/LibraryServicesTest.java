@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.*;
@@ -102,6 +103,10 @@ public class LibraryServicesTest{
         Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200000);
         recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
         servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        Reserva test=servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0);
+        System.out.println(test.getId());
+        //System.out.println(test.getRecurso());
+        //System.out.println(test.getUsuario());
         assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).size()==1);
         assertTrue(servicesLibrary.consultarReservas().size()==1);
         assertTrue(servicesLibrary.consultarReservaRecurso(recurso)!=null);
