@@ -13,34 +13,12 @@ public class Recurso implements Serializable {
     private String estado;
     private List<String> estados;
 
-    /*
-    select
-        r.nombre as r_nombre,
-        r.ubicacion as r_ubicacion,
-        r.estado as r_estado,
-        r.id_interno as r_id_interno,
-        r.capacidad as r_capacidad,
-        tr.id as tr_id,
-        tr.tipo as tr_tipo
-        FROM
-        recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.estado='Disponible';
-     */
-
-
-    /*
-    select
-        r.nombre,
-        r.ubicacion,
-        r.estado,
-        r.id_interno,
-        r.capacidad,
-        tr.id as tr_id,
-        tr.tipo as tr_tipo
-        FROM recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.id_interno=#{id};
-     */
-
     public Recurso(){
         super();
+        estados = new ArrayList<String>();
+        estados.add("Disponible");
+        estados.add("No Disponible");
+        estados.add("Mantenimiento");
     }
 
     /**
@@ -64,6 +42,7 @@ public class Recurso implements Serializable {
         estados.add("Mantenimiento");
     }
 
+
     public Recurso(int identificadorInterno,int idTipo,String nombre,String ubicacion,Integer capacidad,String estado,int idTipo2,String nombreTipo){
         this.nombre=nombre;
         this.ubicacion=ubicacion;
@@ -76,7 +55,6 @@ public class Recurso implements Serializable {
         estados.add("No Disponible");
         estados.add("Mantenimiento");
     }
-
 
 
     /**

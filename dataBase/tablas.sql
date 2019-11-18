@@ -4,7 +4,7 @@ create sequence SUS_HORARIO_seq
   maxvalue 99999999
   minvalue 1;
 
-CREATE TABLE TIPO_RECURSO
+CREATE TABLE HORARIO
 (id integer NOT NULL DEFAULT NEXTVAL('SUS_HORARIO_seq'),
 id_recurso integer NOT NULL,
 hora_inicio time NOT NULL,

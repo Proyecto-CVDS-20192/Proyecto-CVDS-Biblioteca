@@ -11,6 +11,8 @@ public class Horario implements Serializable {
     private Timestamp horaFin;
 
 
+    public Horario(){super();}
+
     public Horario(int id,Recurso recurso,Timestamp horaInicio, Timestamp horaFin){
         this.id=id;
         this.recurso=recurso;

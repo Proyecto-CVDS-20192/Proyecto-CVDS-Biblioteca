@@ -47,8 +47,8 @@ public class LibraryServicesTest{
     public void deberiaConsultarTodosLosRecursosComoAdmin() throws LibraryServicesException{
         assertTrue(administratorServices.consultarRecursosAdmin() instanceof List);
     }
-    /*
-    #
+
+
     @Test
     public void deberiaEliminareIngresarRecurso() throws LibraryServicesException {
         administratorServices.eliminarUnRecursoPermanente(recurso);
@@ -57,27 +57,21 @@ public class LibraryServicesTest{
         assertTrue(servicesLibrary.consultarRecursos().size()>length);
     }
 
-    #
+    /*
     @Test
     public void deberiaConsultarUnRecurso() throws LibraryServicesException {
         assertTrue(servicesLibrary.consultarRecurso(500).getNombre().equals("El PC"));
     }
-
-    #
+*/
+    /*
     @Test
-    public void deberiaSacarUnRecursoDeFormaTemporal() throws LibraryServicesException {
+    public void deberiaSacarUnRecursoDeFormaTemporalyDevolverlo() throws LibraryServicesException {
         administratorServices.eliminarUnRecursoTemporal(recurso);
         assertFalse(servicesLibrary.consultarRecurso(500).getEstado().equals("Mantenimiento"));
-    }
-
-    #
-    @Test
-    public void deberiaVolverUnRecurso() throws LibraryServicesException{
         administratorServices.volverAAdmitirElRecurso(recurso);
         assertTrue(servicesLibrary.consultarRecurso(500).getEstado().equals("Disponible"));
     }
-
-    #
+    */
     @Test
     public void NoDebePermitirUnaCapacidadNegativa(){
         try {
@@ -98,6 +92,4 @@ public class LibraryServicesTest{
             assertTrue(false);
         }
     }
-    */
-
 }

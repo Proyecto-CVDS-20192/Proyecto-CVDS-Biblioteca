@@ -10,8 +10,7 @@ public class Usuario implements Serializable{
     private Integer carnet;
 
 
-    public Usuario() {
-    }
+    public Usuario() { super(); }
 
     public Usuario(String nombre,String passw,String tipo,String id,Integer carnet) {
         this.nombre = nombre;

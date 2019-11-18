@@ -9,7 +9,9 @@ import edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper;
 import edu.eci.cvds.services.LibraryServicesException;
 
 import javax.inject.Inject;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class MyBatisDaoReserva implements DaoReserva {
 
@@ -17,11 +19,27 @@ public class MyBatisDaoReserva implements DaoReserva {
     private ReservaMapper reservaMapper;
 
     @Override
-    public void reservarRecurso(Recurso recurso, Usuario usuario) throws LibraryServicesException{
-        Timestamp fechaIni=new Timestamp(System.currentTimeMillis());
-        Timestamp fechaFin=new Timestamp(System.currentTimeMillis());
+    public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException{
         try {
             reservaMapper.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarReservasUsuario(String id) throws LibraryServicesException{
+        try{
+            return reservaMapper.consultarReservasUsuario(id);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw  new LibraryServicesException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarReservas() throws LibraryServicesException {
+        try{
+            return reservaMapper.consultarReservas();
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new LibraryServicesException(e.getMessage());
         }

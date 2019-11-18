@@ -1,6 +1,7 @@
 package edu.eci.cvds.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Reserva implements Serializable {
@@ -9,6 +10,8 @@ public class Reserva implements Serializable {
     private Timestamp fechaFin;
     private Recurso recurso;
     private Usuario usuario;
+
+    public Reserva(){super();}
 
     /**
      * Constructor de la clase RecursoRentado
@@ -95,6 +98,16 @@ public class Reserva implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Date getFechaIniDate(){
+        Date date=new Date(fechaInicio.getYear(),fechaInicio.getMonth(),fechaInicio.getDay());
+        return date;
+    }
+
+    public Date getFechaFinDate(){
+        Date date=new Date(fechaFin.getYear(),fechaFin.getMonth(),fechaFin.getDay());
+        return date;
     }
 
     @Override

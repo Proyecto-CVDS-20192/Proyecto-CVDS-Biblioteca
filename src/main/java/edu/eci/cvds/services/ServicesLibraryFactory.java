@@ -38,7 +38,7 @@ public class ServicesLibraryFactory {
                 bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
                 bind(DaoReserva.class).to(MyBatisDaoReserva.class);
                 bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
-                //bind(DaoHorario.class).to(MyBatisDaoHorario.class);
+                bind(DaoHorario.class).to(MyBatisDaoHorario.class);
             }
         });
 
@@ -52,7 +52,7 @@ public class ServicesLibraryFactory {
                 bind(DaoRecurso.class).to(MyBatisDaoRecurso.class);
                 bind(DaoReserva.class).to(MyBatisDaoReserva.class);
                 bind(DaoTipoRecurso.class).to(MyBatisTipoRecurso.class);
-                //bind(DaoHorario.class).to(MyBatisDaoHorario.class);
+                bind(DaoHorario.class).to(MyBatisDaoHorario.class);
             }
         });
     }

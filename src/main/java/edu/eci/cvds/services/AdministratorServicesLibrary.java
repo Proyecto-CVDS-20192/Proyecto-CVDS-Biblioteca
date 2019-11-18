@@ -4,6 +4,7 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.entities.Usuario;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface AdministratorServicesLibrary {
@@ -39,5 +40,5 @@ public interface AdministratorServicesLibrary {
 
     List<Recurso> consultarRecursosAdmin() throws LibraryServicesException;
 
-    void reservarRecurso(Recurso recurso, Usuario usuario) throws LibraryServicesException;
+    void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin) throws LibraryServicesException;
 }

@@ -10,6 +10,6 @@
     </resultMap>
 
     <insert id="registrarTipoRecurso" parameterType="map">
-        insert into tipo_recurso(id,nombre) values(#{tipoRecurso.id},#{tipoRecurso.nombre});
+        insert into tipo_recurso(nombre) values(#{tipoRecurso.nombre});
     </insert>
 </mapper>

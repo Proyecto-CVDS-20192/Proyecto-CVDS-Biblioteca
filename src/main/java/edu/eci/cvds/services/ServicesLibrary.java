@@ -2,6 +2,7 @@ package edu.eci.cvds.services;
 
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 
 import java.sql.Timestamp;
@@ -22,9 +23,14 @@ public interface ServicesLibrary {
      */
     public Recurso consultarRecurso(int id) throws LibraryServicesException;
 
-    void reservarRecurso(Recurso recurso, Usuario usuario) throws LibraryServicesException;
+    void reservarRecurso(Recurso recurso, Usuario usuario,Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException;
 
-    void reservaRecursorecurrente(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin);
+    void reservaRecursorecurrente(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws  LibraryServicesException;
 
-    //List<Horario> horariosRecursos() throws LibraryServicesException;
+    List<Reserva> consultarReservasUsuario(String id) throws LibraryServicesException;
+
+    List<Reserva> consultarReservas() throws LibraryServicesException;
+
+    List<Horario> horariosRecursos() throws LibraryServicesException;
+
 }

@@ -11,6 +11,8 @@ import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class AdministratorServicesLibraryImpl implements AdministratorServicesLibrary {
@@ -53,8 +55,8 @@ public class AdministratorServicesLibraryImpl implements AdministratorServicesLi
     }
 
     @Override
-    public void reservarRecurso(Recurso recurso, Usuario usuario) throws LibraryServicesException {
-        reservaDao.reservarRecurso(recurso,usuario);
+    public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException {
+        reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
     }
 
 }
