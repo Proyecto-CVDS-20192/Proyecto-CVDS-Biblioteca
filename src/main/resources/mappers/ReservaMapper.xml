@@ -86,6 +86,6 @@
     </select>
     
     <delete id="eliminarReserva" parameterType="map">
-
+        delete from reserva where id=#{reserva.id};
     </delete>
 </mapper>
