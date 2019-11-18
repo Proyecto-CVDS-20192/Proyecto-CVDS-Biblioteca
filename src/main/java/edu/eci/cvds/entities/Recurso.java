@@ -185,6 +185,11 @@ public class Recurso implements Serializable {
 
     @Override
     public String toString() {
-        return this.nombre+" "+this.ubicacion+" "+this.identificadorInterno+" "+this.tipoRecurso.toString()+" "+this.capacidad.toString();
+        if(this.capacidad!=null) {
+            return this.nombre + " " + this.ubicacion + " " + this.identificadorInterno + " " + this.tipoRecurso.toString() + " " + this.capacidad.toString();
+        }
+        else{
+            return this.nombre + " " + this.ubicacion + " " + this.identificadorInterno + " " + this.tipoRecurso.toString();
+        }
     }
 }

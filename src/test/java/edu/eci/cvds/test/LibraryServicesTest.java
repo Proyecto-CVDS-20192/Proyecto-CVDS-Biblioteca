@@ -37,12 +37,6 @@ public class LibraryServicesTest{
     }
 
     @Test
-    public void LaQueEstaObligadaAPasar(){
-        boolean ans=true;
-    }
-
-
-    @Test
     public void deberiaConsultarTodosLosRecursos() throws LibraryServicesException {
         assertTrue(servicesLibrary.consultarRecursos() instanceof List);
     }
@@ -103,12 +97,13 @@ public class LibraryServicesTest{
         Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200000);
         recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
         servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
-        Reserva test=servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0);
-        System.out.println(test.getId());
-        //System.out.println(test.getRecurso());
-        //System.out.println(test.getUsuario());
-        assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).size()==1);
-        assertTrue(servicesLibrary.consultarReservas().size()==1);
+        assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0).getUsuario().getId().equals("regular@cvds.com"));
+        assertTrue(servicesLibrary.consultarReservas().get(0).getRecurso().getIdentificadorInterno()==administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
         assertTrue(servicesLibrary.consultarReservaRecurso(recurso)!=null);
+    }
+
+    @Test
+    public void pruebasSotu()throws LibraryServicesException{
+        
     }
 }

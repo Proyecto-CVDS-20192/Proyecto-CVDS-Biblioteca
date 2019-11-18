@@ -33,19 +33,39 @@
 
     <select id="consultarRecursos" parameterType="map" resultMap="RecursoResult">
         select
-        *
+        r.id_interno,
+        r.capacidad,
+        r.estado,
+        r.nombre,
+        r.ubicacion,
+        tr.id as tr_id,
+        tr.tipo as tr_tipo
         FROM
         recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.estado='Disponible';
     </select>
 
     <select id="consultarRecurso" parameterType="map" resultMap="RecursoResult">
         select
-        *
+        r.id_interno,
+        r.capacidad,
+        r.estado,
+        r.nombre,
+        r.ubicacion,
+        tr.id as tr_id,
+        tr.tipo as tr_tipo
         FROM recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id where r.id_interno=#{id};
     </select>
 
     <select id="consultarRecursosAdmin" parameterType="map" resultMap="RecursoResult">
-        select * from recurso left join tipo_recurso on id_tipo=id;
+        select
+        r.id_interno,
+        r.capacidad,
+        r.estado,
+        r.nombre,
+        r.ubicacion,
+        tr.id as tr_id,
+        tr.tipo as tr_tipo
+        from recurso as r left join tipo_recurso as tr on id_tipo=id;
     </select>
 
 </mapper>
