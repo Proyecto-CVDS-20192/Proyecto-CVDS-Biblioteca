@@ -11,8 +11,18 @@ public class Horario implements Serializable {
     private Timestamp horaFin;
 
 
+    /**
+     * Constructor vacio de la clase horario
+     */
     public Horario(){super();}
 
+    /**
+     * Constructor de la clase horario
+     * @param id el id del horario
+     * @param recurso El recurso del horario
+     * @param horaInicio Hora de inicio
+     * @param horaFin Hora de fin
+     */
     public Horario(int id,Recurso recurso,Timestamp horaInicio, Timestamp horaFin){
         this.id=id;
         this.recurso=recurso;

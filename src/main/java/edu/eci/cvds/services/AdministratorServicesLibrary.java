@@ -38,7 +38,20 @@ public interface AdministratorServicesLibrary {
      */
     public void volverAAdmitirElRecurso(Recurso recurso) throws LibraryServicesException;
 
+    /**
+     * Consulta todos los recursos esten o no disponibles
+     * @return Lista de todos los recursos
+     * @throws LibraryServicesException
+     */
     List<Recurso> consultarRecursosAdmin() throws LibraryServicesException;
 
+    /**
+     * Permite a un administrador reservar un recurso
+     * @param recurso El recurso a reservar
+     * @param usuario El usuario del recurso
+     * @param fechaIni La fecha de inicio
+     * @param fechaFin La fecha de fin
+     * @throws LibraryServicesException
+     */
     void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin) throws LibraryServicesException;
 }

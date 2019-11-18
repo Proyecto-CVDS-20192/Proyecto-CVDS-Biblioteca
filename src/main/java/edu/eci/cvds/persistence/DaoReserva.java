@@ -15,4 +15,6 @@ public interface DaoReserva {
     List<Reserva> consultarReservasUsuario(String id) throws LibraryServicesException;
 
     List<Reserva> consultarReservas() throws LibraryServicesException;
+
+    Reserva consultarReservaRecurso(Recurso recurso)throws  LibraryServicesException;
 }

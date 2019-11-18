@@ -58,10 +58,18 @@ public class ServicesLibraryFactory {
     }
 
 
+    /**
+     * Obtener los servicios de prueba
+     * @return ServicesLibrary de prueba
+     */
     public ServicesLibrary testServicesLibrary(){
         return testInjector.getInstance(ServicesLibrary.class);
     }
 
+    /**
+     * Obtener los servicios de prueba de administrador
+     * @return AdministratorServicesLibrary de prueba
+     */
     public AdministratorServicesLibrary testAdminServicesLibrary(){
         return testInjector.getInstance(AdministratorServicesLibrary.class);
     }

@@ -54,6 +54,8 @@ CREATE TABLE USUARIO(
 id VARCHAR(50) NOT NULL,
 passw VARCHAR(50) NOT NULL,
 tipo VARCHAR(50) NOT NULL,
+carnet integer NOT NULL,
+nombre VARCHAR(50) NOT NULL,
 PRIMARY KEY(id)
 );
 
@@ -86,7 +88,7 @@ insert into tipo_recurso(id,tipo) values(1,'Computador');
 insert into tipo_recurso(id,tipo) values(2,'Multimedia');
 insert into tipo_recurso(id,tipo) values(3,'Sala de estudio');
 
---insert into usuario(id,passw,tipo,carnet,nombre) values();
+insert into usuario(id,passw,tipo,carnet,nombre) values('regular@cvds.com','123456','regular',123456,'prueba');
 
 
   

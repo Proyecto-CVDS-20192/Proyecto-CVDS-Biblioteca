@@ -44,4 +44,13 @@ public class MyBatisDaoReserva implements DaoReserva {
             throw new LibraryServicesException(e.getMessage());
         }
     }
+
+    @Override
+    public Reserva consultarReservaRecurso(Recurso recurso) throws LibraryServicesException{
+        try {
+            return reservaMapper.consultarReservaRecurso(recurso);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(e.getMessage());
+        }
+    }
 }
