@@ -47,6 +47,7 @@
                             <th>Capacidad</th>
                             <th>Tipo</th>
                             <th>Estado</th>
+                            <th>Ver Horario</th>
 
                         </tr>
                     </thead>
@@ -58,6 +59,14 @@
                                 <td align="center" class="columregistro">#{recursos.capacidad}</td>
                                 <td align="center" class="columregistro">#{recursos.tipoRecurso.tipo}</td>
                                 <td align="center" class="columregistro">#{recursos.estado}</td>
+                                <td align="center" class="columregistro">
+                                    <h:form id="frmm3">         
+                                        <p:growl id="message" showDetail="true" />
+                                        <p:commandButton class="buttonR"  value="Ver Horario" update="message">
+                                            <f:actionListener binding="#{recursoBean.horariosPageGuest(recursos.identificadorInterno)}" update="frmm3"/>
+                                        </p:commandButton>
+                                    </h:form>
+                                </td>
                             </tr>
                         </r:repeat>
                     </tbody>

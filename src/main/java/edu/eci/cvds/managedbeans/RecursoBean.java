@@ -84,9 +84,15 @@ public class RecursoBean extends BasePageBean {
     public void reloadUser() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/consultarRecursos.xhtml");
     }
+    
+    public void reloadGuest() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/consultarRecursos.xhtml");
+    }
 
     //Calendario del recurso
     public void fillDate(int id) throws LibraryServicesException {
+        eventModel = new DefaultScheduleModel();
+        event = new DefaultScheduleEvent();
         Recurso re = servicesL.consultarRecurso(id);
         boolean banderaRec = false;
         for (int i = 0; i < servicesL.consultarReservas().size(); i++){
@@ -95,7 +101,7 @@ public class RecursoBean extends BasePageBean {
             }
         }
         if (banderaRec) {
-            if (servicesL.consultarReservaRecurso(re).size() > 0) {
+            if (servicesL.consultarReservaRecurso(re).size() > 0) {                
                 for (Reserva r : servicesL.consultarReservaRecurso(re)) {
                     eventModel.addEvent(new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre(), r.getFechaIniDate(), r.getFechaFinDate()));
                 }
@@ -127,24 +133,6 @@ public class RecursoBean extends BasePageBean {
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
 
         return calendar;
-    }
-
-    private Date nextDay9Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 9);
-
-        return t.getTime();
-    }
-
-    private Date nextDay11Am() {
-        Calendar t = (Calendar) today().clone();
-        t.set(Calendar.AM_PM, Calendar.AM);
-        t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-        t.set(Calendar.HOUR, 11);
-
-        return t.getTime();
     }
 
     public ScheduleEvent getEvent() {
@@ -195,6 +183,11 @@ public class RecursoBean extends BasePageBean {
 
     public void horariosPage(int id) throws IOException, LibraryServicesException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/horarios.xhtml");
+        this.id = id;
+        fillDate(id);
+    }
+    public void horariosPageGuest(int id) throws IOException, LibraryServicesException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/horarios.xhtml");
         this.id = id;
         fillDate(id);
     }

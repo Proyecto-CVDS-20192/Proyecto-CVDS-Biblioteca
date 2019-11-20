@@ -65,7 +65,7 @@
                                         <p:growl id="message" showDetail="true" />
                                         <p:commandButton class="buttonR"  value="Reservar Recurso" update="message">
                                             <p:confirm header="Confirmación" message="¿Desea reservar el recurso #{recursos.nombre}?" icon="pi pi-exclamation-triangle" />
-                                            <f:actionListener binding="#{recursoBean.horariosPage(recursos.identificadorInterno)}" update="frmm3"/>
+                                            <f:actionListener binding="#{recursoBean.horariosPage(recursos.identificadorInterno)}" update="Registro_table"/>
                                         </p:commandButton>
 
                                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
