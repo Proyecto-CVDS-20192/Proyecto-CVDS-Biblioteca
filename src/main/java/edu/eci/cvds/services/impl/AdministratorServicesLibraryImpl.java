@@ -1,6 +1,7 @@
 package edu.eci.cvds.services.impl;
 
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.DaoRecurso;
@@ -12,6 +13,7 @@ import edu.eci.cvds.services.ServicesLibrary;
 import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -59,11 +61,13 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
     }
 
-    /*
+
+
     public static void main(String[] args) throws LibraryServicesException{
-        Recurso test=new Recurso("prueba2","Biblioteca",new TipoRecurso(1,"Computadore"),"Disponible",2,10);
-        ServicesLibrary admin= ServicesLibraryFactory.getInstance().getServicesLibrary();
-        System.out.println(admin.consultarReservaRecurso(test));
+        ServicesLibrary test=ServicesLibraryFactory.getInstance().getServicesLibrary();
+        Recurso recurso=test.consultarRecurso(2);
+        List<Reserva> r=test.consultarReservaRecurso(recurso);
+        System.out.println(r);
     }
-    */
+
 }

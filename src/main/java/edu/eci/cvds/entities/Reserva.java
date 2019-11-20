@@ -116,7 +116,7 @@ public class Reserva implements Serializable {
      * @return Date de la fecha inicial
      */
     public Date getFechaIniDate(){
-        Date date=new Date(fechaInicio.getYear(),fechaInicio.getMonth(),fechaInicio.getDay());
+        Date date=new Date(fechaInicio.getTime());
         return date;
     }
 
@@ -125,7 +125,7 @@ public class Reserva implements Serializable {
      * @return Date de la fecha final
      */
     public Date getFechaFinDate(){
-        Date date=new Date(fechaFin.getYear(),fechaFin.getMonth(),fechaFin.getDay());
+        Date date=new Date(fechaFin.getTime());
         return date;
     }
 
