@@ -3,10 +3,7 @@ package edu.eci.cvds.test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.inject.Inject;
@@ -103,8 +100,27 @@ public class LibraryServicesTest{
     }
 
     @Test
-    public void noDebePermitirSobrePonerReservas() throws LibraryServicesException{
-        
+    public void noDebePermitirReservasMayoresADosHoras(){
+        Timestamp fechaIni=new Timestamp(System.currentTimeMillis());
+        Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200001);
+        try{
+            servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        }catch (LibraryServicesException e){
+            assertTrue(e.getMessage().equals(LibraryServicesException.RESERVA_MAYOR_A_DOS_HORAS));
+        }
+    }
+
+    @Test
+    public void noDebePermitirSobrePonerReservas(){
+        Timestamp fechaIni=new Timestamp(System.currentTimeMillis());
+        Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200000);
+        try {
+            recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
+            servicesLibrary.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
+            servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        }catch (LibraryServicesException e){
+            assertTrue(e.getMessage().equals(LibraryServicesException.RECURSO_RESERVADO_EN_HORA));
+        }
     }
 
     @Test

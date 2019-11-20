@@ -21,6 +21,9 @@ public class MyBatisDaoReserva implements DaoReserva {
     @Override
     public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException{
         try {
+            if(fechaFin.getTime()-fechaIni.getTime()>7200000){
+                throw new LibraryServicesException(LibraryServicesException.RESERVA_MAYOR_A_DOS_HORAS);
+            }
             List<Reserva> reservasActuales=reservaMapper.consultarReservaRecurso(recurso);
             for(Reserva i:reservasActuales){
                 if(i.getFechaFin()!=null && i.getFechaInicio()!=null) {
