@@ -21,23 +21,23 @@ public interface ReservaMapper {
     /**
      * Consulta las reservas de un usuario
      * @param id El id del usuario que consulta las reservas
-     * @return
+     * @return Consulta las reservas de un usuario
      */
     List<Reserva> consultarReservasUsuario(@Param("id") String id);
 
     /**
      * Consulta todas las reservas activas
-     * @return
+     * @return todas las reservas
      */
     List<Reserva> consultarReservas();
 
 
     /**
-     * Consulta la reserva de un recurso
+     * Consulta las reservas de un recurso
      * @param recurso El recurso del que se desea consultar la reserva
-     * @return
+     * @return Las reservas de ese recurso
      */
-    Reserva consultarReservaRecurso(@Param("recurso") Recurso recurso);
+    List<Reserva> consultarReservaRecurso(@Param("recurso") Recurso recurso);
 
     /**
      * Eliminar una reserva

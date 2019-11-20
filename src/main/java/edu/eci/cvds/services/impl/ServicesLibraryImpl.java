@@ -64,7 +64,7 @@ public class ServicesLibraryImpl implements ServicesLibrary {
     }
 
     @Override
-    public Reserva consultarReservaRecurso(Recurso recurso) throws LibraryServicesException {
+    public List<Reserva> consultarReservaRecurso(Recurso recurso) throws LibraryServicesException {
         return reservaDao.consultarReservaRecurso(recurso);
     }
 

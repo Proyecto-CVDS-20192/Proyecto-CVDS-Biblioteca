@@ -36,12 +36,12 @@ public interface DaoReserva {
     List<Reserva> consultarReservas() throws LibraryServicesException;
 
     /**
-     * Consulta la reserva de un recurso
+     * Consulta las reservas de un recurso
      * @param recurso El recurso a consultar la reserva
-     * @return La reserva de ese recurso
+     * @return Las reservas de ese recurso
      * @throws LibraryServicesException
      */
-    Reserva consultarReservaRecurso(Recurso recurso)throws  LibraryServicesException;
+    List<Reserva> consultarReservaRecurso(Recurso recurso)throws  LibraryServicesException;
 
     /**
      * Elimina una reserva

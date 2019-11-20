@@ -66,12 +66,12 @@ public interface ServicesLibrary {
     List<Horario> horariosRecursos() throws LibraryServicesException;
 
     /**
-     * Consulta una reserva por su recurso
+     * Consulta las reservas por su recurso
      * @param recurso El recurso de la reserva
-     * @return La reserva del recurso
+     * @return Las reservas del recurso
      * @throws LibraryServicesException
      */
-    Reserva consultarReservaRecurso(Recurso recurso) throws LibraryServicesException;
+    List<Reserva> consultarReservaRecurso(Recurso recurso) throws LibraryServicesException;
 
     /**
      * Elimina una reserva

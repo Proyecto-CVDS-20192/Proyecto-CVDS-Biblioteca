@@ -8,6 +8,8 @@ import edu.eci.cvds.persistence.DaoReserva;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
+import edu.eci.cvds.services.ServicesLibrary;
+import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
 import java.sql.Timestamp;
@@ -57,4 +59,11 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
     }
 
+    /*
+    public static void main(String[] args) throws LibraryServicesException{
+        Recurso test=new Recurso("prueba2","Biblioteca",new TipoRecurso(1,"Computadore"),"Disponible",2,10);
+        ServicesLibrary admin= ServicesLibraryFactory.getInstance().getServicesLibrary();
+        System.out.println(admin.consultarReservaRecurso(test));
+    }
+    */
 }
