@@ -2,6 +2,7 @@ package edu.eci.cvds.managedbeans;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
@@ -32,7 +33,7 @@ public class RecursoBean extends BasePageBean {
     private static final transient Logger log = LoggerFactory.getLogger(UserBean.class);
     private ScheduleModel eventModel = new DefaultScheduleModel();
     private ScheduleEvent event = new DefaultScheduleEvent();
-    
+
     private int id;
 
     @Inject
@@ -50,7 +51,7 @@ public class RecursoBean extends BasePageBean {
     public List<Recurso> getRecursos() throws LibraryServicesException {
         return servicesL.consultarRecursos();
     }
-    
+
     public List<String> getEstados() {
         return recurso.getEstados();
     }
@@ -76,24 +77,32 @@ public class RecursoBean extends BasePageBean {
         }
     }
 
-    public void reloadAdmin() throws IOException{
+    public void reloadAdmin() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin/pages/cambiarEstadoRecurso.xhtml");
     }
-    
-    public void reloadUser() throws IOException{
+
+    public void reloadUser() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/consultarRecursos.xhtml");
     }
-    
-    
+
     //Calendario del recurso
-    
-    public void fillDate(int id) throws LibraryServicesException{
-        
-        for(Recurso r : servicesL.consultarRecursos()){
-            eventModel.addEvent(new DefaultScheduleEvent(r.getNombre(),getRandomDate(nextDay9Am()),getRandomDate(nextDay11Am())));
+    public void fillDate(int id) throws LibraryServicesException {
+        Recurso re = servicesL.consultarRecurso(id);
+        boolean banderaRec = false;
+        for (int i = 0; i < servicesL.consultarReservas().size(); i++){
+            if (servicesL.consultarReservas().get(i).getRecurso().getIdentificadorInterno() == id){
+                banderaRec = true;
+            }
+        }
+        if (banderaRec) {
+            if (servicesL.consultarReservaRecurso(re).size() > 0) {
+                for (Reserva r : servicesL.consultarReservaRecurso(re)) {
+                    eventModel.addEvent(new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre(), r.getFechaIniDate(), r.getFechaFinDate()));
+                }
+            }
         }
     }
-    
+
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
         date.setTime(base);
