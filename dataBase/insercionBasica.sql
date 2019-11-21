@@ -3,7 +3,7 @@ insert into tipo_recurso(id,tipo) values(2,'Multimedia');
 insert into tipo_recurso(id,tipo) values(3,'Sala de estudio');
 
 insert into usuario(id,passw,tipo,carnet,nombre,carrera) values('regular@cvds.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','regular',123456,'regular','Ingenieria de sistemas');
-insert into usuario(id,passw,tipo,carnet,nombre,carrera) values('admin@cvds.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','admin',1234567,'admin','Administrador');
+insert into usuario(id,passw,tipo,carnet,nombre,carrera) values('admin@cvds.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','administrador',1234567,'administrador','Administrador');
 
 insert into recurso (id_tipo, nombre, ubicacion, capacidad, estado) values (3, 'Wrapsafe', 'Biblioteca G', 1, 'No Disponible');
 insert into recurso (id_tipo, nombre, ubicacion, capacidad, estado) values (1, 'Domainer', 'Biblioteca B', 2, 'No Disponible');
