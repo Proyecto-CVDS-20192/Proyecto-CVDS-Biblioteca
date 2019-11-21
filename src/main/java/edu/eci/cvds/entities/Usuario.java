@@ -8,6 +8,7 @@ public class Usuario implements Serializable{
     private String tipo;
     private String id;
     private Integer carnet;
+    private String carrera;
 
     /**
      * Constructor vacio de la clase Usuario
@@ -22,12 +23,29 @@ public class Usuario implements Serializable{
      * @param id Correo del usuario
      * @param carnet Carnet del usuario
      */
-    public Usuario(String nombre,String passw,String tipo,String id,Integer carnet) {
+    public Usuario(String nombre,String passw,String tipo,String id,Integer carnet,String carrera) {
         this.nombre = nombre;
         this.passw=passw;
         this.tipo = tipo;
         this.id=id;
         this.carnet=carnet;
+        this.carrera=carrera;
+    }
+
+    /**
+     * Getter de la carrera
+     * @return la carrera de la persona
+     */
+    public String getCarrera() {
+        return carrera;
+    }
+
+    /**
+     * Setter de la carrera
+     * @param carrera la nueva carrera
+     */
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 
     /**

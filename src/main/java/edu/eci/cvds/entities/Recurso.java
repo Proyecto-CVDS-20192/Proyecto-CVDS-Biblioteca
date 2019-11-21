@@ -21,7 +21,6 @@ public class Recurso implements Serializable {
         estados = new ArrayList<String>();
         estados.add("Disponible");
         estados.add("No Disponible");
-        estados.add("Mantenimiento");
     }
 
     /**
@@ -42,7 +41,6 @@ public class Recurso implements Serializable {
         estados = new ArrayList<String>();
         estados.add("Disponible");
         estados.add("No Disponible");
-        estados.add("Mantenimiento");
     }
 
 
@@ -67,7 +65,6 @@ public class Recurso implements Serializable {
         estados = new ArrayList<String>();
         estados.add("Disponible");
         estados.add("No Disponible");
-        estados.add("Mantenimiento");
     }
 
 

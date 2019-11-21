@@ -64,9 +64,7 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
 
 
     public static void main(String[] args) throws LibraryServicesException{
-        Timestamp t1=new Timestamp(System.currentTimeMillis());
-        Timestamp t2=new Timestamp(System.currentTimeMillis()+7200000);
-        System.out.println(t2.getTime()-t1.getTime());
+        
     }
 
 }

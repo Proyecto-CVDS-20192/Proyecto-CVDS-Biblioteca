@@ -32,7 +32,8 @@
         u.id as u_id,
         u.passw as u_passw,
         u.tipo as u_tipo,
-        u.carnet as u_carnet
+        u.carnet as u_carnet,
+        u.carrera as u_carrera
         from
         recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id
         left join reserva as re on r.id_interno=re.id_recurso
@@ -55,7 +56,8 @@
         u.id as u_id,
         u.passw as u_passw,
         u.tipo as u_tipo,
-        u.carnet as u_carnet
+        u.carnet as u_carnet,
+        u.carrera as u_carrera
         from
         recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id
         left join reserva as re on r.id_interno=re.id_recurso
@@ -78,7 +80,8 @@
         u.id as u_id,
         u.passw as u_passw,
         u.tipo as u_tipo,
-        u.carnet as u_carnet
+        u.carnet as u_carnet,
+        u.carrera as u_carrera
         from
         recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id
         left join reserva as re on r.id_interno=re.id_recurso

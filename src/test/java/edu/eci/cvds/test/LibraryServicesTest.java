@@ -23,7 +23,7 @@ public class LibraryServicesTest{
     @Inject
     ServicesLibrary servicesLibrary;
     private Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
-    private Usuario usuario=new Usuario("Hola","123456","regular","regular@cvds.com",123456);
+    private Usuario usuario=new Usuario("Hola","123456","regular","regular@cvds.com",123456,"Ingenieria de Sistemas");
 
     @Before
     public void setUp(){}
