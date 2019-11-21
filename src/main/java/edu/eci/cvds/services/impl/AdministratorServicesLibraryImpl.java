@@ -62,10 +62,10 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     }
 
 
-    /*
+
     public static void main(String[] args) throws LibraryServicesException{
 
     }
-    */
+
 
 }
