@@ -1,5 +1,6 @@
 package edu.eci.cvds.services;
 
+import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.TipoRecurso;
 import edu.eci.cvds.entities.Usuario;
@@ -54,4 +55,6 @@ public interface AdministratorServicesLibrary {
      * @throws LibraryServicesException
      */
     void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin) throws LibraryServicesException;
+
+    void ingresarHorario(Recurso recurso, Horario horario) throws LibraryServicesException;
 }

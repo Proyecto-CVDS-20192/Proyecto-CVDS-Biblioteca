@@ -83,4 +83,11 @@ public class ServicesLibraryImpl implements ServicesLibrary {
         return usuarioDao.consultarUsuario(username);
     }
 
+    @Override
+    public List<Horario> horarioRecurso(Recurso recurso) throws LibraryServicesException {
+        return horarioDao.horarioRecurso(recurso);
+    }
+
+
+
 }

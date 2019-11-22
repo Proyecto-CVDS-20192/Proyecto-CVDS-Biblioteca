@@ -7,10 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
-import edu.eci.cvds.entities.TipoRecurso;
-import edu.eci.cvds.entities.Usuario;
+import edu.eci.cvds.entities.*;
 import edu.eci.cvds.services.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +21,7 @@ public class LibraryServicesTest{
     ServicesLibrary servicesLibrary;
     private Recurso recurso=new Recurso("El PC","Central",new TipoRecurso(1,"Computador"),"Disponible",500,null);
     private Usuario usuario=new Usuario("Hola","123456","regular","regular@cvds.com",123456,"Ingenieria de Sistemas");
+    private Horario horario=new Horario(1,recurso,new Time(System.currentTimeMillis()),new Time(System.currentTimeMillis()+7200000));
 
     @Before
     public void setUp(){}
@@ -121,6 +119,12 @@ public class LibraryServicesTest{
         }catch (LibraryServicesException e){
             assertTrue(e.getMessage().equals(LibraryServicesException.RECURSO_RESERVADO_EN_HORA));
         }
+    }
+
+    @Test
+    public void deberiaAgregarUnHorarioYConsultarlo(){
+
+
     }
 
     @Test

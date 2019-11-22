@@ -1,9 +1,7 @@
 package edu.eci.cvds.services.impl;
 
-import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
-import edu.eci.cvds.entities.TipoRecurso;
-import edu.eci.cvds.entities.Usuario;
+import edu.eci.cvds.entities.*;
+import edu.eci.cvds.persistence.DaoHorario;
 import edu.eci.cvds.persistence.DaoRecurso;
 import edu.eci.cvds.persistence.DaoReserva;
 import edu.eci.cvds.persistence.DaoTipoRecurso;
@@ -25,6 +23,8 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     private DaoTipoRecurso tipoRecursoDao;
     @Inject
     private DaoReserva reservaDao;
+    @Inject
+    private DaoHorario horarioDao;
 
     @Override
     public void registrarTipoRecurso(TipoRecurso tipoRecurso) throws LibraryServicesException {
@@ -60,6 +60,13 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException {
         reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
     }
+
+    @Override
+    public void ingresarHorario(Recurso recurso, Horario horario) throws LibraryServicesException {
+        horarioDao.ingresarHorario(recurso,horario);
+    }
+
+
     public static void main(String[] args) throws LibraryServicesException{
 
     }
