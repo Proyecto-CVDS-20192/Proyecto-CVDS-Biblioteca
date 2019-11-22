@@ -14,29 +14,30 @@ html, body {
     background: #9F0D0D;
 }
 
-
 .image{
-    width:55%;
     margin-right:2%;
     float: left;
 }
 
-.logout {
-    float: right;
-    margin-top: 3vh;
-    margin-right: 2vw;
-}
-.clearfix{
-    clear:both;
+.head{
+    height: 100%;
     background: #9F0D0D;
 }
 
+.logout {
+    float: right;
+    margin-right: 2vw;
+    line-height: 70px;
+    font-family: 'Inter UI', sans-serif;
+    display:inline-block;
+}
+
 .divbarra{
-    width:100%;
-    background:#9F0D0D;
+    text-align:center;
+    line-height: 70px;
     color:white;
-    font-size:150%;
-    margin: 0 0 0 0;
+    font-size:100%;
+    font-family: 'Inter UI', sans-serif;
 }
 
 .divlogin{
@@ -51,12 +52,18 @@ html, body {
     border-radius: 3px;
 }
 
+.registrar {
+    float: right;
+    margin-top: 3vh;
+    margin-right: 2vw;
+}
+
 .panelregistro{
     background-color: rgba(153, 153, 153, 1);
     color: black;
     border-radius: 6px;
     border: 1px solid rgb(0, 0, 0);
-    margin-top: 5px;
+    margin-top: 50px;
     margin-bottom: 5px;
     margin: 0 0 0 0;
 }
@@ -65,6 +72,7 @@ html, body {
     margin: 0 0 0 0;
     background-color: transparent;
 }
+
 
 .panelregistroH{
     background-color: rgba(66, 66, 66, 1);
@@ -82,7 +90,6 @@ html, body {
     margin-right: 2px;
     margin-left: 2px;
     margin: 0 0 0 0;
-
 }
 
 .mybuttons{
@@ -91,5 +98,36 @@ html, body {
     border-radius: 6px;
     border: 2px solid #545454;
     margin: 0 0 0 0;
+}
 
+.link {
+    float: right;
+    margin-right: 2vw;
+    line-height: 70px;
+    font-family: 'Inter UI', sans-serif;
+    display:inline-block;
+}
+
+a:link, a:visited {
+    background-color: #9F0D0D;
+    color: white;
+    padding: 0 50%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+a:hover, a:active {
+    background-color: #b81010;
+}
+
+.head .ui-button {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-family: 'Inter UI', sans-serif;
+    font-size: 18px;
+    background: #9F0D0D;
+    -webkit-border-radius:10px ;
 }

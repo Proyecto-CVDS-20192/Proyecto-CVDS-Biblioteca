@@ -34,6 +34,15 @@ public class RecursoBean extends BasePageBean {
     private ScheduleModel eventModel = new DefaultScheduleModel();
     private ScheduleEvent event = new DefaultScheduleEvent();
 
+    private String[] ubicaciones = {"Bibioteca B", "Bibioteca G"};
+    private String ubicacionSeleccionada;
+
+    private String[] tipos = {"Computador", "Multimedia","Sala de estudio"};
+    private String tipoSleccionado;
+
+    private String[] estadosRecurso = {"Disponible", "No Disponible","Mantenimiento"};
+    private String estadoSeleccionado;
+
     private int id;
 
     @Inject
@@ -56,17 +65,41 @@ public class RecursoBean extends BasePageBean {
         return recurso.getEstados();
     }
 
-    public void editarEstadoRecurso() {
+    public void editarEstadoRecurso(int id) {
+        if (estadoSeleccionado.equals("Disponible")){
+            try{
+                servicesA.volverAAdmitirElRecurso(servicesL.consultarRecurso(id));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }else if(estadoSeleccionado.equals("No Disponible")){
+            try{
+                servicesA.eliminarUnRecursoTemporal(servicesL.consultarRecurso(id));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {
         int id = servicesA.consultarRecursosAdmin().size() + 1;
+        int tipo = buscarIndice();
         try {
-            recurso = new Recurso(id, 1, nombre, "Biblioteca", capacidad, "Disponible", 1, "PC");
+            recurso = new Recurso(id, tipo+1, nombre, ubicacionSeleccionada, capacidad, "Disponible", tipo+1, tipos[tipo]);
             servicesA.registrarRecurso(recurso);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private int buscarIndice() {
+        int res = -1;
+        for (int i = 0; i <tipos.length ; i++) {
+            if (tipoSleccionado.equals(tipos[i])){
+                res=i;
+            }
+        }
+        return res;
     }
 
     public void eliminarRecurso(int id) {
@@ -190,5 +223,41 @@ public class RecursoBean extends BasePageBean {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/horarios.xhtml");
         this.id = id;
         fillDate(id);
+    }
+
+    public void setUbicacionSeleccionada(String ubicacionSeleccionada) {
+        this.ubicacionSeleccionada = ubicacionSeleccionada;
+    }
+
+    public String getUbicacionSeleccionada() {
+        return this.ubicacionSeleccionada;
+    }
+
+    public String[] getUbicaciones() {
+        return ubicaciones;
+    }
+
+    public String getTipoSleccionado() {
+        return tipoSleccionado;
+    }
+
+    public void setTipoSleccionado(String tipoSleccionado) {
+        this.tipoSleccionado = tipoSleccionado;
+    }
+
+    public String[] getTipos() {
+        return tipos;
+    }
+
+    public String[] getEstadosRecurso(){
+        return estadosRecurso;
+    }
+
+    public String getEstadoSeleccionado() {
+        return estadoSeleccionado;
+    }
+
+    public void setEstadoSeleccionado(String estadoSeleccionado) {
+        this.estadoSeleccionado = estadoSeleccionado;
     }
 }

@@ -8,53 +8,56 @@
         <title>Cambiar de estado un recurso</title>
         <meta charset="utf-8"/>
         <link rel="icon" type="image/png" href="/resources/img/libro.png" />
-        <link href="resources/css/login.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css"
-              href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
+        <link href="/resources/css/login.css" rel="stylesheet" />
+        <!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"/-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
 
         <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+                src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
     </h:head>
     <h:body style="margin:0px; padding:0px;">
-        <div class="image">
-            <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+        <div class="head">
+            <div class="image">
+                <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+            </div>
+            <div class="logout">
+                <h:form id="frmm">
+                    <p:commandButton value="Cerrar sesión" class="dropdown-item"
+                                     action="#{userBean.doLogOut()}" />
+                </h:form>
+            </div>
+            <div id="divbarraid" class="divbarra">
+                <h1>Consultar Recursos Biblioteca ECI</h1>
+            </div>
         </div>
-        <div class="logout">
-            <h:form id="frmm">
-                <p:commandButton value="Cerrar sesión" class="dropdown-item"
-                                 action="#{userBean.doLogOut()}" />
-            </h:form>
-        </div>
-        <div class="clearfix"></div>
         <br></br>
-        <div id="divbarraid" class="divbarra">
-            <center>Cambiar de estado recursos de la Biblioteca ECI</center>
-        </div>
-
         <div class="registrar">
             <h:form id="frmm2">
                 <p:commandButton value="Agregar Recurso" onclick="PF('dlg1').show();"/>
 
-                <p:dialog header="Agregar Recurso" widgetVar="dlg1" focus="tipo" resizable="false">
+                <p:dialog header="Agregar Recurso" widgetVar="dlg1" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
-                        <h:outputLabel for="tipo" value="Tipo:" />
-                        <p:inputText id="tipo" label="tipo" 
-                                     binding="#{tipo}"/>
-
                         <h:outputLabel for="nombre" value="Nombre:" />
                         <p:inputText id="nombre" label="nombre"
                                      binding="#{nombre}"/>
 
-                        <h:outputLabel for="ubicacion" value="Ubicacion:" />
-                        <p:inputText id="ubicacion" label="ubicacion" 
-                                     binding="#{ubicacion}"/>
 
                         <h:outputLabel for="capacidad" value="Capacidad:" />
-                        <p:inputText id="capacidad" label="capacidad" 
+                        <p:inputText id="capacidad" label="capacidad"
                                      binding="#{capacidad}"/>
 
-                        <p:growl id="message1" showDetail="true" />                                        
+                        <label class="bmd-label-floating">Ubicacion:</label>
+                        <h:selectOneMenu value="#{recursoBean.ubicacionSeleccionada}" class="form-control">
+                            <f:selectItems value="#{recursoBean.getUbicaciones()}" />
+                        </h:selectOneMenu>
+
+                        <label class="bmd-label-floating">Tipo:</label>
+                        <h:selectOneMenu value="#{recursoBean.tipoSleccionado}" class="form-control">
+                            <f:selectItems value="#{recursoBean.getTipos()}" />
+                        </h:selectOneMenu>
+
+                        <p:growl id="message1" showDetail="true" />
                         <p:commandButton class="buttonR" value="Registrar" update="message1">
                             <p:confirm header="Confirmación" message="¿Desea registrar este recurso?" icon="pi pi-exclamation-triangle" />
                             <f:actionListener binding="#{recursoBean.registrarRecurso(nombre.value, capacidad.value)}" update="frmm2"/>
@@ -64,7 +67,7 @@
                             <div align="center">
                                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                            </div></p:confirmDialog> 
+                            </div></p:confirmDialog>
 
                     </h:panelGrid>
                 </p:dialog>
@@ -96,7 +99,7 @@
                                 <td align="center" class="columregistro">#{recursos.tipoRecurso.tipo}</td>
                                 <td align="center" class="columregistro">#{recursos.estado}</td>
                                 <td align="center" class="columregistro">
-                                    <h:form id="frmm3">         
+                                    <h:form id="frmm3">
                                         <p:growl id="message" showDetail="true" />
                                         <p:commandButton class="buttonR"  value="Eliminar Recurso" update="message">
                                             <p:confirm header="Confirmación" message="¿Desea eliminar el recurso?" icon="pi pi-exclamation-triangle" />
@@ -109,7 +112,7 @@
                                                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                                             </div>
-                                        </p:confirmDialog> 
+                                        </p:confirmDialog>
                                     </h:form>
                                 </td>
                             </tr>
@@ -118,6 +121,8 @@
                 </table>
             </h:panelGroup>
         </p:panel>
+
+        <br></br>
 
         <script>
             $(document).ready(function () {

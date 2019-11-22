@@ -2,9 +2,7 @@
 ::selection {
   background: #2D2F36;
 }
-::-webkit-selection {
-  background: #2D2F36;
-}
+
 ::-moz-selection {
   background: #2D2F36;
 }
@@ -45,7 +43,7 @@ body {
 }
 .left {
   background: white;
-  height: calc(100% - 40px);
+  height: calc(100%);
   top: 20px;
   width: 50%;
 }
@@ -138,4 +136,23 @@ input::-moz-focus-inner {
 	-moz-border-radius:20px ;
 	-webkit-border-radius:20px ;
 	border:2px solid #9F0D0D ;
+}
+
+.link {
+  position: relative;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+a:link, a:visited {
+  background-color: #9F0D0D;
+  color: white;
+  padding: 10px 23%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+a:hover, a:active {
+  background-color: #b81010;
 }

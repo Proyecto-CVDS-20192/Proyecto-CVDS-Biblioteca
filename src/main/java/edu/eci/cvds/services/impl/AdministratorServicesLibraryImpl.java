@@ -60,9 +60,6 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException {
         reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
     }
-
-
-
     public static void main(String[] args) throws LibraryServicesException{
 
     }

@@ -6,9 +6,12 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.DaoHorario;
 import edu.eci.cvds.persistence.DaoReserva;
+import edu.eci.cvds.persistence.DaoUsuario;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
 import edu.eci.cvds.persistence.DaoRecurso;
+import edu.eci.cvds.services.ServicesLibraryFactory;
+
 import javax.inject.Inject;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -23,6 +26,8 @@ public class ServicesLibraryImpl implements ServicesLibrary {
     private DaoReserva reservaDao;
     @Inject
     private DaoHorario horarioDao;
+    @Inject
+    private DaoUsuario usuarioDao;
 
     @Override
     public List<Recurso> consultarRecursos() throws LibraryServicesException {
@@ -73,5 +78,9 @@ public class ServicesLibraryImpl implements ServicesLibrary {
         reservaDao.eliminarReserva(reserva);
     }
 
+    @Override
+    public Usuario consultarUsuario(String username) throws LibraryServicesException {
+        return usuarioDao.consultarUsuario(username);
+    }
 
 }

@@ -80,4 +80,11 @@ public interface ServicesLibrary {
      */
     void eliminarReserva(Reserva reserva) throws LibraryServicesException;
 
+    /**
+     * Consulta un usuario
+     * @param username El identificador del usuario
+     * @throws LibraryServicesException
+     */
+    Usuario consultarUsuario(String username) throws LibraryServicesException;
+
 }

@@ -19,24 +19,22 @@
         src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
     </h:head>
-    <h:body style="margin:0px; padding:0px;">
-        <div class="image">
-            <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+    <h:body style="margin:0px; padding:0px;" >
+        <div class="head">
+            <div class="image">
+                <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+            </div>
+            <div class="logout">
+                <h:form id="frmm">
+                    <p:commandButton value="Cerrar sesión" class="dropdown-item"
+                                     action="#{userBean.doLogOut()}" />
+                </h:form>
+            </div>
+            <div id="divbarraid" class="divbarra">
+                <h1>Consultar Recursos Biblioteca ECI</h1>
+            </div>
         </div>
-        <div class="logout">
-            <h:form id="frmm">
-                <p:commandButton value="Cerrar sesión" class="dropdown-item"
-                                 action="#{userBean.doLogOut()}" />
-            </h:form>
-        </div>
-        <div class="clearfix"></div>
-
         <br></br>
-        <div id="divbarraid" class="divbarra">
-            <center>Consultar Recursos Biblioteca ECI</center>
-        </div>
-        <br></br>
-
 
         <p:panel class="panelregistro">
             <h:panelGroup class="panelregistro" id="panelregistroid">
@@ -82,7 +80,7 @@
                 </table>
             </h:panelGroup>
         </p:panel>
-
+        <br/>
         <script>
             $(document).ready(function () {
                 $('#Registro_table').DataTable();

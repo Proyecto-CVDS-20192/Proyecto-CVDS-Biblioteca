@@ -20,22 +20,18 @@
 
     </h:head>
     <h:body style="margin:0px; padding:0px;">
-        <div class="image">
-            <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
-        </div>
-        <div class="logout">
-            <h:form id="frmm">
-                <p:linkButton outcome="index" value="Login" style="margin-right:20px;"></p:linkButton>
-            </h:form>
-        </div>
-        <div class="clearfix"></div>
-
-        <br></br>
-        <div id="divbarraid" class="divbarra">
-            <center>Consultar Recursos Biblioteca ECI</center>
+        <div class="head">
+            <div class="image">
+                <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
+            </div>
+            <div class="logout">
+                <a href="/faces/index.xhtml">Login</a>
+            </div>
+            <div id="divbarraid" class="divbarra">
+                <h1>Consultar Recursos Biblioteca ECI</h1>
+            </div>
         </div>
         <br></br>
-
 
         <p:panel class="panelregistro">
             <h:panelGroup class="panelregistro" id="panelregistroid">
@@ -73,13 +69,12 @@
                 </table>
             </h:panelGroup>
         </p:panel>
-
+        <br></br>
         <script>
             $(document).ready(function () {
                 $('#Registro_table').DataTable();
             });
         </script>
-
 
         <!-- Site footer -->
 
