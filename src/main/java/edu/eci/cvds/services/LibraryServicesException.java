@@ -4,6 +4,7 @@ public class LibraryServicesException extends Exception {
     public static final String CAPACIDAD_NEGATIVA="La capacidad no puede ser negativa";
     public static final String RECURSO_RESERVADO_EN_HORA="El recurso ya se encuentra reservado a esa hora";
     public static  final String RESERVA_MAYOR_A_DOS_HORAS="Una reserva no puede ser mayor a dos horas";
+    public static final String RESERVA_FUERA_DE_HORE="La reserva no se puede realizar fuera de horario";
 
     /**
      * Constructor de la clase LibraryServicesException
