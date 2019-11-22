@@ -40,8 +40,9 @@ public class RecursoBean extends BasePageBean {
     private String[] tipos = {"Computador", "Multimedia","Sala de estudio"};
     private String tipoSleccionado;
 
-    private String[] estadosRecurso = {"Disponible", "No Disponible","Mantenimiento"};
+    private String[] estadosRecurso = {"Disponible", "No Disponible"};
     private String estadoSeleccionado;
+    private int idSeleccionado;
 
     private int id;
 
@@ -65,22 +66,26 @@ public class RecursoBean extends BasePageBean {
         return recurso.getEstados();
     }
 
-    public void editarEstadoRecurso(int id) {
+    public void editarEstadoRecurso() {
         if (estadoSeleccionado.equals("Disponible")){
             try{
-                servicesA.volverAAdmitirElRecurso(servicesL.consultarRecurso(id));
+                servicesA.volverAAdmitirElRecurso(servicesL.consultarRecurso(idSeleccionado));
             }catch(Exception e){
                 e.printStackTrace();
             }
         }else if(estadoSeleccionado.equals("No Disponible")){
             try{
-                servicesA.eliminarUnRecursoTemporal(servicesL.consultarRecurso(id));
+                servicesA.eliminarUnRecursoTemporal(servicesL.consultarRecurso(idSeleccionado));
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
     }
-
+    
+    public void seleccionarRecurso(int idSeleccionado){
+        this.idSeleccionado = idSeleccionado;
+    }
+    
     public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {
         int id = servicesA.consultarRecursosAdmin().size() + 1;
         int tipo = buscarIndice();
