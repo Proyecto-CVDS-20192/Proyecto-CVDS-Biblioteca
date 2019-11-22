@@ -30,15 +30,18 @@
 
         <div>
             <h:form>
-                <p:growl id="messages" showDetail="true" />
+                <p:messages id="messages" showDetail="true" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+                <p:growl id="messages1" showDetail="true" />
 
                 <h:panelGrid columnClasses="value" class="panelHorario">
                     <p:schedule id="schedule" value="#{recursoBean.eventModel}" widgetVar="myschedule" >
 
                         <p:ajax event="dateSelect" listener="#{recursoBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         <p:ajax event="eventSelect" listener="#{recursoBean.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                        <p:ajax event="eventMove" listener="#{recursoBean.onEventMove}" update="messages" />
-                        <p:ajax event="eventResize" listener="#{recursoBean.onEventResize}" update="messages" />
+                        <p:ajax event="eventMove" listener="#{recursoBean.onEventMove}" update="messages1" />
+                        <p:ajax event="eventResize" listener="#{recursoBean.onEventResize}" update="messages1" />
 
                     </p:schedule>
                 </h:panelGrid>
@@ -52,8 +55,21 @@
                         <p:outputLabel for="to" value="Fecha Fin:" />
                         <p:calendar id="to" value="#{recursoBean.event.endDate}" pattern="dd/MM/yyyy HH:mm" />
 
+                        <p:outputLabel for="recurrente" value="Tipo repeticion: " />
+                        <p:selectOneMenu id="recurrente" value="#{dropdown.tipoRepeticionSeleccionado}" style="width:150px">
+                            <p:ajax listener="#{dropdown.onTipoCambiado}" update="periodo" />
+                            <f:selectItem itemLabel="Tipo de repeticion" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{dropdown.tipoRepeticiones}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="periodo" value="Cantidad repeticiones: " />
+                        <p:selectOneMenu id="periodo" value="#{dropdown.cantidadRepeticiones}" style="width:150px">
+                            <f:selectItem itemLabel="Seleccione la cantidad" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{dropdown.cantidadesRepeticiones}" />
+                        </p:selectOneMenu>
+
                         <p:commandButton type="reset" value="Reset" />
-                        <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent()}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();">
+                        <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent(dropdown.tipoRepeticionSeleccionado,dropdown.cantidadRepeticiones)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();">
                             <f:actionListener binding="#{recursoBean.reloadUser()}"/>
                         </p:commandButton>
                         <p:commandButton id="deleteButton" value="Delete" action="#{recursoBean.deleteEvent()}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />

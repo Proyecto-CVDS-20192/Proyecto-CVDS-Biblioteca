@@ -137,15 +137,17 @@ public class RecursoBean extends BasePageBean {
         eventModel = new DefaultScheduleModel();
         event = new DefaultScheduleEvent();
         Recurso re = servicesL.consultarRecurso(id);
+        List<Reserva> lista = servicesL.consultarReservas();
         boolean banderaRec = false;
-        for (int i = 0; i < servicesL.consultarReservas().size(); i++){
-            if (servicesL.consultarReservas().get(i).getRecurso().getIdentificadorInterno() == id){
+        for (int i = 0; i < lista.size(); i++){
+            if (lista.get(i).getRecurso().getIdentificadorInterno() == id){
                 banderaRec = true;
             }
         }
+        lista = servicesL.consultarReservaRecurso(re);
         if (banderaRec) {
-            if (servicesL.consultarReservaRecurso(re).size() > 0) {                
-                for (Reserva r : servicesL.consultarReservaRecurso(re)) {
+            if (lista.size() > 0) {
+                for (Reserva r : lista) {
                     eventModel.addEvent(new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre(), r.getFechaIniDate(), r.getFechaFinDate()));
                 }
             }
@@ -186,13 +188,22 @@ public class RecursoBean extends BasePageBean {
         this.event = event;
     }
 
-    public void addEvent() throws LibraryServicesException {
+    public void addEvent(String tipoRecurencia, String cantidadRecurrencia) throws LibraryServicesException {
         if (event.getId() == null) {
             eventModel.addEvent(event);
         } else {
             eventModel.updateEvent(event);
         }
-        servicesL.reservarRecurso(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()));
+        if (tipoRecurencia == null || tipoRecurencia.equals("")){
+            servicesL.reservarRecurso(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()));
+        }else{
+            if (cantidadRecurrencia == null || cantidadRecurrencia.equals("")){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se seleccionó la cantidad de la recurrencia en la reserva"));
+            }else{
+                servicesL.reservaRecursorecurrente(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()),tipoRecurencia,cantidadRecurrencia);
+            }
+        }
+
         event = new DefaultScheduleEvent();
     }
 

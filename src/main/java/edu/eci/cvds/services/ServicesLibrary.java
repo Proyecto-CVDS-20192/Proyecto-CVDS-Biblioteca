@@ -39,9 +39,11 @@ public interface ServicesLibrary {
      * @param usuario El usuario que realiza la reserva
      * @param fechaIni La fecha de inicio
      * @param fechaFin La fecha de fin
+     * @param tipoRecurrencia El tipo de recurrencia (Diaria, semanal o mensual)
+     * @param cantidadRecurrencia La cantidad de veces que se va a hacer la recurrencia
      * @throws LibraryServicesException
      */
-    void reservaRecursorecurrente(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws  LibraryServicesException;
+    void reservaRecursorecurrente(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin,String tipoRecurrencia,String cantidadRecurrencia) throws  LibraryServicesException;
 
     /**
      * Consulta las reservas de un usuario
