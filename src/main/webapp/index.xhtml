@@ -35,7 +35,9 @@
 
                 <label for="email">Password</label>
                 <p:password id="password" required="true" value="#{userBean.password}"/>
-                <p:commandButton id="ingresar" value="Login" action="#{userBean.doLogin()}" />
+                <p:commandButton id="ingresar" value="Login" action="#{userBean.doLogin()}" >
+                    <f:actionListener binding="#{recursoBean.setUsuario(userBean.username)}" update="frmm2"/>
+                </p:commandButton>
 				<p:messages id="messages" showDetail="true" closable="true">
 				<p:autoUpdate />
 				</p:messages> 

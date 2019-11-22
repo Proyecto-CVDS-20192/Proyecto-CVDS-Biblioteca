@@ -72,7 +72,7 @@
 
                     </h:panelGrid>
                 </p:dialog>
-                <p:dialog header="Agregar Recurso" widgetVar="dlg2" resizable="false">
+                <p:dialog header="Editar Recurso" widgetVar="dlg2" resizable="false">
                     <h:panelGrid columns="2" cellpadding="2">
 
                         <label class="bmd-label-floating">Estado:</label>
@@ -83,6 +83,7 @@
                         <p:growl id="message3" showDetail="true" />
                         <p:commandButton class="buttonR" value="Editar" update="message3">
                             <p:confirm header="Confirmación" message="¿Desea registrar este recurso?" icon="pi pi-exclamation-triangle" />
+                            <f:actionListener binding="#{recursoBean.editarEstadoRecurso()}" update="frmm3"/>
                             <f:actionListener binding="#{recursoBean.reloadAdmin()}" update="frmm4"/>
                         </p:commandButton>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -140,8 +141,9 @@
                                 </td>
                                 <td align="center" class="columregistro">
                                     <h:form id="frmm4">
-                                        <p:commandButton value="Editar Recurso" onclick="PF('dlg2').show();"/>
-                                        <!--f:actionListener binding="{recursoBean.seleccionarRecurso(recursos.identificadorInterno)}" update="frmm4"/-->
+                                        <p:commandButton value="Editar Recurso" onclick="PF('dlg2').show();">
+                                        <f:actionListener binding="#{recursoBean.seleccionarRecurso(recursos.identificadorInterno)}" update="frmm4"/>
+                                        </p:commandButton>
                                     </h:form>
                                 </td>
                             </tr>

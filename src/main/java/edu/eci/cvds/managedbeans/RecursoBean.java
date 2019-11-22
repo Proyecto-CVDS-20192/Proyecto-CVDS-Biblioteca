@@ -7,6 +7,7 @@ import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class RecursoBean extends BasePageBean {
     private String[] estadosRecurso = {"Disponible", "No Disponible"};
     private String estadoSeleccionado;
     private int idSeleccionado;
-
+    private String usuario;
     private int id;
 
     @Inject
@@ -127,6 +128,10 @@ public class RecursoBean extends BasePageBean {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/consultarRecursos.xhtml");
     }
 
+    public void verReservas() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/verReservas.xhtml");
+    }
+
     //Calendario del recurso
     public void fillDate(int id) throws LibraryServicesException {
         eventModel = new DefaultScheduleModel();
@@ -181,13 +186,13 @@ public class RecursoBean extends BasePageBean {
         this.event = event;
     }
 
-    public void addEvent() {
+    public void addEvent() throws LibraryServicesException {
         if (event.getId() == null) {
             eventModel.addEvent(event);
         } else {
             eventModel.updateEvent(event);
         }
-
+        servicesL.reservarRecurso(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()));
         event = new DefaultScheduleEvent();
     }
 
@@ -221,12 +226,12 @@ public class RecursoBean extends BasePageBean {
 
     public void horariosPage(int id) throws IOException, LibraryServicesException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/horarios.xhtml");
-        this.id = id;
+        idSeleccionado = id;
         fillDate(id);
     }
     public void horariosPageGuest(int id) throws IOException, LibraryServicesException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/horarios.xhtml");
-        this.id = id;
+        idSeleccionado = id;
         fillDate(id);
     }
 
@@ -265,4 +270,17 @@ public class RecursoBean extends BasePageBean {
     public void setEstadoSeleccionado(String estadoSeleccionado) {
         this.estadoSeleccionado = estadoSeleccionado;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Reserva> getReservasUsuario() throws LibraryServicesException {
+        return servicesL.consultarReservasUsuario(usuario);
+    }
+
 }
