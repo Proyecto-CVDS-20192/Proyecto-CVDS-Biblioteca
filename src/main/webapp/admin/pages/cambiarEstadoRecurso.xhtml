@@ -82,7 +82,7 @@
 
                         <p:growl id="message3" showDetail="true" />
                         <p:commandButton class="buttonR" value="Editar" update="message3">
-                            <p:confirm header="Confirmación" message="¿Desea registrar este recurso?" icon="pi pi-exclamation-triangle" />
+                            <p:confirm header="Confirmación" message="¿Desea editar este recurso?" icon="pi pi-exclamation-triangle" />
                             <f:actionListener binding="#{recursoBean.editarEstadoRecurso()}" update="frmm3"/>
                             <f:actionListener binding="#{recursoBean.reloadAdmin()}" update="frmm4"/>
                         </p:commandButton>
