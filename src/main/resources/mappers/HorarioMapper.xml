@@ -8,12 +8,12 @@
         <id property="id" column="id"/>
         <result property="horaInicio" column="hora_inicio"/>
         <result property="horaFin" column="hora_fin"/>
-        <association property="recurso" javaType="edu.eci.cvds.entities.Recurso" resultMap="RecursoResult"
+        <association property="recurso" javaType="edu.eci.cvds.entities.Recurso" resultMap="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper.RecursoResult"
                      columnPrefix="r_"/>
     </resultMap>
 
     <insert id="ingresarHorario" parameterType="map">
-        insert into horario(id_recurso,hora_inicio,hora_fin) values(#{recurso.idInterno},#{horario.horaInicio},#{horario.horaFin});
+        insert into horario(id_recurso,hora_inicio,hora_fin) values(#{recurso.identificadorInterno},#{horario.horaInicio},#{horario.horaFin});
     </insert>
 
     <select id="horarios" parameterType="map" resultMap="HorarioResult">
@@ -45,7 +45,7 @@
         tr.id as r_tr_id,
         tr.tipo as r_tr_tipo
         from horario as h left join recurso as r on h.id_recurso=r.id_interno
-        left join tipo_recurso as tr on r.id_tipo=tr.id where r.id_interno=#{recurso.id};
+        left join tipo_recurso as tr on r.id_tipo=tr.id where r.id_interno=#{recurso.identificadorInterno};
     </select>
 
 </mapper>

@@ -56,5 +56,11 @@ public interface AdministratorServicesLibrary {
      */
     void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin) throws LibraryServicesException;
 
+    /**
+     * Ingresa un nuevo horario a un recurso
+     * @param recurso El recurso al ingresar el horario
+     * @param horario El nuevo horario
+     * @throws LibraryServicesException
+     */
     void ingresarHorario(Recurso recurso, Horario horario) throws LibraryServicesException;
 }

@@ -36,7 +36,7 @@ public class MyBatisDaoReserva implements DaoReserva {
                     }
                 }
             }
-            reservaMapper.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
+            reservaMapper.reservarRecurso(recurso, usuario, fechaIni, fechaFin,"Normal");
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new LibraryServicesException(e.getMessage());
         }
@@ -73,6 +73,15 @@ public class MyBatisDaoReserva implements DaoReserva {
     public void eliminarReserva(Reserva reserva) throws LibraryServicesException{
         try{
             reservaMapper.eliminarReserva(reserva);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Reserva> consultarReservasActivas() throws LibraryServicesException {
+        try{
+            return reservaMapper.consultarReservasActivas();
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new LibraryServicesException(e.getMessage());
         }

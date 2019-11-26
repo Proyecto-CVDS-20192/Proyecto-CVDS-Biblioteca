@@ -48,4 +48,11 @@ public interface DaoReserva {
      * @param reserva la reserva a eliminar
      */
     void eliminarReserva(Reserva reserva) throws LibraryServicesException;
+
+    /**
+     * Consulta todas las reservas activas
+     * @return una lista con todas las reservas activas
+     * @throws LibraryServicesException
+     */
+    List<Reserva> consultarReservasActivas() throws LibraryServicesException;
 }

@@ -90,7 +90,20 @@ public interface ServicesLibrary {
      */
     Usuario consultarUsuario(String username) throws LibraryServicesException;
 
+    /**
+     * Consulta el horario de un recurso
+     * @param recurso el recurso del que se desea hacer la consulta
+     * @return una lista con todos los horarios del recurso
+     * @throws LibraryServicesException
+     */
     List<Horario> horarioRecurso(Recurso recurso) throws LibraryServicesException;
+
+    /**
+     * Consulta todas las reservas activas
+     * @return una lista con todas las reservas activas
+     * @throws LibraryServicesException
+     */
+    List<Reserva> consultarReservasActivas() throws LibraryServicesException;
 
 
 }

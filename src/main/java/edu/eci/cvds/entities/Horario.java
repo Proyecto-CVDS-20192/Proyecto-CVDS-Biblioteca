@@ -99,4 +99,5 @@ public class Horario implements Serializable {
     public String toString() {
         return horaInicio.toString()+" "+horaFin.toString();
     }
+
 }

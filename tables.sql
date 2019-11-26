@@ -72,6 +72,8 @@ fecha_ini TIMESTAMP NOT NULL,
 fecha_fin TIMESTAMP NOT NULL,
 id_recurso integer,
 id_usuario VARCHAR(50),
+estado VARCHAR(50) NOT NULL,
+tipo VARCHAR(50) NOT NULL,
 PRIMARY KEY (id),
 CONSTRAINT fk_reserva_usuario
     FOREIGN KEY(id_usuario)

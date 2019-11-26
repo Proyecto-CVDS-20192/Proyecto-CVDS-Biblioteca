@@ -50,6 +50,15 @@ public class LibraryServicesTest{
         assertTrue(servicesLibrary.consultarRecursos().size()>length);
     }
 
+    @Test
+    public void deberiaAgregarUnHorarioYConsultarlo() throws LibraryServicesException{
+        administratorServices.registrarRecurso(recurso);
+        recurso.setIdentificadorInterno(servicesLibrary.consultarRecursos().get(0).getIdentificadorInterno());
+        administratorServices.ingresarHorario(recurso,horario);
+        servicesLibrary.horarioRecurso(recurso);
+        assertTrue(servicesLibrary.horarioRecurso(recurso).get(0).getId()==horario.getId());
+    }
+
 
     @Test
     public void deberiaConsultarUnRecurso() throws LibraryServicesException {
@@ -95,6 +104,9 @@ public class LibraryServicesTest{
         assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0).getUsuario().getId().equals("regular@cvds.com"));
         assertTrue(servicesLibrary.consultarReservas().get(0).getRecurso().getIdentificadorInterno()==administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
         assertTrue(servicesLibrary.consultarReservaRecurso(recurso)!=null);
+        servicesLibrary.eliminarReserva(servicesLibrary.consultarReservas().get(0));
+        assertTrue(servicesLibrary.consultarReservas().get(0).getEstado().equals("Cancelada"));
+        assertTrue(servicesLibrary.consultarReservasActivas().size()==0);
     }
 
     @Test
@@ -121,10 +133,6 @@ public class LibraryServicesTest{
         }
     }
 
-    @Test
-    public void deberiaAgregarUnHorarioYConsultarlo(){
-
-    }
 
     @Test
     public void pruebasSotu()throws LibraryServicesException{

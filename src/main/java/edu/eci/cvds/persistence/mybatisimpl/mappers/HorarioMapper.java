@@ -14,7 +14,17 @@ public interface HorarioMapper  {
      */
     List<Horario> horarios();
 
+    /**
+     * Ingresa un nuevo horario con las reservas
+     * @param recurso
+     * @param horario
+     */
     void ingresarHorario(@Param("recurso") Recurso recurso,@Param("horario") Horario horario);
 
+    /**
+     * Consulta todos los horarios de un recurso
+     * @param recurso El recurso del que se quiere consultar
+     * @return
+     */
     List<Horario> horariosRecurso(@Param("recurso") Recurso recurso);
 }
