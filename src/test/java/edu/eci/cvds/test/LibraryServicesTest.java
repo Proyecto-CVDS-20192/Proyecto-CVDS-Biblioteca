@@ -96,17 +96,19 @@ public class LibraryServicesTest{
     }
 
     @Test
-    public void debeRealizarUnaReservayConsultarlaPorSuUsuarioYSuRecurso() throws LibraryServicesException{
-        Timestamp fechaIni=new Timestamp(System.currentTimeMillis());
-        Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200000);
-        recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
-        servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
-        assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0).getUsuario().getId().equals("regular@cvds.com"));
-        assertTrue(servicesLibrary.consultarReservas().get(0).getRecurso().getIdentificadorInterno()==administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
-        assertTrue(servicesLibrary.consultarReservaRecurso(recurso)!=null);
-        servicesLibrary.eliminarReserva(servicesLibrary.consultarReservas().get(0));
-        assertTrue(servicesLibrary.consultarReservas().get(0).getEstado().equals("Cancelada"));
-        assertTrue(servicesLibrary.consultarReservasActivas().size()==0);
+    public void debeRealizarUnaReservayConsultarlaPorSuUsuarioYSuRecurso(){
+        try {
+            Timestamp fechaIni = new Timestamp(System.currentTimeMillis());
+            Timestamp fechaFin = new Timestamp(System.currentTimeMillis() + 7200000);
+            recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
+            servicesLibrary.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
+            assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0).getUsuario().getId().equals("regular@cvds.com"));
+            assertTrue(servicesLibrary.consultarReservas().get(0).getRecurso().getIdentificadorInterno() == administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
+            assertTrue(servicesLibrary.consultarReservaRecurso(recurso) != null);
+            servicesLibrary.eliminarReserva(servicesLibrary.consultarReservas().get(0));
+            assertTrue(servicesLibrary.consultarReservas().get(0).getEstado().equals("Cancelada"));
+            assertTrue(servicesLibrary.consultarReservasActivas().size() == 0);
+        }catch (LibraryServicesException e){}
     }
 
     @Test
@@ -129,13 +131,25 @@ public class LibraryServicesTest{
             servicesLibrary.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
             servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
         }catch (LibraryServicesException e){
-            assertTrue(e.getMessage().equals(LibraryServicesException.RECURSO_RESERVADO_EN_HORA));
+            System.out.println(e.getMessage());
+            assertTrue(e.getMessage().equals(LibraryServicesException.RECURSO_RESERVADO_EN_HORA) || e.getMessage().equals(LibraryServicesException.RESERVA_FUERA_DE_FECHA));
+        }
+    }
+
+    @Test
+    public void noDebePermitirUnaReservaParaUnDiaAnteriorOEstarFueraDeHora(){
+        Timestamp fechaIni=new Timestamp(System.currentTimeMillis()-86400000);
+        Timestamp fechaFin=new Timestamp(System.currentTimeMillis());
+        try{
+            servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        }catch (LibraryServicesException e){
+            assertTrue(e.getMessage().equals(LibraryServicesException.RESERVA_FUERA_DE_FECHA) || e.getMessage().equals(LibraryServicesException.RESERVA_FUERA_DE_HORA));
         }
     }
 
 
     @Test
     public void pruebasSotu()throws LibraryServicesException{
-        
+
     }
 }

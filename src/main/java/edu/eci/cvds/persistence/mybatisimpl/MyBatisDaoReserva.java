@@ -9,6 +9,7 @@ import edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper;
 import edu.eci.cvds.services.LibraryServicesException;
 
 import javax.inject.Inject;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,6 +22,14 @@ public class MyBatisDaoReserva implements DaoReserva {
     @Override
     public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException{
         try {
+            Date today=new Date(System.currentTimeMillis());
+            Date fechaIniDate=new Date(fechaIni.getTime());
+            if(fechaIniDate.before(today)){
+                throw new LibraryServicesException(LibraryServicesException.RESERVA_FUERA_DE_FECHA);
+            }
+            if(fechaIni.getHours()<7 || fechaFin.getHours()>19){
+                throw new LibraryServicesException(LibraryServicesException.RESERVA_FUERA_DE_HORA);
+            }
             if(fechaFin.getTime()-fechaIni.getTime()>7200000){
                 throw new LibraryServicesException(LibraryServicesException.RESERVA_MAYOR_A_DOS_HORAS);
             }
