@@ -12,7 +12,10 @@ import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implements AdministratorServicesLibrary {
@@ -64,6 +67,25 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     @Override
     public void ingresarHorario(Recurso recurso, Horario horario) throws LibraryServicesException {
         horarioDao.ingresarHorario(recurso,horario);
+    }
+
+    @Override
+    public void reporteDeOcupacion() throws LibraryServicesException {
+        List<Reserva> reservas=reservaDao.consultarReservas();
+        ArrayList<Reserva> recurrentes=new ArrayList<>();
+        ArrayList<Reserva> canceladas=new ArrayList<>();
+        HashMap<Reserva,Integer> recursosMasUsados=new HashMap<>();
+        for(Reserva i:reservas){
+            if(i.getTipo().equals("Recurrente")) recurrentes.add(i);
+            if(i.getEstado().equals("Cancelada")) canceladas.add(i);
+            if(recursosMasUsados.containsKey(i)){
+                recursosMasUsados.put(i,recursosMasUsados.get(i)+1);
+            }
+            else{
+                recursosMasUsados.put(i,1);
+            }
+        }
+
     }
 
 

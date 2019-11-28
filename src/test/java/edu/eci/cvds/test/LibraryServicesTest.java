@@ -124,15 +124,15 @@ public class LibraryServicesTest{
 
     @Test
     public void noDebePermitirSobrePonerReservas(){
-        Timestamp fechaIni=new Timestamp(System.currentTimeMillis());
-        Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200000);
+        Timestamp fechaIni=new Timestamp(System.currentTimeMillis()+86400000);
+        Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200000+86400000);
         try {
             recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
             servicesLibrary.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
             servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
         }catch (LibraryServicesException e){
             System.out.println(e.getMessage());
-            assertTrue(e.getMessage().equals(LibraryServicesException.RECURSO_RESERVADO_EN_HORA) || e.getMessage().equals(LibraryServicesException.RESERVA_FUERA_DE_FECHA));
+            assertTrue(e.getMessage().equals(LibraryServicesException.RECURSO_RESERVADO_EN_HORA) );
         }
     }
 

@@ -63,4 +63,10 @@ public interface AdministratorServicesLibrary {
      * @throws LibraryServicesException
      */
     void ingresarHorario(Recurso recurso, Horario horario) throws LibraryServicesException;
+
+    /**
+     * Obtiene el reporte de las reservas 
+     * @throws LibraryServicesException
+     */
+    void reporteDeOcupacion() throws LibraryServicesException;
 }
