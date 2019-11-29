@@ -102,6 +102,7 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     }
 
     private Time[] calculeArray(Reserva reserva) {
+        Time horaInicioReserva=new Time(reserva.getFechaInicio().getTime());
         Time[] ans=new Time[2];
         HashMap<Time,Time> tiempos=new HashMap<>();
         tiempos.put(Time.valueOf("07:00:00"),Time.valueOf("08:30:00"));
@@ -114,10 +115,21 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         tiempos.put(Time.valueOf("17:30:00"),Time.valueOf("19:00:00"));
         Set<Time> values=tiempos.keySet();
         for(Time i:values){
+            if(in(i,horaInicioReserva)){
+                ans[0]=i;
+                ans[1]=tiempos.get(i);
+                break;
+            }
         }
         return ans;
     }
 
+    private boolean in(Time taken,Time reservaTime){
+        if(taken.getHours()<=reservaTime.getHours() && taken.getHours()+1>=reservaTime.getHours()){
+            return true;
+        }
+        return false;
+    }
 
     public static void main(String[] args) throws LibraryServicesException{
 
