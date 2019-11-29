@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implements AdministratorServicesLibrary {
 
@@ -69,12 +70,22 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         horarioDao.ingresarHorario(recurso,horario);
     }
 
+
     @Override
     public void reporteDeOcupacion() throws LibraryServicesException {
         List<Reserva> reservas=reservaDao.consultarReservas();
         ArrayList<Reserva> recurrentes=new ArrayList<>();
         ArrayList<Reserva> canceladas=new ArrayList<>();
-        HashMap<Timestamp[],Integer> recursosMasUsados=new HashMap<>();
+        HashMap<Reserva,Integer> recursosMasUsados=new HashMap<>();
+        HashMap<Time[],Integer> horasMasSolicitadas=new HashMap<>();
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("07:00:00"),Time.valueOf("08:30:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("08:30:00"),Time.valueOf("10:00:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("10:00:00"),Time.valueOf("11:30:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("11:30:00"),Time.valueOf("13:00:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("13:00:00"),Time.valueOf("14:30:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("14:30:00"),Time.valueOf("16:00:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("16:00:00"),Time.valueOf("17:30:00")},0);
+        horasMasSolicitadas.put(new Time[]{Time.valueOf("17:30:00"),Time.valueOf("19:00:00")},0);
         for(Reserva i:reservas){
             if(i.getTipo().equals("Recurrente")) recurrentes.add(i);
             if(i.getEstado().equals("Cancelada")) canceladas.add(i);
@@ -84,8 +95,27 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
             else{
                 recursosMasUsados.put(i,1);
             }
+            Time[] arr=calculeArray(i);
+            horasMasSolicitadas.put(arr,horasMasSolicitadas.get(arr)+1);
         }
 
+    }
+
+    private Time[] calculeArray(Reserva reserva) {
+        Time[] ans=new Time[2];
+        HashMap<Time,Time> tiempos=new HashMap<>();
+        tiempos.put(Time.valueOf("07:00:00"),Time.valueOf("08:30:00"));
+        tiempos.put(Time.valueOf("08:30:00"),Time.valueOf("10:00:00"));
+        tiempos.put(Time.valueOf("10:00:00"),Time.valueOf("11:30:00"));
+        tiempos.put(Time.valueOf("11:30:00"),Time.valueOf("13:00:00"));
+        tiempos.put(Time.valueOf("13:00:00"),Time.valueOf("14:30:00"));
+        tiempos.put(Time.valueOf("14:30:00"),Time.valueOf("16:00:00"));
+        tiempos.put(Time.valueOf("16:00:00"),Time.valueOf("17:30:00"));
+        tiempos.put(Time.valueOf("17:30:00"),Time.valueOf("19:00:00"));
+        Set<Time> values=tiempos.keySet();
+        for(Time i:values){
+        }
+        return ans;
     }
 
 

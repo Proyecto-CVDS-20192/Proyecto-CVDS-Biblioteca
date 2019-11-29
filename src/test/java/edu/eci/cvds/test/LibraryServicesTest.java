@@ -99,8 +99,8 @@ public class LibraryServicesTest{
     @Test
     public void debeRealizarUnaReservayConsultarlaPorSuUsuarioYSuRecurso() throws LibraryServicesException{
 
-        Timestamp fechaIni = new Timestamp(System.currentTimeMillis());
-        Timestamp fechaFin = new Timestamp(System.currentTimeMillis() + 7200000);
+        Timestamp fechaIni = new Timestamp(System.currentTimeMillis()+86400000);
+        Timestamp fechaFin = new Timestamp(System.currentTimeMillis() + 7200000+86400000);
         recurso.setIdentificadorInterno(administratorServices.consultarRecursosAdmin().get(0).getIdentificadorInterno());
         servicesLibrary.reservarRecurso(recurso, usuario, fechaIni, fechaFin);
         assertTrue(servicesLibrary.consultarReservasUsuario(usuario.getId()).get(0).getUsuario().getId().equals("regular@cvds.com"));
