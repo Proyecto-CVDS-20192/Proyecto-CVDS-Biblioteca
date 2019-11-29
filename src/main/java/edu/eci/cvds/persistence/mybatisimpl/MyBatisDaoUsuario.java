@@ -13,6 +13,10 @@ public class MyBatisDaoUsuario implements DaoUsuario {
 
     @Override
     public Usuario consultarUsuario(String username) throws LibraryServicesException {
-        return usuarioMapper.consultarUsuario(username);
+        try {
+            return usuarioMapper.consultarUsuario(username);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA);
+        }
     }
 }

@@ -93,5 +93,9 @@ insert into tipo_recurso(id,tipo) values(3,'Sala de estudio');
 
 insert into usuario(id,passw,tipo,carnet,nombre,carrera) values('regular@cvds.com','123456','regular',123456,'prueba','Ingenieria de sistemas');
 
+insert into recurso(id_tipo,nombre,ubicacion,capacidad,estado) values(1,'El insertado','Biblioteca G',50,'Disponible');
+
+insert into horario(id_recurso,hora_inicio,hora_fin) values(1,'00:00:00','23:59:59');
+
 
   

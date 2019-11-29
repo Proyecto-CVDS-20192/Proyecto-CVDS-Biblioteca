@@ -19,16 +19,22 @@ public class MyBatisDaoHorario implements DaoHorario {
         try {
             return horarioMapper.horarios();
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA);
         }
     }
 
     @Override
     public void ingresarHorario(Recurso recurso, Horario horario) throws LibraryServicesException {
         try{
+            if(horario.getHoraInicio().getHours()<7 || horario.getHoraFin().getHours()>19){
+                throw new LibraryServicesException(LibraryServicesException.HORARIO_FUERA_DE_HORAS);
+            }
+            if(horario.getHoraFin().before(horario.getHoraInicio())){
+                throw new LibraryServicesException(LibraryServicesException.ERROR_DE_HORAS_HORARIO);
+            }
             horarioMapper.ingresarHorario(recurso,horario);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA);
         }
     }
 
@@ -37,7 +43,7 @@ public class MyBatisDaoHorario implements DaoHorario {
         try{
             return horarioMapper.horariosRecurso(recurso);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(e.getMessage());
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA);
         }
     }
 }

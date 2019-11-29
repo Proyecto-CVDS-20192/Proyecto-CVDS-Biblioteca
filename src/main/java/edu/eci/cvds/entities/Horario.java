@@ -95,6 +95,37 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Verifica si la hora dada esta antes de la hora inicio del horario
+     * @param time La hora dada
+     * @return Si la hora esta antes de la hora inicio del horario
+     */
+    public boolean after(Time time){
+        if(time.getHours()>horaInicio.getHours()){
+            return true;
+        }
+        if(time.getHours()==horaInicio.getHours() && time.getMinutes()>horaInicio.getMinutes()){
+            return true;
+        }
+        if(time.getMinutes()==horaInicio.getMinutes() && time.getSeconds()>horaInicio.getSeconds()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Verifica si la hora dada esta despues de la hora fin del horario
+     * @param time La hora dada
+     * @return Si la hora esta antes de la hora fin del horario
+     */
+    public boolean before(Time time){
+        boolean ans=false;
+        ans=(time.getHours()<horaFin.getHours())? true:ans;
+        ans=(time.getHours()==horaFin.getHours() && time.getMinutes()<horaFin.getMinutes())? true:ans;
+        ans=(time.getMinutes()==horaFin.getMinutes() && time.getSeconds()<horaFin.getSeconds())? true:ans;
+        return ans;
+    }
+
     @Override
     public String toString() {
         return horaInicio.toString()+" "+horaFin.toString();

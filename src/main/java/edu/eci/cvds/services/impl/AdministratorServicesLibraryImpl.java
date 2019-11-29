@@ -74,7 +74,7 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         List<Reserva> reservas=reservaDao.consultarReservas();
         ArrayList<Reserva> recurrentes=new ArrayList<>();
         ArrayList<Reserva> canceladas=new ArrayList<>();
-        HashMap<Reserva,Integer> recursosMasUsados=new HashMap<>();
+        HashMap<Timestamp[],Integer> recursosMasUsados=new HashMap<>();
         for(Reserva i:reservas){
             if(i.getTipo().equals("Recurrente")) recurrentes.add(i);
             if(i.getEstado().equals("Cancelada")) canceladas.add(i);
