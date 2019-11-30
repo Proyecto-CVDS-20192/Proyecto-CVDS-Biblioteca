@@ -24,7 +24,7 @@ public class MyBatisDaoReserva implements DaoReserva {
     private HorarioMapper horarioMapper;
 
     @Override
-    public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException{
+    public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin,String tipo) throws LibraryServicesException{
         try {
             Date today=new Date(System.currentTimeMillis());
             Date fechaIniDate=new Date(fechaIni.getTime());
@@ -60,7 +60,7 @@ public class MyBatisDaoReserva implements DaoReserva {
                     }
                 }
             }
-            reservaMapper.reservarRecurso(recurso, usuario, fechaIni, fechaFin,"Normal");
+            reservaMapper.reservarRecurso(recurso, usuario, fechaIni, fechaFin,tipo);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new LibraryServicesException(e.getMessage());
         }

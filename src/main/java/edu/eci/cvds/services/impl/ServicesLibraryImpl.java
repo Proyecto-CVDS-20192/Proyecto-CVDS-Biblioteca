@@ -42,7 +42,7 @@ public class ServicesLibraryImpl implements ServicesLibrary {
 
     @Override
     public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin) throws LibraryServicesException {
-        reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin,"Normal");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ServicesLibraryImpl implements ServicesLibrary {
         else if (tipoRecurrencia.equals("Mensual"))
             fechas = sumarMeses(cantidadRecurrencia, fechaIni.toLocalDateTime(), fechaFin.toLocalDateTime());
         for (int i = 0; i <fechas.size() ; i+=2) {
-            reservarRecurso(recurso, usuario, fechas.get(i), fechas.get(i+1));
+            reservaDao.reservarRecurso(recurso, usuario, fechas.get(i), fechas.get(i+1),"Recurrente");
         }
     }
     private ArrayList<Timestamp> sumarMeses(String cantidadRecurrencia, LocalDateTime fechaIni, LocalDateTime fechaFin) {

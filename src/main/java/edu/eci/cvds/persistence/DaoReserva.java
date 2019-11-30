@@ -18,7 +18,7 @@ public interface DaoReserva {
      * @param fechaFin La fecha de final de la reserva
      * @throws LibraryServicesException
      */
-    void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin) throws LibraryServicesException;
+    void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni, Timestamp fechaFin,String tipo) throws LibraryServicesException;
 
     /**
      * Consulta las reservas de un usuario

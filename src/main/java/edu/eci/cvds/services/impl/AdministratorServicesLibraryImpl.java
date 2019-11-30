@@ -62,7 +62,7 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
 
     @Override
     public void reservarRecurso(Recurso recurso, Usuario usuario, Timestamp fechaIni,Timestamp fechaFin) throws LibraryServicesException {
-        reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        reservaDao.reservarRecurso(recurso,usuario,fechaIni,fechaFin,"Normal");
     }
 
     @Override
