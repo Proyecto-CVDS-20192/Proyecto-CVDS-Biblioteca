@@ -141,4 +141,15 @@ public class ServicesLibraryImpl implements ServicesLibrary {
     public Reserva consultarReserva(int id) throws LibraryServicesException {
         return reservaDao.consultarReserva(id);
     }
+
+    @Override
+    public List<Reserva> reservasActivasUsuario(Usuario usuario) throws LibraryServicesException {
+        return reservaDao.reservasActivasUsuario(usuario);
+    }
+
+    @Override
+    public List<Reserva> reservasCanceladasUsuario(Usuario usuario) throws LibraryServicesException {
+        return reservaDao.reservasCanceladasUsuario(usuario);
+    }
+
 }

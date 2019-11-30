@@ -148,6 +148,58 @@
         left join usuario as u on u.id=re.id_usuario where re.id=#{id};
     </select>
 
+    <select id="reservasActivasUsuario" parameterType="map" resultMap="ReservaResult">
+        select
+        re.id,
+        re.fecha_ini,
+        re.fecha_fin,
+        re.estado,
+        re.tipo,
+        r.nombre as r_nombre,
+        r.id_interno as r_id_interno,
+        r.capacidad as r_capacidad,
+        r.estado as r_estado,
+        r.ubicacion as r_ubicacion,
+        tr.tipo as r_tr_tipo,
+        tr.id as r_tr_id,
+        u.nombre as u_nombre,
+        u.id as u_id,
+        u.passw as u_passw,
+        u.tipo as u_tipo,
+        u.carnet as u_carnet,
+        u.carrera as u_carrera
+        from
+        recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id
+        left join reserva as re on r.id_interno=re.id_recurso
+        left join usuario as u on u.id=re.id_usuario where u.id=#{usuario.id} and re.estado='Activa';
+    </select>
+
+    <select id="reservasCanceladasUsuario" parameterType="map" resultMap="ReservaResult">
+        select
+        re.id,
+        re.fecha_ini,
+        re.fecha_fin,
+        re.estado,
+        re.tipo,
+        r.nombre as r_nombre,
+        r.id_interno as r_id_interno,
+        r.capacidad as r_capacidad,
+        r.estado as r_estado,
+        r.ubicacion as r_ubicacion,
+        tr.tipo as r_tr_tipo,
+        tr.id as r_tr_id,
+        u.nombre as u_nombre,
+        u.id as u_id,
+        u.passw as u_passw,
+        u.tipo as u_tipo,
+        u.carnet as u_carnet,
+        u.carrera as u_carrera
+        from
+        recurso as r left join tipo_recurso as tr on r.id_tipo=tr.id
+        left join reserva as re on r.id_interno=re.id_recurso
+        left join usuario as u on u.id=re.id_usuario where u.id=#{usuario.id} and re.estado='Cancelada';
+    </select>
+
     <update id="eliminarReserva" parameterType="map">
         update reserva set estado='Cancelada' where id=#{reserva.id};
     </update>

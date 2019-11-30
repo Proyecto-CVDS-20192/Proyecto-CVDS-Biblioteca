@@ -119,4 +119,22 @@ public class MyBatisDaoReserva implements DaoReserva {
             throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA,e.getMessage());
         }
     }
+
+    @Override
+    public List<Reserva> reservasActivasUsuario(Usuario usuario) throws LibraryServicesException {
+        try{
+            return reservaMapper.reservasActivasUsuario(usuario);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA,e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Reserva> reservasCanceladasUsuario(Usuario usuario) throws LibraryServicesException {
+        try{
+            return reservaMapper.reservasCanceladasUsuario(usuario);
+        }catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA,e.getMessage());
+        }
+    }
 }

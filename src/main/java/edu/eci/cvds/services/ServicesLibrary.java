@@ -106,4 +106,8 @@ public interface ServicesLibrary {
     List<Reserva> consultarReservasActivas() throws LibraryServicesException;
 
     Reserva consultarReserva(int id) throws LibraryServicesException;
+
+    List<Reserva> reservasActivasUsuario(Usuario usuario) throws LibraryServicesException;
+
+    List<Reserva> reservasCanceladasUsuario(Usuario usuario) throws LibraryServicesException;
 }

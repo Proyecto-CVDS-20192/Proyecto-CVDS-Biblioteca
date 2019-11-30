@@ -53,4 +53,8 @@ public interface ReservaMapper {
 
 
     Reserva consultarReserva(@Param("id") int id);
+
+    List<Reserva> reservasActivasUsuario(@Param("usuario") Usuario usuario);
+
+    List<Reserva> reservasCanceladasUsuario(@Param("usuario") Usuario usuario);
 }

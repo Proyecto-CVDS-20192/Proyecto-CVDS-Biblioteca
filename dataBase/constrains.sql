@@ -6,7 +6,8 @@ references TIPO_RECURSO(id);
 alter table RESERVA 
 add constraint FK_RESERVA_RECURSO 
 foreign key(id_recurso) 
-references RECURSO(id_interno);
+references RECURSO(id_interno)
+ON DELETE CASCADE;
 
 alter table RESERVA 
 add constraint FK_RESERVA_USUARIO 
@@ -16,5 +17,6 @@ references USUARIO(id);
 alter table HORARIO 
 add constraint FK_HORARIO_RECURSO 
 foreign key(id_recurso) 
-references RECURSO(id_interno);
+references RECURSO(id_interno)
+ON DELETE CASCADE;
 
