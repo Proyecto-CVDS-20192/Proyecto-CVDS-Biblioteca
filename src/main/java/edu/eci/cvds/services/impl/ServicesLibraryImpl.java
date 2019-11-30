@@ -141,6 +141,4 @@ public class ServicesLibraryImpl implements ServicesLibrary {
     public Reserva consultarReserva(int id) throws LibraryServicesException {
         return reservaDao.consultarReserva(id);
     }
-
-
 }

@@ -147,6 +147,15 @@ public class LibraryServicesTest{
         }
     }
 
+    @Test
+    public void debeConsultarUnaSolaReserva() throws LibraryServicesException{
+        Timestamp fechaIni=new Timestamp(System.currentTimeMillis()+86400000*2);
+        Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+86400000*2+7200000);
+        servicesLibrary.reservarRecurso(recurso,usuario,fechaIni,fechaFin);
+        List<Reserva> temp=servicesLibrary.consultarReservas();
+        Reserva reserva=servicesLibrary.consultarReserva(temp.get(temp.size()-1).getId());
+        assertTrue(reserva.getUsuario().getId().equals("regular@cvds.com") && reserva.getRecurso().getIdentificadorInterno()==1);
+    }
 
     @Test
     public void pruebasSotu()throws LibraryServicesException{
