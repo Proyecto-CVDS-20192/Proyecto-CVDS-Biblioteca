@@ -231,8 +231,10 @@ public class RecursoBean extends BasePageBean {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void deleteEvent() {
+    public void deleteEvent(int idB) throws LibraryServicesException, IOException {
         eventModel.deleteEvent(event);
+        servicesL.eliminarReserva(servicesL.consultarReserva(idB));
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/verReservas.xhtml");
     }
 
     public void horariosPage(int id) throws IOException, LibraryServicesException {

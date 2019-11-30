@@ -72,7 +72,6 @@
                         <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent(dropdown.tipoRepeticionSeleccionado,dropdown.cantidadRepeticiones)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();">
                             <f:actionListener binding="#{recursoBean.reloadUser()}"/>
                         </p:commandButton>
-                        <p:commandButton id="deleteButton" value="Delete" action="#{recursoBean.deleteEvent()}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
                     </h:panelGrid>
                 </p:dialog>    
             </h:form>
