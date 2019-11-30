@@ -1,12 +1,14 @@
 package edu.eci.cvds.managedbeans;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
 import java.io.IOException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,6 +20,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.apache.shiro.subject.Subject;
+
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -47,6 +51,9 @@ public class RecursoBean extends BasePageBean {
     private String usuario;
     private int id;
 
+    private Date horaInicial;
+    private Date horaFinal;
+
     @Inject
     private ServicesLibrary servicesL;
 
@@ -54,6 +61,7 @@ public class RecursoBean extends BasePageBean {
     private AdministratorServicesLibrary servicesA;
 
     private Recurso recurso;
+
 
     public List<Recurso> getRecursosAdmin() throws LibraryServicesException {
         return servicesA.consultarRecursosAdmin();
@@ -92,7 +100,11 @@ public class RecursoBean extends BasePageBean {
         int tipo = buscarIndice();
         try {
             recurso = new Recurso(id, tipo+1, nombre, ubicacionSeleccionada, capacidad, "Disponible", tipo+1, tipos[tipo]);
+            Horario h = new Horario();
+            h.setHoraInicio(new Time(horaInicial.getHours(),horaInicial.getMinutes(),horaInicial.getSeconds()));
+            h.setHoraFin(new Time(horaFinal.getHours(),horaFinal.getMinutes(),horaFinal.getSeconds()));
             servicesA.registrarRecurso(recurso);
+            servicesA.ingresarHorario(recurso,h);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -128,6 +140,13 @@ public class RecursoBean extends BasePageBean {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/consultarRecursos.xhtml");
     }
 
+    public void reload(String tipo) throws IOException {
+        if (tipo.equals("administrador"))
+            reloadAdmin();
+        else
+            reloadUser();
+    }
+
     public void verReservas() throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/verReservas.xhtml");
     }
@@ -148,7 +167,7 @@ public class RecursoBean extends BasePageBean {
         if (banderaRec) {
             if (lista.size() > 0) {
                 for (Reserva r : lista) {
-                    eventModel.addEvent(new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre(), r.getFechaIniDate(), r.getFechaFinDate()));
+                    eventModel.addEvent( new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre()+" "+r.getTipo(), r.getFechaIniDate(), r.getFechaFinDate()));
                 }
             }
         }
@@ -188,23 +207,29 @@ public class RecursoBean extends BasePageBean {
         this.event = event;
     }
 
-    public void addEvent(String tipoRecurencia, String cantidadRecurrencia) throws LibraryServicesException {
-        if (event.getId() == null) {
-            eventModel.addEvent(event);
-        } else {
-            eventModel.updateEvent(event);
-        }
+    public void addEvent(String tipoRecurencia, String cantidadRecurrencia) throws IOException {
         if (tipoRecurencia == null || tipoRecurencia.equals("")){
-            servicesL.reservarRecurso(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()));
+            try{
+                servicesL.reservarRecurso(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()));
+            }catch(LibraryServicesException e){
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Error", e.getMessage() ));
+            }
         }else{
             if (cantidadRecurrencia == null || cantidadRecurrencia.equals("")){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se seleccionó la cantidad de la recurrencia en la reserva"));
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Error",  "No se selecciono la cantidad de la recurrencia en la reserva" ));
             }else{
-                servicesL.reservaRecursorecurrente(servicesL.consultarRecurso(idSeleccionado),servicesL.consultarUsuario(usuario),new Timestamp(event.getStartDate().getTime()),new Timestamp(event.getEndDate().getTime()),tipoRecurencia,cantidadRecurrencia);
+                try {
+                    servicesL.reservaRecursorecurrente(servicesL.consultarRecurso(idSeleccionado), servicesL.consultarUsuario(usuario), new Timestamp(event.getStartDate().getTime()), new Timestamp(event.getEndDate().getTime()), tipoRecurencia, cantidadRecurrencia);
+                    event = new DefaultScheduleEvent();
+                    horariosPage(idSeleccionado);
+                }catch(LibraryServicesException e){
+                    FacesContext context = FacesContext.getCurrentInstance();
+                    context.addMessage(null, new FacesMessage("Error", e.getMessage() ));
+                }
             }
         }
-
-        event = new DefaultScheduleEvent();
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
@@ -238,7 +263,7 @@ public class RecursoBean extends BasePageBean {
     }
 
     public void horariosPage(int id) throws IOException, LibraryServicesException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/horarios.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/general/pages/horarios.xhtml");
         idSeleccionado = id;
         fillDate(id);
     }
@@ -296,4 +321,19 @@ public class RecursoBean extends BasePageBean {
         return servicesL.consultarReservasUsuario(usuario);
     }
 
+    public Date getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(Date horaFinal) {
+        this.horaFinal = horaFinal;
+    }
+
+    public Date getHoraInicial() {
+        return horaInicial;
+    }
+
+    public void setHoraInicial(Date horaInicial) {
+        this.horaInicial = horaInicial;
+    }
 }

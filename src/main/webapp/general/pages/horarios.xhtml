@@ -17,31 +17,36 @@
             </div>
             <div class="logout">
                 <h:form id="frmm">
-                    <p:commandButton value="Regresar" class="dropdown-item"
-                                     action="#{recursoBean.reloadUser()}" />
+                    <p:commandButton value="Regresar" class="dropdown-item" action="#{recursoBean.reload(userBean.tipo)}" />
                 </h:form>
             </div>
             <div id="divbarraid" class="divbarra">
                 <h1>Horario del recurso</h1>
             </div>
         </div>
-
-        <br></br>
-
+        <div class="nav">
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="Inicio" action="#{recursoBean.reload(userBean.tipo)}" icon="pi pi-times" />
+                    <p:menuitem value="#{userBean.nombre}" icon="pi pi-times"/>
+                    <f:facet name="options">
+                        <p:commandButton value="Cerrar sesión" class="dropdown-item" action="#{userBean.doLogOut()}" />
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </div>
+        <br/>
         <div>
             <h:form>
-                <p:messages id="messages" showDetail="true" closable="true">
-                    <p:autoUpdate />
-                </p:messages>
-                <p:growl id="messages1" showDetail="true" />
+                <p:growl id="messages" showDetail="true" sticky="true" />
 
                 <h:panelGrid columnClasses="value" class="panelHorario">
                     <p:schedule id="schedule" value="#{recursoBean.eventModel}" widgetVar="myschedule" >
 
                         <p:ajax event="dateSelect" listener="#{recursoBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                         <p:ajax event="eventSelect" listener="#{recursoBean.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                        <p:ajax event="eventMove" listener="#{recursoBean.onEventMove}" update="messages1" />
-                        <p:ajax event="eventResize" listener="#{recursoBean.onEventResize}" update="messages1" />
+                        <p:ajax event="eventMove" listener="#{recursoBean.onEventMove}" update="messages" />
+                        <p:ajax event="eventResize" listener="#{recursoBean.onEventResize}" update="messages" />
 
                     </p:schedule>
                 </h:panelGrid>
@@ -69,9 +74,7 @@
                         </p:selectOneMenu>
 
                         <p:commandButton type="reset" value="Reset" />
-                        <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent(dropdown.tipoRepeticionSeleccionado,dropdown.cantidadRepeticiones)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();">
-                            <f:actionListener binding="#{recursoBean.reloadUser()}"/>
-                        </p:commandButton>
+                        <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent(dropdown.tipoRepeticionSeleccionado,dropdown.cantidadRepeticiones)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="@form"/>
                     </h:panelGrid>
                 </p:dialog>    
             </h:form>

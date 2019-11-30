@@ -24,22 +24,25 @@
             <div class="image">
                 <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
             </div>
-            <div class="logout">
-                <h:form id="frmm">
-                    <p:commandButton value="Cerrar sesión" class="dropdown-item"
-                                     action="#{userBean.doLogOut()}" />
-                </h:form>
-            </div>
             <div id="divbarraid" class="divbarra">
                 <h1>Consultar Recursos Biblioteca ECI</h1>
             </div>
         </div>
-        <br></br>
-        <div class="Ver mis reservas">
-            <h:form id="frmm2">
-                <p:commandButton value="Ver mis reservas" action="#{recursoBean.verReservas()}"/>
+        <div class="nav">
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="Inicio" action="#{recursoBean.reloadUser}" icon="pi pi-times" />
+                    <p:submenu label="Opciones" icon="pi pi-file">
+                        <p:menuitem value="Ver mis reservas" action="#{recursoBean.verReservas()}"/>
+                    </p:submenu>
+                    <p:menuitem value="Bienvenido #{userBean.nombre}" icon="pi pi-times"/>
+                    <f:facet name="options">
+                        <p:commandButton value="Cerrar sesión" class="dropdown-item" action="#{userBean.doLogOut()}" />
+                    </f:facet>
+                </p:menubar>
             </h:form>
         </div>
+
         <br></br>
         <p:panel class="panelregistro">
             <h:panelGroup class="panelregistro" id="panelregistroid">

@@ -23,21 +23,23 @@
             <div class="image">
                 <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
             </div>
-            <div class="logout">
-                <h:form id="frmm">
-                    <p:commandButton value="Cerrar sesión" class="dropdown-item"
-                                     action="#{userBean.doLogOut()}" />
-                </h:form>
-            </div>
             <div id="divbarraid" class="divbarra">
                 <h1>Consultar Reservas Biblioteca ECI</h1>
             </div>
         </div>
-        <br></br>
-
-        <div class="Ver recusos">
-            <h:form id="frmm2">
-                <p:commandButton value="Ver recusos" action="#{recursoBean.reloadUser()}"/>
+        <div class="nav">
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="Inicio" action="#{recursoBean.reloadUser}" icon="pi pi-times" />
+                    <p:submenu label="Opciones" icon="pi pi-file">
+                        <p:menuitem value="Ver recusos" action="#{recursoBean.reloadUser}"/>
+                        <p:menuitem value="Ver reservas canceladas" url="#"/>
+                    </p:submenu>
+                    <p:menuitem value="#{userBean.nombre}" icon="pi pi-times"/>
+                    <f:facet name="options">
+                        <p:commandButton value="Cerrar sesión" class="dropdown-item" action="#{userBean.doLogOut()}" />
+                    </f:facet>
+                </p:menubar>
             </h:form>
         </div>
 
@@ -51,6 +53,8 @@
                             <th>Tipo</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Fin</th>
+                            <th>Tipo Reserva</th>
+                            <th>Estado Reserva</th>
                             <th>Cancelar Reserva</th>
                         </tr>
                     </thead>
@@ -61,8 +65,10 @@
                                 <td align="center" class="columregistro">#{reservasUsuario.recurso.tipoRecurso.tipo}</td>
                                 <td align="center" class="columregistro">#{reservasUsuario.fechaInicio}</td>
                                 <td align="center" class="columregistro">#{reservasUsuario.fechaFin}</td>
+                                <td align="center" class="columregistro">#{reservasUsuario.tipo}</td>
+                                <td align="center" class="columregistro">#{reservasUsuario.estado}</td>
                                 <td align="center" class="columregistro">
-                                    <h:form id="frmm3">         
+                                    <h:form id="frmm3">
                                         <p:growl id="message" showDetail="true" />
                                         <p:commandButton class="buttonR"  value="Cancelar reserva" update="message">
                                             <p:confirm header="Confirmación" message="¿Desea cancelar la reserva #{reservasUsuario.recurso.nombre}?" icon="pi pi-exclamation-triangle" />

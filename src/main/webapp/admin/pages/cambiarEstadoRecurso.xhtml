@@ -21,20 +21,28 @@
             <div class="image">
                 <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
             </div>
-            <div class="logout">
-                <h:form id="frmm">
-                    <p:commandButton value="Cerrar sesión" class="dropdown-item"
-                                     action="#{userBean.doLogOut()}" />
-                </h:form>
-            </div>
             <div id="divbarraid" class="divbarra">
                 <h1>Consultar Recursos Biblioteca ECI</h1>
             </div>
         </div>
+        <div class="nav">
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="Inicio" action="#{recursoBean.reloadAdmin}" icon="pi pi-times" />
+                    <p:submenu label="Opciones" icon="pi pi-file">
+                        <p:menuitem value="Agregar recurso" onclick="PF('dlg1').show();" />
+                        <p:menuitem value="Reservar recurso" url="/faces/admin/pages/verRecursos.xhtml" />
+                    </p:submenu>
+                    <p:menuitem value="Bienvenido #{userBean.nombre}" icon="pi pi-times"/>
+                    <f:facet name="options">
+                        <p:commandButton value="Cerrar sesión" class="dropdown-item" action="#{userBean.doLogOut()}" />
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </div>
         <br></br>
         <div class="registrar">
             <h:form id="frmm2">
-                <p:commandButton value="Agregar Recurso" onclick="PF('dlg1').show();"/>
 
                 <p:dialog header="Agregar Recurso" widgetVar="dlg1" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
@@ -56,6 +64,12 @@
                         <h:selectOneMenu value="#{recursoBean.tipoSleccionado}" class="form-control">
                             <f:selectItems value="#{recursoBean.getTipos()}" />
                         </h:selectOneMenu>
+
+                        <p:outputLabel for="time" value="Hora inicial:" />
+                        <p:calendar id="time" value="#{recursoBean.horaInicial}" pattern="HH:mm" timeOnly="true"  />
+
+                        <p:outputLabel for="time" value="Hora inicial:" />
+                        <p:calendar id="time2" value="#{recursoBean.horaFinal}" pattern="HH:mm" timeOnly="true"  />
 
                         <p:growl id="message1" showDetail="true" />
                         <p:commandButton class="buttonR" value="Registrar" update="message1">
