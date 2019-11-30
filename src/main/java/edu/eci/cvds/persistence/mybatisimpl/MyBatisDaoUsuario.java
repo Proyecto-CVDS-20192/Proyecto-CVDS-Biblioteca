@@ -16,7 +16,7 @@ public class MyBatisDaoUsuario implements DaoUsuario {
         try {
             return usuarioMapper.consultarUsuario(username);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA);
+            throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA,e.getMessage());
         }
     }
 }

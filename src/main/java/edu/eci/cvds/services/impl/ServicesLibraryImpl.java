@@ -137,5 +137,10 @@ public class ServicesLibraryImpl implements ServicesLibrary {
         return reservaDao.consultarReservasActivas();
     }
 
+    @Override
+    public Reserva consultarReserva(int id) throws LibraryServicesException {
+        return reservaDao.consultarReserva(id);
+    }
+
 
 }

@@ -98,7 +98,6 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
             Time[] arr=calculeArray(i);
             horasMasSolicitadas.put(arr,horasMasSolicitadas.get(arr)+1);
         }
-
     }
 
     private Time[] calculeArray(Reserva reserva) {
