@@ -76,4 +76,5 @@ public interface AdministratorServicesLibrary {
 
     Map<Time,Integer> horasMenosSolicitadas() throws LibraryServicesException;
 
+    void generaRegistroOcupacion() throws LibraryServicesException;
 }

@@ -9,6 +9,7 @@ import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
 import edu.eci.cvds.services.ServicesLibraryFactory;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -179,13 +180,14 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         }
         Map<Time,Integer> hora=sortByValueTime(horasMasSolicitadas);
         int cont=0;
+        Map<Time,Integer> horaAns=new LinkedHashMap<>();
         for(Time i:hora.keySet()){
-            if(cont>3){
-                hora.remove(i);
+            if(cont<4){
+                horaAns.put(i,hora.get(i));
             }
             cont++;
         }
-        return hora;
+        return horaAns;
     }
 
     @Override
@@ -235,18 +237,34 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
             }
         }
         Map<Time,Integer> hora=sortByValueTime(horasMasSolicitadas);
+        Map<Time,Integer> horaAns=new LinkedHashMap<>();
         int cont=0;
         for(Time i:hora.keySet()){
-            if(cont<4){
-                hora.remove(i);
+            if(cont>3){
+                horaAns.put(i,hora.get(i));
             }
             cont++;
         }
-        return hora;
+        return horaAns;
     }
-    
-    public static void main(String[] args) throws LibraryServicesException {
 
+
+    @Override
+    public void generaRegistroOcupacion() throws LibraryServicesException {
+        HSSFWorkbook libro = new HSSFWorkbook();
+    }
+
+
+    public static void main(String[] args) throws LibraryServicesException {
+        AdministratorServicesLibrary a=ServicesLibraryFactory.getInstance().getAdministratorServices();
+        Map<Time,Integer> t1=a.horasMasSolicitadas();
+        Map<Time,Integer> t2=a.horasMenosSolicitadas();
+        Map<Integer,Integer> r1=a.recursosMasUsados();
+        Map<Integer,Integer> r2=a.recursosMenosUsados();
+        System.out.println(t1);
+        System.out.println(t2);
+        System.out.println(r1);
+        System.out.println(r2);
     }
 
 }
