@@ -3,6 +3,7 @@ package edu.eci.cvds.entities;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 public class Reserva implements Serializable {
     private int id;

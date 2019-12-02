@@ -44,12 +44,39 @@
                     <p:schedule id="schedule" value="#{recursoBean.eventModel}" widgetVar="myschedule" >
 
                         <p:ajax event="dateSelect" listener="#{recursoBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-                        <p:ajax event="eventSelect" listener="#{recursoBean.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                        <p:ajax event="eventSelect" listener="#{recursoBean.onEventSelect}" update="eventDetails1" oncomplete="PF('eventDialog1').show();" />
                         <p:ajax event="eventMove" listener="#{recursoBean.onEventMove}" update="messages" />
                         <p:ajax event="eventResize" listener="#{recursoBean.onEventResize}" update="messages" />
 
                     </p:schedule>
                 </h:panelGrid>
+
+                <p:dialog widgetVar="eventDialog1" header="Horario de reserva" showEffect="clip" hideEffect="clip" modal="true">
+                    <h:panelGrid id="eventDetails1" columns="2">
+
+                        <p:outputLabel value="Recurso:" />
+                        <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).recurso.nombre}" />
+
+                        <p:outputLabel value="Tipo Recurso:" />
+                        <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).recurso.tipoRecurso.tipo}" />
+
+                        <p:outputLabel value="Fecha Inicio:" />
+                        <p:outputLabel value="#{recursoBean.hacerFecha(recursoBean.event.startDate)}" />
+
+                        <p:outputLabel value="Fecha Fin:" />
+                        <p:outputLabel value="#{recursoBean.hacerFecha(recursoBean.event.endDate)}" />
+
+                        <p:outputLabel value="Tipo:" />
+                        <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).tipo}" />
+
+                        <p:outputLabel value="Usuario:" />
+                        <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).usuario.nombre}" />
+
+                        <p:outputLabel value="Carrera:" />
+                        <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).usuario.carrera}" />
+
+                    </h:panelGrid>
+                </p:dialog>
 
                 <p:dialog widgetVar="eventDialog" header="Horario de reserva" showEffect="clip" hideEffect="clip" modal="true">
                     <h:panelGrid id="eventDetails" columns="2">

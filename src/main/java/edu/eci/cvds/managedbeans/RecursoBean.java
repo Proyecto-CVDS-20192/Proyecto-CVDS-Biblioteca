@@ -15,13 +15,13 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.apache.shiro.subject.Subject;
 
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -55,7 +55,7 @@ public class RecursoBean extends BasePageBean {
     private String estadoSeleccionado;
     private int idSeleccionado;
     private String usuario;
-    private int id;
+    private int idRecurso;
 
     private Date horaInicial;
     private Date horaFinal;
@@ -229,6 +229,7 @@ public class RecursoBean extends BasePageBean {
         eventModel = new DefaultScheduleModel();
         event = new DefaultScheduleEvent();
         Recurso re = servicesL.consultarRecurso(id);
+        idRecurso = id;
         List<Reserva> lista = servicesL.consultarReservas();
         boolean banderaRec = false;
         for (int i = 0; i < lista.size(); i++){
@@ -240,7 +241,9 @@ public class RecursoBean extends BasePageBean {
         if (banderaRec) {
             if (lista.size() > 0) {
                 for (Reserva r : lista) {
-                    eventModel.addEvent( new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre()+" "+r.getTipo(), r.getFechaIniDate(), r.getFechaFinDate()));
+                    event = new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre()+" "+r.getTipo(), r.getFechaIniDate(), r.getFechaFinDate());
+                    ((DefaultScheduleEvent) event).setDescription(Integer.toString(r.getId()));
+                    eventModel.addEvent(event);
                 }
             }
         }
@@ -336,14 +339,35 @@ public class RecursoBean extends BasePageBean {
     }
     
     public void horariosPage(int id) throws IOException, LibraryServicesException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/general/pages/horarios.xhtml");
         idSeleccionado = id;
         fillDate(id);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/general/pages/horarios.xhtml");
     }
     public void horariosPageGuest(int id) throws IOException, LibraryServicesException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/horarios.xhtml");
         idSeleccionado = id;
         fillDate(id);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/horarios.xhtml");
+    }
+
+    public Reserva consultarReserva(String id) throws LibraryServicesException {
+        System.out.println("id de la reserva "+id);
+        return servicesL.consultarReserva(Integer.parseInt(id));
+    }
+
+    public String hacerFecha(Date date){
+        String s = "";
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        s += c.get(Calendar.DAY_OF_MONTH)+"/";
+        s += c.get(Calendar.MONTH)+"/";
+        s += c.get(Calendar.YEAR)+" ";
+        s += c.get(Calendar.HOUR_OF_DAY)+":";
+        if (c.get(Calendar.MINUTE)<10){
+            s += "0"+c.get(Calendar.MINUTE);
+        }else {
+            s += c.get(Calendar.MINUTE);
+        }
+        return s;
     }
 
     public void setUbicacionSeleccionada(String ubicacionSeleccionada) {
