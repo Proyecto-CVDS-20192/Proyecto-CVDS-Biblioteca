@@ -177,28 +177,27 @@ public class RecursoBean extends BasePageBean {
     private BarChartModel initBarHorariosMasYMenosUsados(char tipo) {
         BarChartModel model = new BarChartModel();
         Map<Time, Integer> dataRecursos;
-        /**
-         * try { if (tipo == '+') { dataRecursos =
-         * servicesA.horasMasSolicitadas(); } else { dataRecursos =
-         * servicesA.horasMenosSolicitadas();
-         *
-         * }
-         *
-         * for (Map.Entry<Time, Integer> entry : dataRecursos.entrySet()) { Time
-         * key = entry.getKey(); Integer value = entry.getValue(); ChartSeries
-         * ChartS = new ChartSeries(); ChartS.setLabel(key.toString());
-         * ChartS.set("Horas de reserva", value); model.addSeries(ChartS); } }
-         * catch (LibraryServicesException ex) {
-         * java.util.logging.Logger.getLogger(RecursoBean.class.getName()).log(Level.SEVERE,
-         * null, ex);
-        }*
-         */
 
-        //TEMPORALLLLL
-        ChartSeries ChartS = new ChartSeries();
-        ChartS.setLabel("HoralTemporal");
-        ChartS.set("Horas de reserva", 25);
-        model.addSeries(ChartS);
+        try {
+            if (tipo == '+') {
+                dataRecursos = servicesA.horasMasSolicitadas();
+            } else {
+                dataRecursos = servicesA.horasMenosSolicitadas();
+
+            }
+
+            for (Map.Entry<Time, Integer> entry : dataRecursos.entrySet()) {
+                Time key = entry.getKey();
+                Integer value = entry.getValue();
+                ChartSeries ChartS = new ChartSeries();
+                ChartS.setLabel(key.toString());
+                ChartS.set("Horas de reserva", value);
+                model.addSeries(ChartS);
+            }
+        } catch (LibraryServicesException ex) {
+            java.util.logging.Logger.getLogger(RecursoBean.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        }
         return model;
     }
 
