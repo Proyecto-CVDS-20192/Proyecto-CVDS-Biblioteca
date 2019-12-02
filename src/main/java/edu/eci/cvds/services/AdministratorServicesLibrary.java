@@ -68,8 +68,12 @@ public interface AdministratorServicesLibrary {
      * Obtiene el reporte de las reservas 
      * @throws LibraryServicesException
      */
-    Map<Integer,Integer> recursosMasYMenosUsados() throws LibraryServicesException;
+    Map<Integer,Integer> recursosMasUsados() throws LibraryServicesException;
 
-    HashMap<Time, Integer> horasMasYMenosSolicitadas() throws LibraryServicesException;
+    Map<Time, Integer> horasMasSolicitadas() throws LibraryServicesException;
+
+    Map<Integer,Integer> recursosMenosUsados() throws LibraryServicesException;
+
+    Map<Time,Integer> horasMenosSolicitadas() throws LibraryServicesException;
 
 }

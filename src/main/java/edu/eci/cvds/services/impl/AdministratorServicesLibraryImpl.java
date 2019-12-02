@@ -84,8 +84,10 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         return result;
     }
 
+
+
     @Override
-    public Map<Integer,Integer> recursosMasYMenosUsados() throws LibraryServicesException {
+    public Map<Integer,Integer> recursosMasUsados() throws LibraryServicesException {
         List<Reserva> reservas=reservaDao.consultarReservas();
         HashMap<Integer,Integer> recursos=new HashMap<>();
         Map<Integer,Integer> sortRecursos;
@@ -100,10 +102,9 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
             }
         }
         sortRecursos= sortByValue(recursos);
-        int size=sortRecursos.size();
         int cont=0;
         for(Integer i:sortRecursos.keySet()){
-            if(cont<4 || (cont<size && cont>size-5)){
+            if(cont<4){
                 dataRecursos.put(i,sortRecursos.get(i));
             }
             cont+=1;
@@ -141,8 +142,25 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         return ans;
     }
 
+    private Map<Time,Integer> sortByValueTime(Map<Time, Integer> map){
+        List<Map.Entry<Time, Integer>> list = new LinkedList<Map.Entry<Time, Integer>>(map.entrySet());
+
+        Collections.sort(list, new Comparator<Map.Entry<Time, Integer>>() {
+
+            public int compare(Map.Entry<Time, Integer> m1, Map.Entry<Time, Integer> m2) {
+                return (m2.getValue()).compareTo(m1.getValue());
+            }
+        });
+
+        Map<Time, Integer> result = new LinkedHashMap<Time, Integer>();
+        for (Map.Entry<Time, Integer> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
     @Override
-    public HashMap<Time, Integer> horasMasYMenosSolicitadas() throws LibraryServicesException {
+    public Map<Time, Integer> horasMasSolicitadas() throws LibraryServicesException {
         List<Reserva> reservas=reservaDao.consultarReservas();
         HashMap<Time,Integer> horasMasSolicitadas=new HashMap<>();
         horasMasSolicitadas.put(Time.valueOf("07:00:00"),0);
@@ -159,13 +177,76 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
                 horasMasSolicitadas.put(time,horasMasSolicitadas.get(time)+1);
             }
         }
-        return horasMasSolicitadas;
+        Map<Time,Integer> hora=sortByValueTime(horasMasSolicitadas);
+        int cont=0;
+        for(Time i:hora.keySet()){
+            if(cont>3){
+                hora.remove(i);
+            }
+            cont++;
+        }
+        return hora;
+    }
+
+    @Override
+    public Map<Integer, Integer> recursosMenosUsados() throws LibraryServicesException {
+        List<Reserva> reservas=reservaDao.consultarReservas();
+        HashMap<Integer,Integer> recursos=new HashMap<>();
+        Map<Integer,Integer> sortRecursos;
+        Map<Integer,Integer> dataRecursos=new HashMap<>();
+        for(Reserva i:reservas){
+            if(i!=null) {
+                if (recursos.containsKey(i.getRecurso().getIdentificadorInterno())) {
+                    recursos.put(i.getRecurso().getIdentificadorInterno(), recursos.get(i.getRecurso().getIdentificadorInterno()) + 1);
+                } else {
+                    recursos.put(i.getRecurso().getIdentificadorInterno(), 1);
+                }
+            }
+        }
+        sortRecursos= sortByValue(recursos);
+        int size=sortRecursos.size();
+        int cont=0;
+        for(Integer i:sortRecursos.keySet()){
+            if(cont<size && cont>size-5){
+                dataRecursos.put(i,sortRecursos.get(i));
+            }
+            cont+=1;
+        }
+        dataRecursos=sortByValue(dataRecursos);
+        return dataRecursos;
+    }
+
+    @Override
+    public Map<Time, Integer> horasMenosSolicitadas() throws LibraryServicesException {
+        List<Reserva> reservas=reservaDao.consultarReservas();
+        HashMap<Time,Integer> horasMasSolicitadas=new HashMap<>();
+        horasMasSolicitadas.put(Time.valueOf("07:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("08:30:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("10:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("11:30:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("13:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("14:30:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("16:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("17:30:00"),0);
+        for(Reserva i:reservas){
+            if(i!=null){
+                Time time=this.calculeHora(i);
+                horasMasSolicitadas.put(time,horasMasSolicitadas.get(time)+1);
+            }
+        }
+        Map<Time,Integer> hora=sortByValueTime(horasMasSolicitadas);
+        int cont=0;
+        for(Time i:hora.keySet()){
+            if(cont<4){
+                hora.remove(i);
+            }
+            cont++;
+        }
+        return hora;
     }
 
     public static void main(String[] args) throws LibraryServicesException {
-        AdministratorServicesLibrary a= ServicesLibraryFactory.getInstance().getAdministratorServices();
-        Map<Time,Integer> a1=a.horasMasYMenosSolicitadas();
-        System.out.println(a1);
+
     }
 
 }
