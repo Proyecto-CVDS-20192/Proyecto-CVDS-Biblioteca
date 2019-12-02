@@ -32,6 +32,7 @@
                     <p:submenu label="Opciones" icon="pi pi-file">
                         <p:menuitem value="Agregar recurso" onclick="PF('dlg1').show();" />
                         <p:menuitem value="Reservar recurso" url="/faces/admin/pages/verRecursos.xhtml" />
+                        <p:menuitem value="Ver estadísticas" url="/faces/admin/pages/estadisticas.xhtml" action="#{recursoBean.iniciarDatos()}" />
                     </p:submenu>
                     <p:menuitem value="Bienvenido #{userBean.nombre}" icon="pi pi-times"/>
                     <f:facet name="options">

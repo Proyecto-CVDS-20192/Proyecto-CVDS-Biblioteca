@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.logging.Level;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -29,6 +30,11 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.PieChartModel;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "recursoBean")
@@ -61,8 +67,75 @@ public class RecursoBean extends BasePageBean {
     private AdministratorServicesLibrary servicesA;
 
     private Recurso recurso;
+    
+    
+    private PieChartModel ubicacionRecursosGra;
+    private BarChartModel tipoDeReservasGra;
+ 
+    
+    private BarChartModel initBarModel() {
+        BarChartModel model = new BarChartModel();
 
+        ChartSeries diarias = new ChartSeries();
+        diarias.setLabel("Reservas diarias");
+        diarias.set("Diciembre", 120);
 
+        ChartSeries recurrentes = new ChartSeries();
+        recurrentes.setLabel("Reservas recurrentes");
+        recurrentes.set("Diciembre", 40);
+        
+        ChartSeries canceladas = new ChartSeries();
+        canceladas.setLabel("Reservas canceladas");
+        canceladas.set("Diciembre", 13);
+
+        model.addSeries(diarias);
+        model.addSeries(recurrentes);
+        model.addSeries(canceladas);
+
+        return model;
+    }
+    
+    public BarChartModel getTipoDeReservasGra() {
+        tipoDeReservasGra = initBarModel();
+        tipoDeReservasGra.setTitle("Tipo de reservas");
+        tipoDeReservasGra.setAnimate(true);
+        tipoDeReservasGra.setLegendPosition("ne");
+        Axis xAxis = tipoDeReservasGra.getAxis(AxisType.X);
+        xAxis.setLabel("Mes");
+        Axis yAxis = tipoDeReservasGra.getAxis(AxisType.Y);
+        yAxis.setLabel("Numero de reservas");
+        yAxis.setMin(0);
+        yAxis.setMax(200);
+        return tipoDeReservasGra;
+    }
+
+    public PieChartModel getUbicacionRecursosGra(){
+        ubicacionRecursosGra = new PieChartModel();
+        int cantBloqueB = 100;
+        int cantBloqueG = 200;
+        try {
+            for (Recurso r : servicesA.consultarRecursosAdmin()) {
+                if (r.getUbicacion().equals("Biblioteca B")) {
+                    cantBloqueB += 1;
+                } else {
+                    cantBloqueG += 1;
+                }
+            }
+        } catch (LibraryServicesException ex) {
+            java.util.logging.Logger.getLogger(RecursoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ubicacionRecursosGra.set("Biblioteca bloque B", cantBloqueB);
+        ubicacionRecursosGra.set("Biblioteca bloque G", cantBloqueG);
+        ubicacionRecursosGra.setTitle("Ubicación de los recursos");
+        ubicacionRecursosGra.setLegendPosition("e");
+        ubicacionRecursosGra.setFill(false);
+        ubicacionRecursosGra.setShowDataLabels(true);
+        ubicacionRecursosGra.setDiameter(150);
+        ubicacionRecursosGra.setShadow(false);
+        
+        return ubicacionRecursosGra;
+    }
+    
     public List<Recurso> getRecursosAdmin() throws LibraryServicesException {
         return servicesA.consultarRecursosAdmin();
     }
@@ -261,7 +334,7 @@ public class RecursoBean extends BasePageBean {
         servicesL.eliminarReserva(servicesL.consultarReserva(idB));
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/regular/pages/verReservas.xhtml");
     }
-
+    
     public void horariosPage(int id) throws IOException, LibraryServicesException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/general/pages/horarios.xhtml");
         idSeleccionado = id;
