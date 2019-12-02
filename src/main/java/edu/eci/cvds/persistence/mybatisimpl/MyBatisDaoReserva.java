@@ -30,6 +30,9 @@ public class MyBatisDaoReserva implements DaoReserva {
             Date fechaIniDate=new Date(fechaIni.getTime());
             Time horaInicio=new Time(fechaIni.getTime());
             Time horaFin=new Time(fechaFin.getTime());
+            if (fechaIni.after(fechaFin)|| fechaIni.equals(fechaFin)){
+                throw new LibraryServicesException(LibraryServicesException.ERROR_DE_HORAS_HORARIO);
+            }
             if(fechaIniDate.before(today)){
                 throw new LibraryServicesException(LibraryServicesException.RESERVA_FUERA_DE_FECHA);
             }
@@ -53,8 +56,8 @@ public class MyBatisDaoReserva implements DaoReserva {
                 if(i.getFechaFin()!=null && i.getFechaInicio()!=null) {
                     Timestamp fechaIniActual = i.getFechaInicio();
                     Timestamp fechaFinActual = i.getFechaFin();
-                    boolean fechaInicio = (fechaIni.before(fechaFinActual) && fechaIni.after(fechaIniActual));
-                    boolean fechaFinB = (fechaFin.before(fechaFinActual) && fechaIni.after(fechaIniActual));
+                    boolean fechaInicio = ((fechaIni.before(fechaFinActual)) && (fechaIni.after(fechaIniActual)||fechaIni.equals(fechaIniActual)));
+                    boolean fechaFinB = ((fechaFin.before(fechaFinActual)||fechaFin.equals(fechaFinActual)) && fechaFin.after(fechaIniActual));
                     if (fechaInicio || fechaFinB) {
                         throw new LibraryServicesException(LibraryServicesException.RECURSO_RESERVADO_EN_HORA);
                     }

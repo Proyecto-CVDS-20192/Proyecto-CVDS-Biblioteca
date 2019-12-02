@@ -101,12 +101,13 @@
                         </p:selectOneMenu>
 
                         <p:commandButton type="reset" value="Reset" />
-                        <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent(dropdown.tipoRepeticionSeleccionado,dropdown.cantidadRepeticiones)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="@form"/>
+                        <p:commandButton id="addButton" value="Save" action="#{recursoBean.addEvent(dropdown.tipoRepeticionSeleccionado,dropdown.cantidadRepeticiones)}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" update="messages"/>
                     </h:panelGrid>
                 </p:dialog>    
             </h:form>
         </div>
         <br/>
+        
         <!-- Footer -->
         <div class="footerlogin" id="footerloginid"></div>
         <!-- Footer -->

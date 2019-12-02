@@ -1,6 +1,5 @@
 package edu.eci.cvds.services.impl;
 
-import com.sun.javafx.image.IntPixelGetter;
 import edu.eci.cvds.entities.*;
 import edu.eci.cvds.persistence.DaoHorario;
 import edu.eci.cvds.persistence.DaoRecurso;

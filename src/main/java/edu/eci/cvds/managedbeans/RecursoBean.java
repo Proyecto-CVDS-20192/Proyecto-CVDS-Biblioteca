@@ -418,6 +418,7 @@ public class RecursoBean extends BasePageBean {
         if (tipoRecurencia == null || tipoRecurencia.equals("")) {
             try {
                 servicesL.reservarRecurso(servicesL.consultarRecurso(idSeleccionado), servicesL.consultarUsuario(usuario), new Timestamp(event.getStartDate().getTime()), new Timestamp(event.getEndDate().getTime()));
+                fillDate(idSeleccionado);
             } catch (LibraryServicesException e) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Error", e.getMessage()));
@@ -430,13 +431,14 @@ public class RecursoBean extends BasePageBean {
                 try {
                     servicesL.reservaRecursorecurrente(servicesL.consultarRecurso(idSeleccionado), servicesL.consultarUsuario(usuario), new Timestamp(event.getStartDate().getTime()), new Timestamp(event.getEndDate().getTime()), tipoRecurencia, cantidadRecurrencia);
                     event = new DefaultScheduleEvent();
-                    horariosPage(idSeleccionado);
+                    fillDate(idSeleccionado);
                 } catch (LibraryServicesException e) {
                     FacesContext context = FacesContext.getCurrentInstance();
                     context.addMessage(null, new FacesMessage("Error", e.getMessage()));
                 }
             }
         }
+
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
@@ -482,7 +484,6 @@ public class RecursoBean extends BasePageBean {
     }
 
     public Reserva consultarReserva(String id) throws LibraryServicesException {
-        System.out.println("id de la reserva "+id);
         return servicesL.consultarReserva(Integer.parseInt(id));
     }
 
