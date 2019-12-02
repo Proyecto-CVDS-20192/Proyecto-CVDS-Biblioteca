@@ -61,10 +61,10 @@
                         <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).recurso.tipoRecurso.tipo}" />
 
                         <p:outputLabel value="Fecha Inicio:" />
-                        <p:outputLabel value="#{recursoBean.hacerFecha(recursoBean.event.startDate)}" />
+                        <p:outputLabel value="#{recursoBean.hacerFecha(recursoBean.consultarReserva(recursoBean.event.description).fechaIniDate)}" />
 
                         <p:outputLabel value="Fecha Fin:" />
-                        <p:outputLabel value="#{recursoBean.hacerFecha(recursoBean.event.endDate)}" />
+                        <p:outputLabel value="#{recursoBean.hacerFecha(recursoBean.consultarReserva(recursoBean.event.description).fechaFinDate)}" />
 
                         <p:outputLabel value="Tipo:" />
                         <p:outputLabel value="#{recursoBean.consultarReserva(recursoBean.event.description).tipo}" />
@@ -107,7 +107,7 @@
             </h:form>
         </div>
         <br/>
-        
+
         <!-- Footer -->
         <div class="footerlogin" id="footerloginid"></div>
         <!-- Footer -->

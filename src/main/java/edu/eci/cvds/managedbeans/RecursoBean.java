@@ -1,9 +1,7 @@
 package edu.eci.cvds.managedbeans;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Horario;
-import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.*;
 import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
@@ -484,7 +482,29 @@ public class RecursoBean extends BasePageBean {
     }
 
     public Reserva consultarReserva(String id) throws LibraryServicesException {
-        return servicesL.consultarReserva(Integer.parseInt(id));
+        if (id!=""){
+            return servicesL.consultarReserva(Integer.parseInt(id));
+        }else{
+            return crearReReservaVacia();
+        }
+    }
+
+    private Reserva crearReReservaVacia() {
+        Usuario u = new Usuario();
+        u.setNombre("");
+        u.setCarrera("");
+        TipoRecurso t = new TipoRecurso();
+        t.setTipo("");
+        Recurso r = new Recurso();
+        r.setNombre("");
+        r.setTipoRecurso(t);
+        Reserva re = new Reserva();
+        re.setTipo("");
+        re.setUsuario(u);
+        re.setRecurso(r);
+        re.setFechaFin(new Timestamp(0));
+        re.setFechaInicio(new Timestamp(0));
+        return re;
     }
 
     public String hacerFecha(Date date){
@@ -549,6 +569,10 @@ public class RecursoBean extends BasePageBean {
 
     public List<Reserva> getReservasUsuario() throws LibraryServicesException {
         return servicesL.consultarReservasUsuario(usuario);
+    }
+
+    public List<Reserva> getReservasUsuarioCanceladas() throws LibraryServicesException {
+        return servicesL.reservasCanceladasUsuario(servicesL.consultarUsuario(usuario));
     }
 
     public Date getHoraFinal() {

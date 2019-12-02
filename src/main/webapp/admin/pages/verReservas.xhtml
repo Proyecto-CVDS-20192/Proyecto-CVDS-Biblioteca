@@ -30,10 +30,10 @@
         <div class="nav">
             <h:form>
                 <p:menubar>
-                    <p:menuitem value="Inicio" action="#{recursoBean.reloadUser}" icon="pi pi-times" />
+                    <p:menuitem value="Inicio" action="#{recursoBean.reloadAdmin}" icon="pi pi-times" />
                     <p:submenu label="Opciones" icon="pi pi-file">
-                        <p:menuitem value="Ver recusos" action="#{recursoBean.reloadUser}"/>
-                        <p:menuitem value="Ver reservas canceladas" url="/faces/regular/pages/verReservasCanceladas.xhtml"/>
+                        <p:menuitem value="Administrar Recursos" url="/faces/admin/pages/cambiarEstadoRecurso.xhtml" />
+                        <p:menuitem value="Ver reservas canceladas" url="/faces/admin/pages/verReservasCanceladas.xhtml" />
                     </p:submenu>
                     <p:menuitem value="#{userBean.nombre}" icon="pi pi-times"/>
                     <f:facet name="options">

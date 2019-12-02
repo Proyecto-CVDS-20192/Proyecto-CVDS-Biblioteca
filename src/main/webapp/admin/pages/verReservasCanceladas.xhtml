@@ -9,14 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="keywords" content="footer, address, phone, icons" />
-    <title>Consultar Recurso</title>
+    <title>Ver Reservas</title>
 
     <link rel="icon" type="image/png" href="/resources/img/libro.png" />
     <link href="/resources/css/login.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" />
 
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 </h:head>
 <h:body style="margin:0px; padding:0px;" >
@@ -25,63 +24,48 @@
             <img src="/resources/img/banner-biblioteca.jpg" style="width:250px;"></img>
         </div>
         <div id="divbarraid" class="divbarra">
-            <h1>Consultar Recursos Biblioteca ECI</h1>
+            <h1>Consultar Reservas Biblioteca ECI</h1>
         </div>
     </div>
-    <br/>
     <div class="nav">
         <h:form>
             <p:menubar>
                 <p:menuitem value="Inicio" action="#{recursoBean.reloadAdmin}" icon="pi pi-times" />
                 <p:submenu label="Opciones" icon="pi pi-file">
                     <p:menuitem value="Administrar Recursos" url="/faces/admin/pages/cambiarEstadoRecurso.xhtml" />
-                    <p:menuitem value="Ver mis reservas" url="/faces/admin/pages/verReservas.xhtml" />
+                    <p:menuitem value="Ver reservas activas" url="/faces/admin/pages/verReservas.xhtml" />
                 </p:submenu>
-                <p:menuitem value="Bienvenido #{userBean.nombre}" icon="pi pi-times"/>
+                <p:menuitem value="#{userBean.nombre}" icon="pi pi-times"/>
                 <f:facet name="options">
                     <p:commandButton value="Cerrar sesión" class="dropdown-item" action="#{userBean.doLogOut()}" />
                 </f:facet>
             </p:menubar>
         </h:form>
     </div>
+
     <br></br>
     <p:panel class="panelregistro">
         <h:panelGroup class="panelregistro" id="panelregistroid">
             <table class="panelRegistroF" id="Registro_table">
                 <thead class="panelregistroH">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Ubicacion</th>
-                    <th>Capacidad</th>
+                    <th>Recurso</th>
                     <th>Tipo</th>
-                    <th>Estado</th>
-                    <th>Reservar</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Tipo Reserva</th>
+                    <th>Estado Reserva</th>
                 </tr>
                 </thead>
                 <tbody>
-                <r:repeat var="recursos" value="#{recursoBean.recursos}">
+                <r:repeat var="reservasUsuario" value="#{recursoBean.getReservasUsuarioCanceladas()}">
                     <tr>
-                        <td align="center" class="columregistro">#{recursos.nombre}</td>
-                        <td align="center" class="columregistro">#{recursos.ubicacion}</td>
-                        <td align="center" class="columregistro">#{recursos.capacidad}</td>
-                        <td align="center" class="columregistro">#{recursos.tipoRecurso.tipo}</td>
-                        <td align="center" class="columregistro">#{recursos.estado}</td>
-                        <td align="center" class="columregistro">
-                            <h:form id="frmm3">
-                                <p:growl id="message" showDetail="true" />
-                                <p:commandButton class="buttonR"  value="Reservar Recurso" update="message">
-                                    <p:confirm header="Confirmación" message="¿Desea reservar el recurso #{recursos.nombre}?" icon="pi pi-exclamation-triangle" />
-                                    <f:actionListener binding="#{recursoBean.horariosPage(recursos.identificadorInterno)}" update="Registro_table"/>
-                                </p:commandButton>
-
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                    <div align="center">
-                                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                                    </div>
-                                </p:confirmDialog>
-                            </h:form>
-                        </td>
+                        <td align="center" class="columregistro">#{reservasUsuario.recurso.nombre}</td>
+                        <td align="center" class="columregistro">#{reservasUsuario.recurso.tipoRecurso.tipo}</td>
+                        <td align="center" class="columregistro">#{reservasUsuario.fechaInicio}</td>
+                        <td align="center" class="columregistro">#{reservasUsuario.fechaFin}</td>
+                        <td align="center" class="columregistro">#{reservasUsuario.tipo}</td>
+                        <td align="center" class="columregistro">#{reservasUsuario.estado}</td>
                     </tr>
                 </r:repeat>
                 </tbody>
