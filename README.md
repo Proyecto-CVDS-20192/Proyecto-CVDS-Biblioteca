@@ -16,7 +16,25 @@
 ### Descripción general:
 	
 El objetivo del sistema es permitir que los estudiantes, puedan reservar las salas de estudio, equipos de cómputo, tablero inteligente y demás recursos de la biblioteca. Deberían autenticarse con su correo institucional y hacer la reserva del recurso en el horario de su preferencia. Debe existir también una forma de gestionar aquellos recursos en caso que se deseen agregar o modificar los mismos, así como asignar horarios de disponibilidad específicos. La plataforma de gestión de recursos debe contar con una interfaz de usuario amigable con los usuarios.
-		
+
+### Manual de usuario:
+
+Para ingresar a la plataforma es necesario entrar al link de heroku https://cvds-proyecto-biblioteca.herokuapp.com/, estando en la pagina de inicio se puede visualizar todos los recursos de la biblioteca. Para poder reservar algun recurso es necesario iniciar sesion usando su correo electronico institucional y su clave de moodle.
+
+### Pagina de Inicio
+![Pagina Inicio](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Inicio.PNG)
+### Administrador
+![Administrador](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Admin.PNG)
+### Agregar Recurso
+![Agregar Recurso](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/AgregarRecurso.PNG)
+### Estadisticas
+![Estadisticas](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Estadisticas.PNG)
+### Usuario Regular
+![Usuario Regular](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Regular.PNG)
+### Mis Reservas
+![Mis Reservas](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/MisReservas.PNG)
+### Calendario
+![Calendario](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Calendario.PNG)
 	
 ## Arquitectura y Diseño detallado:
 ### Modelo E-R.

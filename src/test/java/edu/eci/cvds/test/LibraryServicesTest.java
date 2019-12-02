@@ -21,7 +21,7 @@ public class LibraryServicesTest{
     ServicesLibrary servicesLibrary;
     private Recurso recurso=new Recurso("El insertado","Biblioteca G",new TipoRecurso(1,"Computador"),"Disponible",1,50);
     private Usuario usuario=new Usuario("Hola","123456","regular","regular@cvds.com",123456,"Ingenieria de Sistemas");
-    private Horario horario=new Horario(1,recurso,new Time(System.currentTimeMillis()),new Time(System.currentTimeMillis()+7200000));
+    private Horario horario=new Horario(1,recurso,Time.valueOf("07:00:00"),Time.valueOf("19:00:00"));
     private Recurso recursoIns=new Recurso("El insertado","Biblioteca G",new TipoRecurso(1,"Computador"),"Disponible",2,50);
 
     @Before
@@ -51,7 +51,7 @@ public class LibraryServicesTest{
         assertTrue(servicesLibrary.consultarRecursos().size()>length);
     }
 
-    //@Test
+    @Test
     public void deberiaAgregarUnHorarioYConsultarlo() throws LibraryServicesException{
         administratorServices.registrarRecurso(recurso);
         recurso.setIdentificadorInterno(servicesLibrary.consultarRecursos().get(0).getIdentificadorInterno());
@@ -112,7 +112,7 @@ public class LibraryServicesTest{
 
     }
 
-    //@Test
+    @Test
     public void noDebePermitirReservasMayoresADosHoras(){
         Timestamp fechaIni=new Timestamp(System.currentTimeMillis());
         Timestamp fechaFin=new Timestamp(System.currentTimeMillis()+7200001);
