@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -114,51 +115,8 @@ public class RecursoBean extends BasePageBean {
     }
 
     public BarChartModel getTipoDeReservasGra() {
-        recursoMasUsadosGra = initBarModel();
-        recursoMasUsadosGra.setTitle("Tipo de reservas");
-        recursoMasUsadosGra.setAnimate(true);
-        recursoMasUsadosGra.setLegendPosition("ne");
-        Axis yAxis = recursoMasUsadosGra.getAxis(AxisType.Y);
-        yAxis.setLabel("Cantidad de reservas");
-        yAxis.setMin(0);
-        yAxis.setMax(50);
-        return recursoMasUsadosGra;
-    }
-
-    private BarChartModel initBarMasYMenosUsados(char tipo) {
-        BarChartModel model = new BarChartModel();
-        int cant = 5;
-        int prueba = 10;
-        if (tipo == '+') {
-            for (int i = 0; i <= cant; i++) {
-                //servicesA.reporteDeOcupacion();
-                ChartSeries ChartS = new ChartSeries();
-                //Nombre del recurso
-                ChartS.setLabel("NombreRecurso");
-                //Cantidad de reservas
-                ChartS.set("Recursos",prueba);
-                model.addSeries(ChartS);
-                prueba += 6;
-            }
-        } else {
-            for (int i = 0; i <= cant; i++) {
-                //servicesA.reporteDeOcupacion();
-                ChartSeries ChartS = new ChartSeries();
-                //Nombre del recurso
-                ChartS.setLabel("NombreRecurso");
-                //Cantidad de reservas
-                ChartS.set("Recursos",prueba);
-                model.addSeries(ChartS);
-                prueba -= 1;
-            }
-        }
-
-        return model;
-    }
-
-    public BarChartModel getRecursoMasUsadosGra() {
-        tipoDeReservasGra = initBarMasYMenosUsados('+');
-        tipoDeReservasGra.setTitle("Recursos mas usados");
+        tipoDeReservasGra = initBarModel();
+        tipoDeReservasGra.setTitle("Tipo de reservas");
         tipoDeReservasGra.setAnimate(true);
         tipoDeReservasGra.setLegendPosition("ne");
         Axis yAxis = tipoDeReservasGra.getAxis(AxisType.Y);
@@ -166,6 +124,42 @@ public class RecursoBean extends BasePageBean {
         yAxis.setMin(0);
         yAxis.setMax(50);
         return tipoDeReservasGra;
+    }
+
+    private BarChartModel initBarMasYMenosUsados(char tipo) {
+        BarChartModel model = new BarChartModel();
+        try {
+            Map<Integer, Integer> dataRecursos;
+            if (tipo == '+') {
+                dataRecursos = servicesA.recursosMasUsados();
+            } else {
+                dataRecursos = servicesA.recursosMenosUsados();
+
+            }
+            for (Map.Entry<Integer, Integer> entry : dataRecursos.entrySet()) {
+                Integer key = entry.getKey();
+                Integer value = entry.getValue();
+                ChartSeries ChartS = new ChartSeries();
+                ChartS.setLabel(servicesL.consultarRecurso(key).getNombre());
+                ChartS.set("Recursos", value);
+                model.addSeries(ChartS);
+            }
+        } catch (LibraryServicesException ex) {
+            java.util.logging.Logger.getLogger(RecursoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+
+    public BarChartModel getRecursoMasUsadosGra() {
+        recursoMasUsadosGra = initBarMasYMenosUsados('+');
+        recursoMasUsadosGra.setTitle("Recursos mas usados");
+        recursoMasUsadosGra.setAnimate(true);
+        recursoMasUsadosGra.setLegendPosition("ne");
+        Axis yAxis = recursoMasUsadosGra.getAxis(AxisType.Y);
+        yAxis.setLabel("Cantidad de reservas");
+        yAxis.setMin(0);
+        yAxis.setMax(50);
+        return recursoMasUsadosGra;
     }
 
     public BarChartModel getRecursoMenosUsadosGra() {
@@ -179,35 +173,32 @@ public class RecursoBean extends BasePageBean {
         yAxis.setMax(50);
         return recursoMenosUsadosGra;
     }
-    
+
     private BarChartModel initBarHorariosMasYMenosUsados(char tipo) {
         BarChartModel model = new BarChartModel();
-        int cant = 5;
-        int prueba = 10;
-        if (tipo == '+') {
-            for (int i = 0; i <= cant; i++) {
-                //servicesA.reporteDeOcupacion();
-                ChartSeries ChartS = new ChartSeries();
-                //Hora de uso mas usada.
-                ChartS.setLabel("Hora de Uso");
-                //Cantidad de reservas.
-                ChartS.set("Horas de reserva",prueba);
-                model.addSeries(ChartS);
-                prueba += 6;
-            }
-        } else {
-            for (int i = 0; i <= cant; i++) {
-                //servicesA.reporteDeOcupacion();
-                ChartSeries ChartS = new ChartSeries();
-                //Nombre del recurso
-                ChartS.setLabel("Hora de Uso");
-                //Cantidad de reservas
-                ChartS.set("Horas de reserva",prueba);
-                model.addSeries(ChartS);
-                prueba -= 1;
-            }
-        }
+        Map<Time, Integer> dataRecursos;
+        /**
+         * try { if (tipo == '+') { dataRecursos =
+         * servicesA.horasMasSolicitadas(); } else { dataRecursos =
+         * servicesA.horasMenosSolicitadas();
+         *
+         * }
+         *
+         * for (Map.Entry<Time, Integer> entry : dataRecursos.entrySet()) { Time
+         * key = entry.getKey(); Integer value = entry.getValue(); ChartSeries
+         * ChartS = new ChartSeries(); ChartS.setLabel(key.toString());
+         * ChartS.set("Horas de reserva", value); model.addSeries(ChartS); } }
+         * catch (LibraryServicesException ex) {
+         * java.util.logging.Logger.getLogger(RecursoBean.class.getName()).log(Level.SEVERE,
+         * null, ex);
+        }*
+         */
 
+        //TEMPORALLLLL
+        ChartSeries ChartS = new ChartSeries();
+        ChartS.setLabel("HoralTemporal");
+        ChartS.set("Horas de reserva", 25);
+        model.addSeries(ChartS);
         return model;
     }
 
@@ -224,25 +215,23 @@ public class RecursoBean extends BasePageBean {
     }
 
     public BarChartModel getHorariosMenosUsadosGra() {
-        recursoMenosUsadosGra = initBarHorariosMasYMenosUsados('-');
-        recursoMenosUsadosGra.setTitle("Horarios de menor ocupacion");
-        recursoMenosUsadosGra.setAnimate(true);
-        recursoMenosUsadosGra.setLegendPosition("ne");
-        Axis yAxis = recursoMenosUsadosGra.getAxis(AxisType.Y);
+        horariosMenosUsadosGra = initBarHorariosMasYMenosUsados('-');
+        horariosMenosUsadosGra.setTitle("Horarios de menor ocupacion");
+        horariosMenosUsadosGra.setAnimate(true);
+        horariosMenosUsadosGra.setLegendPosition("ne");
+        Axis yAxis = horariosMenosUsadosGra.getAxis(AxisType.Y);
         yAxis.setLabel("Cantidad de reservas");
         yAxis.setMin(0);
         yAxis.setMax(50);
-        return recursoMenosUsadosGra;
+        return horariosMenosUsadosGra;
     }
 
     public PieChartModel getUbicacionRecursosGra() {
         ubicacionRecursosGra = new PieChartModel();
         int cantBloqueB = 0;
         int cantBloqueG = 0;
-        int conta = 0;
         try {
             for (Recurso r : servicesA.consultarRecursosAdmin()) {
-                conta += 1;
                 if (r.getUbicacion().equals("Biblioteca B")) {
                     cantBloqueB += 1;
                 } else {
@@ -254,7 +243,7 @@ public class RecursoBean extends BasePageBean {
         }
         ubicacionRecursosGra.set("Biblioteca bloque B", cantBloqueB);
         ubicacionRecursosGra.set("Biblioteca bloque G", cantBloqueG);
-        ubicacionRecursosGra.setTitle("Ubicación de los recursos");
+        ubicacionRecursosGra.setTitle("Ubicacion de los recursos");
         ubicacionRecursosGra.setLegendPosition("e");
         ubicacionRecursosGra.setFill(false);
         ubicacionRecursosGra.setShowDataLabels(true);
@@ -370,7 +359,7 @@ public class RecursoBean extends BasePageBean {
         if (banderaRec) {
             if (lista.size() > 0) {
                 for (Reserva r : lista) {
-                    event = new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre()+" "+r.getTipo(), r.getFechaIniDate(), r.getFechaFinDate());
+                    event = new DefaultScheduleEvent(r.getRecurso().getNombre() + "  " + r.getUsuario().getNombre() + " " + r.getTipo(), r.getFechaIniDate(), r.getFechaFinDate());
                     ((DefaultScheduleEvent) event).setDescription(Integer.toString(r.getId()));
                     eventModel.addEvent(event);
                 }
@@ -482,9 +471,9 @@ public class RecursoBean extends BasePageBean {
     }
 
     public Reserva consultarReserva(String id) throws LibraryServicesException {
-        if (id!=""){
+        if (id != "") {
             return servicesL.consultarReserva(Integer.parseInt(id));
-        }else{
+        } else {
             return crearReReservaVacia();
         }
     }
@@ -507,17 +496,17 @@ public class RecursoBean extends BasePageBean {
         return re;
     }
 
-    public String hacerFecha(Date date){
+    public String hacerFecha(Date date) {
         String s = "";
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        s += c.get(Calendar.DAY_OF_MONTH)+"/";
-        s += c.get(Calendar.MONTH)+"/";
-        s += c.get(Calendar.YEAR)+" ";
-        s += c.get(Calendar.HOUR_OF_DAY)+":";
-        if (c.get(Calendar.MINUTE)<10){
-            s += "0"+c.get(Calendar.MINUTE);
-        }else {
+        s += c.get(Calendar.DAY_OF_MONTH) + "/";
+        s += c.get(Calendar.MONTH) + "/";
+        s += c.get(Calendar.YEAR) + " ";
+        s += c.get(Calendar.HOUR_OF_DAY) + ":";
+        if (c.get(Calendar.MINUTE) < 10) {
+            s += "0" + c.get(Calendar.MINUTE);
+        } else {
             s += c.get(Calendar.MINUTE);
         }
         return s;
