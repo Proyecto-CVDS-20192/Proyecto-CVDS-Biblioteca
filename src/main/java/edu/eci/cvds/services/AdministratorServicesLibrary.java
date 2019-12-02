@@ -4,7 +4,9 @@ import edu.eci.cvds.entities.*;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface AdministratorServicesLibrary {
     /**
@@ -66,6 +68,8 @@ public interface AdministratorServicesLibrary {
      * Obtiene el reporte de las reservas 
      * @throws LibraryServicesException
      */
-    void reporteDeOcupacion() throws LibraryServicesException;
+    Map<Integer,Integer> recursosMasYMenosUsados() throws LibraryServicesException;
+
+    HashMap<Time, Integer> horasMasYMenosSolicitadas() throws LibraryServicesException;
 
 }

@@ -1,5 +1,6 @@
 package edu.eci.cvds.services.impl;
 
+import com.sun.javafx.image.IntPixelGetter;
 import edu.eci.cvds.entities.*;
 import edu.eci.cvds.persistence.DaoHorario;
 import edu.eci.cvds.persistence.DaoRecurso;
@@ -11,13 +12,10 @@ import edu.eci.cvds.services.ServicesLibrary;
 import edu.eci.cvds.services.ServicesLibraryFactory;
 
 import javax.inject.Inject;
-import java.sql.Date;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implements AdministratorServicesLibrary {
 
@@ -70,39 +68,61 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         horarioDao.ingresarHorario(recurso,horario);
     }
 
+    private Map<Integer,Integer> sortByValue(Map<Integer, Integer> map){
+        List<Map.Entry<Integer, Integer>> list = new LinkedList<Map.Entry<Integer, Integer>>(map.entrySet());
 
-    @Override
-    public void reporteDeOcupacion() throws LibraryServicesException {
-        List<Reserva> reservas=reservaDao.consultarReservas();
-        ArrayList<Reserva> recurrentes=new ArrayList<>();
-        ArrayList<Reserva> canceladas=new ArrayList<>();
-        HashMap<Reserva,Integer> recursosMasUsados=new HashMap<>();
-        HashMap<Time[],Integer> horasMasSolicitadas=new HashMap<>();
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("07:00:00"),Time.valueOf("08:30:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("08:30:00"),Time.valueOf("10:00:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("10:00:00"),Time.valueOf("11:30:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("11:30:00"),Time.valueOf("13:00:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("13:00:00"),Time.valueOf("14:30:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("14:30:00"),Time.valueOf("16:00:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("16:00:00"),Time.valueOf("17:30:00")},0);
-        horasMasSolicitadas.put(new Time[]{Time.valueOf("17:30:00"),Time.valueOf("19:00:00")},0);
-        for(Reserva i:reservas){
-            if(i.getTipo().equals("Recurrente")) recurrentes.add(i);
-            if(i.getEstado().equals("Cancelada")) canceladas.add(i);
-            if(recursosMasUsados.containsKey(i)){
-                recursosMasUsados.put(i,recursosMasUsados.get(i)+1);
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+
+            public int compare(Map.Entry<Integer, Integer> m1, Map.Entry<Integer, Integer> m2) {
+                return (m2.getValue()).compareTo(m1.getValue());
             }
-            else{
-                recursosMasUsados.put(i,1);
-            }
-            Time[] arr=calculeArray(i);
-            horasMasSolicitadas.put(arr,horasMasSolicitadas.get(arr)+1);
+        });
+
+        Map<Integer, Integer> result = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
         }
+        return result;
     }
 
-    private Time[] calculeArray(Reserva reserva) {
+    @Override
+    public Map<Integer,Integer> recursosMasYMenosUsados() throws LibraryServicesException {
+        List<Reserva> reservas=reservaDao.consultarReservas();
+        HashMap<Integer,Integer> recursos=new HashMap<>();
+        Map<Integer,Integer> sortRecursos;
+        Map<Integer,Integer> dataRecursos=new HashMap<>();
+        for(Reserva i:reservas){
+            if(i!=null) {
+                if (recursos.containsKey(i.getRecurso().getIdentificadorInterno())) {
+                    recursos.put(i.getRecurso().getIdentificadorInterno(), recursos.get(i.getRecurso().getIdentificadorInterno()) + 1);
+                } else {
+                    recursos.put(i.getRecurso().getIdentificadorInterno(), 1);
+                }
+            }
+        }
+        sortRecursos= sortByValue(recursos);
+        int size=sortRecursos.size();
+        int cont=0;
+        for(Integer i:sortRecursos.keySet()){
+            if(cont<4 || (cont<size && cont>size-5)){
+                dataRecursos.put(i,sortRecursos.get(i));
+            }
+            cont+=1;
+        }
+        dataRecursos=sortByValue(dataRecursos);
+        return dataRecursos;
+    }
+
+    private boolean in(Time taken,Time reservaTime){
+        if(taken.getHours()<=reservaTime.getHours() && taken.getHours()+1>=reservaTime.getHours()){
+            return true;
+        }
+        return false;
+    }
+
+    private Time calculeHora(Reserva reserva) {
         Time horaInicioReserva=new Time(reserva.getFechaInicio().getTime());
-        Time[] ans=new Time[2];
+        Time ans=null;
         HashMap<Time,Time> tiempos=new HashMap<>();
         tiempos.put(Time.valueOf("07:00:00"),Time.valueOf("08:30:00"));
         tiempos.put(Time.valueOf("08:30:00"),Time.valueOf("10:00:00"));
@@ -115,24 +135,38 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         Set<Time> values=tiempos.keySet();
         for(Time i:values){
             if(in(i,horaInicioReserva)){
-                ans[0]=i;
-                ans[1]=tiempos.get(i);
+                ans=i;
                 break;
             }
         }
         return ans;
     }
 
-    private boolean in(Time taken,Time reservaTime){
-        if(taken.getHours()<=reservaTime.getHours() && taken.getHours()+1>=reservaTime.getHours()){
-            return true;
+    @Override
+    public HashMap<Time, Integer> horasMasYMenosSolicitadas() throws LibraryServicesException {
+        List<Reserva> reservas=reservaDao.consultarReservas();
+        HashMap<Time,Integer> horasMasSolicitadas=new HashMap<>();
+        horasMasSolicitadas.put(Time.valueOf("07:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("08:30:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("10:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("11:30:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("13:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("14:30:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("16:00:00"),0);
+        horasMasSolicitadas.put(Time.valueOf("17:30:00"),0);
+        for(Reserva i:reservas){
+            if(i!=null){
+                Time time=this.calculeHora(i);
+                horasMasSolicitadas.put(time,horasMasSolicitadas.get(time)+1);
+            }
         }
-        return false;
+        return horasMasSolicitadas;
     }
 
-    public static void main(String[] args) throws LibraryServicesException{
-
+    public static void main(String[] args) throws LibraryServicesException {
+        AdministratorServicesLibrary a= ServicesLibraryFactory.getInstance().getAdministratorServices();
+        Map<Time,Integer> a1=a.horasMasYMenosSolicitadas();
+        System.out.println(a1);
     }
-
 
 }
