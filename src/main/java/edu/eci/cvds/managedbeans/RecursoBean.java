@@ -59,6 +59,8 @@ public class RecursoBean extends BasePageBean {
     private Date horaInicial;
     private Date horaFinal;
 
+
+
     @Inject
     private ServicesLibrary servicesL;
 
@@ -284,18 +286,20 @@ public class RecursoBean extends BasePageBean {
         this.idSeleccionado = idSeleccionado;
     }
 
-    public void registrarRecurso(String nombre, int capacidad) throws LibraryServicesException {
-        int id = servicesA.consultarRecursosAdmin().size() + 1;
-        int tipo = buscarIndice();
+    public void registrarRecurso(String nombre, int capacidad) {
         try {
+            int id = servicesA.consultarRecursosAdmin().size() + 1;
+            int tipo = buscarIndice();
             recurso = new Recurso(id, tipo + 1, nombre, ubicacionSeleccionada, capacidad, "Disponible", tipo + 1, tipos[tipo]);
             Horario h = new Horario();
             h.setHoraInicio(new Time(horaInicial.getHours(), horaInicial.getMinutes(), horaInicial.getSeconds()));
             h.setHoraFin(new Time(horaFinal.getHours(), horaFinal.getMinutes(), horaFinal.getSeconds()));
-            servicesA.registrarRecurso(recurso);
             servicesA.ingresarHorario(recurso, h);
-        } catch (Exception e) {
-            e.printStackTrace();
+            servicesA.registrarRecurso(recurso);
+            reloadAdmin();
+        } catch (LibraryServicesException | IOException e) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Error", e.getMessage()));
         }
     }
 
@@ -313,7 +317,8 @@ public class RecursoBean extends BasePageBean {
         try {
             servicesA.eliminarUnRecursoPermanente(servicesL.consultarRecurso(id));
         } catch (Exception e) {
-            e.printStackTrace();
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Error", e.getMessage()));
         }
     }
 

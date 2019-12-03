@@ -48,12 +48,12 @@
                 <p:dialog header="Agregar Recurso" widgetVar="dlg1" resizable="false">
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputLabel for="nombre" value="Nombre:" />
-                        <p:inputText id="nombre" label="nombre"
+                        <p:inputText id="nombre" required="true" label="nombre"
                                      binding="#{nombre}"/>
 
 
                         <h:outputLabel for="capacidad" value="Capacidad:" />
-                        <p:inputText id="capacidad" label="capacidad"
+                        <p:inputText id="capacidad" required="true" label="capacidad"
                                      binding="#{capacidad}"/>
 
                         <label class="bmd-label-floating">Ubicacion:</label>
@@ -67,16 +67,15 @@
                         </h:selectOneMenu>
 
                         <p:outputLabel for="time" value="Hora inicial:" />
-                        <p:calendar id="time" value="#{recursoBean.horaInicial}" pattern="HH:mm" timeOnly="true"  />
+                        <p:calendar id="time" value="#{recursoBean.horaInicial}" pattern="HH:mm" timeOnly="true"  required="true"/>
 
                         <p:outputLabel for="time" value="Hora final:" />
-                        <p:calendar id="time2" value="#{recursoBean.horaFinal}" pattern="HH:mm" timeOnly="true"  />
+                        <p:calendar id="time2" value="#{recursoBean.horaFinal}" pattern="HH:mm" timeOnly="true" required="true"  />
 
                         <p:growl id="message1" showDetail="true" />
                         <p:commandButton class="buttonR" value="Registrar" update="message1">
                             <p:confirm header="Confirmación" message="¿Desea registrar este recurso?" icon="pi pi-exclamation-triangle" />
                             <f:actionListener binding="#{recursoBean.registrarRecurso(nombre.value, capacidad.value)}" update="frmm2"/>
-                            <f:actionListener binding="#{recursoBean.reloadAdmin()}" update="frmm2"/>
                         </p:commandButton>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <div align="center">
