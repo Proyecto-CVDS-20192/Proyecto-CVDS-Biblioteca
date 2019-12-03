@@ -132,4 +132,7 @@ En este sprint se termino las funcionalidades restantes y se corrigieron los bug
 	-Usuario: regular@cvds.com
     
     -Password: 1234
+    
+## Retrospectiva: 
+En este proyecto hicimos un muy buen trabajo en la separación de cada una de las tareas, todos nosotros nos entendimos muy bien trabajando como grupo. Si bien tuvimos problemas con la implementación de algunos casos de uso, trabajamos en equipo para poder resolver los bugs que fueron surgiendo. Fuimos organizados al momento de la planeación de los Sprints, y si bien pudimos ser más específicos con las actividades planeadas, fuimos reformulando el tiempo de ejecución con forme íbamos trabajando para así tener una estimación más certera del tiempo que tomaba cada implementación.
 
