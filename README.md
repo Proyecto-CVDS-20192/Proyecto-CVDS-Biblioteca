@@ -1,4 +1,5 @@
-﻿# Proyecto CVDS 2019-II - Biblioteca
+# GESTIÓN DE RECURSOS BIBLIOTECA 
+# Proyecto CVDS 2019-II - Biblioteca
 
 ## Profesores 
 	- Julian Velasco (Product Owner)
@@ -15,26 +16,37 @@
 
 ### Descripción general:
 	
-El objetivo del sistema es permitir que los estudiantes, puedan reservar las salas de estudio, equipos de cómputo, tablero inteligente y demás recursos de la biblioteca. Deberían autenticarse con su correo institucional y hacer la reserva del recurso en el horario de su preferencia. Debe existir también una forma de gestionar aquellos recursos en caso que se deseen agregar o modificar los mismos, así como asignar horarios de disponibilidad específicos. La plataforma de gestión de recursos debe contar con una interfaz de usuario amigable con los usuarios.
+El objetivo del sistema es permitir que los estudiantes, puedan reservar las salas de estudio, equipos de cómputo, tablero inteligente y demás recursos de la biblioteca. Deberían autenticarse con su correo institucional y hacer la reserva del recurso en el horario de su preferencia. Debe existir también una forma de gestionar aquellos recursos en caso de que se deseen agregar o modificar los mismos, así como asignar horarios de disponibilidad específicos. La plataforma de gestión de recursos debe contar con una interfaz de usuario amigable con los usuarios.
 
 ### Manual de usuario:
 
-Para ingresar a la plataforma es necesario entrar al link de heroku https://cvds-proyecto-biblioteca.herokuapp.com/, estando en la pagina de inicio se puede visualizar todos los recursos de la biblioteca. Para poder reservar algun recurso es necesario iniciar sesion usando su correo electronico institucional y su clave de moodle.
+Para ingresar a la plataforma es necesario entrar al link de [heroku](https://cvds-proyecto-biblioteca.herokuapp.com/), estando en la página de inicio se puede visualizar todos los recursos de la biblioteca poniendo clic en el botón de ver recursos. Para poder reservar algún recurso es necesario iniciar sesión usando su correo electrónico institucional y su clave de Moodle, ya teniendo la sesión iniciada se pueden visualizar todos los recursos de la biblioteca, se pueden reservar y ver cuales recursos ya tienen reservaciones.
 
-### Pagina de Inicio
+### Página de Inicio
 ![Pagina Inicio](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Inicio.PNG)
+En la página de inicio se puede visualizar todos los recursos de la biblioteca poniendo clic en el botón de ver recursos o iniciar sesión usando los cuadros de texto de Email y Password.
+
 ### Administrador
 ![Administrador](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Admin.PNG)
+En la página de administrador se pueden administrar todos los recursos, en los botones de la tabla se puede eliminar o editar un recurso y en el menú desplegable se tiene la opción de agregar un recurso, reservar un recurso y ver las estadísticas. 
+
 ### Agregar Recurso
 ![Agregar Recurso](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/AgregarRecurso.PNG)
-### Estadisticas
+En la ventana emergente de agregar recurso se tienen 6 campos de información, Nombre, Capacidad (si aplica), Ubicación, Tipo, Hora Inicial y Hora final.
+
+### Estadísticas
 ![Estadisticas](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Estadisticas.PNG)
+
 ### Usuario Regular
 ![Usuario Regular](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Regular.PNG)
+En la página de estudiantes se puede ver todos los recursos y se pueden reservar usando el botón de reservar recursos, en opciones se pueden ver las reservas que el usuario tiene activas.
+
 ### Mis Reservas
 ![Mis Reservas](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/MisReservas.PNG)
+
 ### Calendario
 ![Calendario](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Calendario.PNG)
+En la página del calendario se pueden ver todas las reservas que hay sobre un recurso y así mismo reservar recursos poniendo clic en el día en el que se quiera apartar el recurso.
 	
 ## Arquitectura y Diseño detallado:
 ### Modelo E-R.
@@ -44,13 +56,16 @@ Para ingresar a la plataforma es necesario entrar al link de heroku https://cvds
 
 ### Tecnologías
 
- - Se ultiliza Guice para hacer la injeccion de los diferentes servicios de la biblioteca 
+ - Se utiliza Guice para hacer la inyección de los diferentes servicios de la biblioteca 
  junto con los elementos necesarios para usar MyBatis
- - MyBatis con el fin de hacer mas eficiente las consultas y acciones sobre la base de datos
- - PostgreeSQL, se relizo una base de datos en Heroku de PostgreeSQL para la capa de persistencia
+ - MyBatis con el fin de hacer más eficiente las consultas y acciones sobre la base de datos
+ - PostgreeSQL, se realizó una base de datos en Heroku de PostgreeSQL para la capa de persistencia
+ - PrimeFaces se utilizó para que la pagina se viera mejor.
 
 ### Enlace a la aplicación en Heroku:
 Heroku APP : [https://cvds-proyecto-biblioteca.herokuapp.com/](https://cvds-proyecto-biblioteca.herokuapp.com/)
+
+Github : [https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca]https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca
 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/936c2a405ca14b45a130fc6a40aaf9b9)](https://www.codacy.com/manual/JuanCe28/Proyecto-CVDS-Biblioteca?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca&amp;utm_campaign=Badge_Grade)
@@ -61,7 +76,7 @@ Heroku APP : [https://cvds-proyecto-biblioteca.herokuapp.com/](https://cvds-proy
 -----------------------------------------------------------------------------------
 
 
-### Informacion Base de Datos
+### Información Base de Datos
  - Host: ec2-54-163-230-199.compute-1.amazonaws.com
  - Database: d4cnn66hp1d27l
  - User: scvtynbcreheid
