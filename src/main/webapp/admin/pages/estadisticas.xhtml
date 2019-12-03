@@ -36,6 +36,7 @@
                     <p:submenu label="Opciones" icon="pi pi-file">
                         <p:menuitem value="Administrar Recursos" url="/faces/admin/pages/cambiarEstadoRecurso.xhtml" />
                         <p:menuitem value="Reservar Recursos" url="/faces/admin/pages/verRecursos.xhtml" />
+                        <p:menuitem value="Generar reporte" action="#{recursoBean.generarReporte()}" />
                     </p:submenu>
                     <p:menuitem value="Bienvenido #{userBean.nombre}" icon="pi pi-times"/>
                     <f:facet name="options">

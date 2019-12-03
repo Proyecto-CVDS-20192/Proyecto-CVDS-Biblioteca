@@ -313,7 +313,7 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     public void obtenerRegistroOcupacion() throws LibraryServicesException{
         HSSFWorkbook file=generaRegistroOcupacion();
         try {
-            FileOutputStream fileOs = new FileOutputStream("/Users/username/Documents/registroOcupasion.xls");
+            FileOutputStream fileOs = new FileOutputStream("/Users/username/Documents/registroOcupacion.xls");
             file.write(fileOs);
             fileOs.close();
         }catch (IOException e){

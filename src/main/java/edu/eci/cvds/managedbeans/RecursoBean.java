@@ -578,4 +578,8 @@ public class RecursoBean extends BasePageBean {
     public void setHoraInicial(Date horaInicial) {
         this.horaInicial = horaInicial;
     }
+
+    public void generarReporte() throws LibraryServicesException {
+        servicesA.obtenerRegistroOcupacion();
+    }
 }
