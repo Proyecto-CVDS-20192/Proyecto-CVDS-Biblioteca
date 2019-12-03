@@ -14,6 +14,7 @@ import org.apache.poi.hssf.usermodel.*;
 import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
@@ -250,8 +251,8 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     }
 
 
-    @Override
-    public HSSFWorkbook generaRegistroOcupacion() throws LibraryServicesException {
+
+    private HSSFWorkbook generaRegistroOcupacion() throws LibraryServicesException {
         Map<Time,Integer> horasMasPedidas=horasMasSolicitadas();
         Map<Time,Integer> horasMenosPedidas=horasMenosSolicitadas();
         Map<Integer,Integer> recursosMasPedidos=recursosMasUsados();
@@ -308,6 +309,17 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
         return libro;
     }
 
+    @Override
+    public void obtenerRegistroOcupacion() throws LibraryServicesException{
+        HSSFWorkbook file=generaRegistroOcupacion();
+        try {
+            FileOutputStream fileOs = new FileOutputStream("/Users/username/Documents/registroOcupasion.xls");
+            file.write(fileOs);
+            fileOs.close();
+        }catch (IOException e){
+            throw new LibraryServicesException(LibraryServicesException.ERROR_EN_IO);
+        }
+    }
 
     public static void main(String[] args) throws LibraryServicesException {
         

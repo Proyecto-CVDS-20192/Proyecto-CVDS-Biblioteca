@@ -77,5 +77,5 @@ public interface AdministratorServicesLibrary {
 
     Map<Time,Integer> horasMenosSolicitadas() throws LibraryServicesException;
 
-    HSSFWorkbook generaRegistroOcupacion() throws LibraryServicesException;
+    void obtenerRegistroOcupacion() throws LibraryServicesException;
 }
