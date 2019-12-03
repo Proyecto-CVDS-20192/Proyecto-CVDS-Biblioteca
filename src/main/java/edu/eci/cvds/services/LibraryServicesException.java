@@ -11,6 +11,7 @@ public class LibraryServicesException extends Exception {
     public static final String HORARIO_FUERA_DE_HORAS="Los horarios no se pueden colocar fuera de los horarios de clase";
     public static final String ERROR_DE_HORAS_HORARIO="Error en el orden de las horas";
     public static final String ERROR_EN_IO="Error en la escritura del archivo";
+    public static final String RECURSO_ELIMINADO="Ese recurso fue eliminado permanentemente comuniquese con su ingeniero de sistemas";
     private String causeE;
 
     /**

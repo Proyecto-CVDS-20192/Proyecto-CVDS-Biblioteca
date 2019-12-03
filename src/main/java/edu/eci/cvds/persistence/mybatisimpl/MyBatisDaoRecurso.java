@@ -54,6 +54,9 @@ public class MyBatisDaoRecurso implements DaoRecurso {
     @Override
     public void volverAAdmitirRecurso(Recurso recurso) throws LibraryServicesException{
         try{
+            if(recursoMapper.consultarRecurso(recurso.getIdentificadorInterno()).getEstado().equals("Eliminado")){
+                throw new LibraryServicesException(LibraryServicesException.RECURSO_ELIMINADO);
+            }
             recursoMapper.volverAAdmitirRecurso(recurso);
         }catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA,e.getMessage());
