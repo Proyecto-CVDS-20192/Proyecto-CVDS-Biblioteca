@@ -9,6 +9,7 @@ public class LibraryServicesException extends Exception {
     public static final String RESERVA_FUERA_DE_HORARIOS="La reserva no se puede hacer fuera de los horarios del recurso";
     public static final String HORARIO_FUERA_DE_HORAS="Los horarios no se pueden colocar fuera de los horarios de clase";
     public static final String ERROR_DE_HORAS_HORARIO="Error en el orden de las horas";
+    public static final String ERROR_EN_IO="Error en la escritura del archivo";
     private String causeE;
 
     /**
