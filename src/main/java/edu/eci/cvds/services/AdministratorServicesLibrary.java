@@ -1,6 +1,7 @@
 package edu.eci.cvds.services;
 
 import edu.eci.cvds.entities.*;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -76,5 +77,5 @@ public interface AdministratorServicesLibrary {
 
     Map<Time,Integer> horasMenosSolicitadas() throws LibraryServicesException;
 
-    void generaRegistroOcupacion() throws LibraryServicesException;
+    HSSFWorkbook generaRegistroOcupacion() throws LibraryServicesException;
 }

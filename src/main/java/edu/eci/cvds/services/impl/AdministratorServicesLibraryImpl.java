@@ -9,10 +9,11 @@ import edu.eci.cvds.services.AdministratorServicesLibrary;
 import edu.eci.cvds.services.LibraryServicesException;
 import edu.eci.cvds.services.ServicesLibrary;
 import edu.eci.cvds.services.ServicesLibraryFactory;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
 
 import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.FileOutputStream;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
@@ -250,21 +251,66 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
 
 
     @Override
-    public void generaRegistroOcupacion() throws LibraryServicesException {
+    public HSSFWorkbook generaRegistroOcupacion() throws LibraryServicesException {
+        Map<Time,Integer> horasMasPedidas=horasMasSolicitadas();
+        Map<Time,Integer> horasMenosPedidas=horasMenosSolicitadas();
+        Map<Integer,Integer> recursosMasPedidos=recursosMasUsados();
+        Map<Integer,Integer> recursosMenosPedidos=recursosMenosUsados();
         HSSFWorkbook libro = new HSSFWorkbook();
+        HSSFSheet hoja = libro.createSheet();
+        int row=0;
+        for(Time i:horasMasPedidas.keySet()){
+            HSSFRow fila = hoja.createRow(row);
+            HSSFCell celda = fila.createCell((short)0);
+            HSSFCell celda2=fila.createCell((short)1);
+            HSSFRichTextString texto1= new HSSFRichTextString(i.toString());
+            HSSFRichTextString texto2=new HSSFRichTextString(horasMasPedidas.get(i).toString());
+            celda.setCellValue(texto1);
+            celda2.setCellValue(texto2);
+            row++;
+        }
+        hoja = libro.createSheet();
+        row=0;
+        for(Time i:horasMenosPedidas.keySet()){
+            HSSFRow fila = hoja.createRow(row);
+            HSSFCell celda = fila.createCell((short)0);
+            HSSFCell celda2=fila.createCell((short)1);
+            HSSFRichTextString texto1= new HSSFRichTextString(i.toString());
+            HSSFRichTextString texto2=new HSSFRichTextString(horasMenosPedidas.get(i).toString());
+            celda.setCellValue(texto1);
+            celda2.setCellValue(texto2);
+            row++;
+        }
+        hoja = libro.createSheet();
+        row=0;
+        for(Integer i:recursosMasPedidos.keySet()){
+            HSSFRow fila = hoja.createRow(row);
+            HSSFCell celda = fila.createCell((short)0);
+            HSSFCell celda2=fila.createCell((short)1);
+            HSSFRichTextString texto1= new HSSFRichTextString(consultarRecurso(i).toString());
+            HSSFRichTextString texto2=new HSSFRichTextString(recursosMasPedidos.get(i).toString());
+            celda.setCellValue(texto1);
+            celda2.setCellValue(texto2);
+            row++;
+        }
+        hoja = libro.createSheet();
+        row=0;
+        for(Integer i:recursosMenosPedidos.keySet()){
+            HSSFRow fila = hoja.createRow(row);
+            HSSFCell celda = fila.createCell((short)0);
+            HSSFCell celda2=fila.createCell((short)1);
+            HSSFRichTextString texto1= new HSSFRichTextString(consultarRecurso(i).toString());
+            HSSFRichTextString texto2=new HSSFRichTextString(recursosMenosPedidos.get(i).toString());
+            celda.setCellValue(texto1);
+            celda2.setCellValue(texto2);
+            row++;
+        }
+        return libro;
     }
 
 
     public static void main(String[] args) throws LibraryServicesException {
-        AdministratorServicesLibrary a=ServicesLibraryFactory.getInstance().getAdministratorServices();
-        Map<Time,Integer> t1=a.horasMasSolicitadas();
-        Map<Time,Integer> t2=a.horasMenosSolicitadas();
-        Map<Integer,Integer> r1=a.recursosMasUsados();
-        Map<Integer,Integer> r2=a.recursosMenosUsados();
-        System.out.println(t1);
-        System.out.println(t2);
-        System.out.println(r1);
-        System.out.println(r2);
+        
     }
 
 }
