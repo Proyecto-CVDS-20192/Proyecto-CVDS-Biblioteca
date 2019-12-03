@@ -27,6 +27,7 @@ public class MyBatisDaoRecurso implements DaoRecurso {
             if(recurso.getTipoRecurso().getTipo().equals("Computador")){
                 recurso.setCapacidad(0);
             }
+            recurso.setEstado("Disponible");
             recursoMapper.registraNuevoRecurso(recurso);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
             throw new LibraryServicesException(LibraryServicesException.ERROR_DE_PERSISTENCIA,e.getMessage());
