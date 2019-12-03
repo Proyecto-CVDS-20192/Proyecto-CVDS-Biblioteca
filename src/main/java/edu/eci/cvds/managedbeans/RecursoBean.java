@@ -288,14 +288,19 @@ public class RecursoBean extends BasePageBean {
 
     public void registrarRecurso(String nombre, int capacidad) {
         try {
+
             int id = servicesA.consultarRecursosAdmin().size() + 1;
             int tipo = buscarIndice();
             recurso = new Recurso(id, tipo + 1, nombre, ubicacionSeleccionada, capacidad, "Disponible", tipo + 1, tipos[tipo]);
             Horario h = new Horario();
             h.setHoraInicio(new Time(horaInicial.getHours(), horaInicial.getMinutes(), horaInicial.getSeconds()));
             h.setHoraFin(new Time(horaFinal.getHours(), horaFinal.getMinutes(), horaFinal.getSeconds()));
+            if(!(h.getHoraInicio().getHours()<7 || h.getHoraFin().getHours()>19)&&!(h.getHoraFin().before(h.getHoraInicio()))) {
+                System.out.println("2");
+                servicesA.registrarRecurso(recurso);
+            }
             servicesA.ingresarHorario(recurso, h);
-            servicesA.registrarRecurso(recurso);
+            System.out.println("3");
             reloadAdmin();
         } catch (LibraryServicesException | IOException e) {
             FacesContext context = FacesContext.getCurrentInstance();
