@@ -322,8 +322,7 @@ public class AdministratorServicesLibraryImpl extends ServicesLibraryImpl implem
     }
 
     public static void main(String[] args) throws LibraryServicesException {
-        AdministratorServicesLibrary a=ServicesLibraryFactory.getInstance().getAdministratorServices();
-        a.obtenerRegistroOcupacion();
+
     }
 
 }
