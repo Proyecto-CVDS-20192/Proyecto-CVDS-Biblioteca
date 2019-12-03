@@ -74,6 +74,9 @@ Heroku APP : [https://cvds-proyecto-biblioteca.herokuapp.com/](https://cvds-proy
 Github : [https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca)
 
 
+### Alcance de pruebas:
+![Jacoco](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/jacoco.PNG)
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/936c2a405ca14b45a130fc6a40aaf9b9)](https://www.codacy.com/manual/JuanCe28/Proyecto-CVDS-Biblioteca?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca&amp;utm_campaign=Badge_Grade)
 
 [![CircleCI](https://circleci.com/gh/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca.svg?style=svg)](https://circleci.com/gh/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca)
