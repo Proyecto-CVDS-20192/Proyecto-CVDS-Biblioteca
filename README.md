@@ -6,10 +6,10 @@
 	- Santiago Alzate (Product Owner)
 	
 ## Integrantes:
-	- Juan Sebastián Gómez 
-	- Sebastián Herrera
-	- Eduardo Ocampo 
-	- Juan David Navarro
+	- Juan Sebastián Gómez (Design)
+	- Sebastián Herrera (Back)
+	- Eduardo Ocampo (UX)
+	- Juan David Navarro (Front)
 
 
 ## Descripción del producto:
@@ -24,14 +24,17 @@ Para ingresar a la plataforma es necesario entrar al link de [heroku](https://cv
 
 ### Página de Inicio
 ![Pagina Inicio](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Inicio.PNG)
+
 En la página de inicio se puede visualizar todos los recursos de la biblioteca poniendo clic en el botón de ver recursos o iniciar sesión usando los cuadros de texto de Email y Password.
 
 ### Administrador
 ![Administrador](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Admin.PNG)
+
 En la página de administrador se pueden administrar todos los recursos, en los botones de la tabla se puede eliminar o editar un recurso y en el menú desplegable se tiene la opción de agregar un recurso, reservar un recurso y ver las estadísticas. 
 
 ### Agregar Recurso
 ![Agregar Recurso](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/AgregarRecurso.PNG)
+
 En la ventana emergente de agregar recurso se tienen 6 campos de información, Nombre, Capacidad (si aplica), Ubicación, Tipo, Hora Inicial y Hora final.
 
 ### Estadísticas
@@ -39,6 +42,7 @@ En la ventana emergente de agregar recurso se tienen 6 campos de información, N
 
 ### Usuario Regular
 ![Usuario Regular](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Regular.PNG)
+
 En la página de estudiantes se puede ver todos los recursos y se pueden reservar usando el botón de reservar recursos, en opciones se pueden ver las reservas que el usuario tiene activas.
 
 ### Mis Reservas
@@ -46,6 +50,7 @@ En la página de estudiantes se puede ver todos los recursos y se pueden reserva
 
 ### Calendario
 ![Calendario](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Calendario.PNG)
+
 En la página del calendario se pueden ver todas las reservas que hay sobre un recurso y así mismo reservar recursos poniendo clic en el día en el que se quiera apartar el recurso.
 	
 ## Arquitectura y Diseño detallado:
@@ -65,7 +70,8 @@ En la página del calendario se pueden ver todas las reservas que hay sobre un r
 ### Enlace a la aplicación en Heroku:
 Heroku APP : [https://cvds-proyecto-biblioteca.herokuapp.com/](https://cvds-proyecto-biblioteca.herokuapp.com/)
 
-Github : [https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca]https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca
+### Enlace al repositorio en Github:
+Github : [https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca)
 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/936c2a405ca14b45a130fc6a40aaf9b9)](https://www.codacy.com/manual/JuanCe28/Proyecto-CVDS-Biblioteca?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca&amp;utm_campaign=Badge_Grade)
@@ -73,8 +79,34 @@ Github : [https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca]https:
 [![CircleCI](https://circleci.com/gh/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca.svg?style=svg)](https://circleci.com/gh/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca)
 
 
------------------------------------------------------------------------------------
+## Descripción del proceso:
 
+### Integrantes:
+	- Juan Sebastián Gómez (Design)
+	- Sebastián Herrera (Back)
+	- Eduardo Ocampo (UX)
+	- Juan David Navarro (Front)
+
+### Metodología
+Nos reunimos antes de comenzar cada sprint y definimos cuales tareas va a hacer cada uno dentro del sprint, así mismo creamos más actividades dependiendo de si hay funcionalidades retrasadas o bugs. En el desarrollo cada uno trabaja y comparte lo que hace con los demás para que todos estén al tanto de los cambios y el estado del proyecto, así todos saben las funcionalidades faltantes y los bugs.
+
+### Enlace al taiga:
+Taiga: [https://tree.taiga.io/project/juance28-gestion-de-recursos-biblioteca/timeline](https://tree.taiga.io/project/juance28-gestion-de-recursos-biblioteca/timeline)
+
+### Sprint1
+![Sprint1](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Sprint1.PNG)
+
+Este sprint al ser el primero tuvimos que dedicarle arto tiempo a la creación de la estructura y corrección de errores.
+
+### Sprint2
+![Sprint2](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Sprint2.PNG)
+
+En este sprint ya teniendo la mayoría de la estructura terminamos adelantando algunas funcionalidades del siguiente sprint al intentar cumplir con las funciones de este sprint.
+
+### Sprint3
+![Sprint3](https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca/blob/master/img/Sprint3.PNG)
+
+En este sprint se termino las funcionalidades restantes y se corrigieron los bugs.
 
 ### Información Base de Datos
  - Host: ec2-54-163-230-199.compute-1.amazonaws.com
@@ -84,3 +116,17 @@ Github : [https://github.com/Proyecto-CVDS-20192/Proyecto-CVDS-Biblioteca]https:
  - Password: 4921657fe3425e23700bbb5ad721ccf8e7bd41bc6fe01ad35df337393ffcfea2
  - URI: postgres://scvtynbcreheid:4921657fe3425e23700bbb5ad721ccf8e7bd41bc6fe01ad35df337393ffcfea2@ec2-54-163-230-199.compute-1.amazonaws.com:5432/d4cnn66hp1d27l
  - Heroku CLI: heroku pg:psql postgresql-objective-64170 --app cvds-proyecto-biblioteca
+ 
+### Usuarios de la aplicacion
+
+- Administrador 
+
+	-Usuario: admin@cvds.com
+    
+    -Password: 1234
+- Regular
+
+	-Usuario: regular@cvds.com
+    
+    -Password: 1234
+
